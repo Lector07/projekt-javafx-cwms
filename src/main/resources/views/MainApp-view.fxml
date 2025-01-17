@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.project.cwmsgradle.controlls.mainAppController">
+    <children>
+        <Label fx:id="appLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="89.0"
+               prefHeight="47.0" prefWidth="534.0" text="System Zarządzania Warsztatem Samochodowym"
+               textAlignment="JUSTIFY">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Label>
+        <Button fx:id="loginButton" onAction="#onLoginButtonClick" layoutX="297.0" layoutY="240.0" prefHeight="45.0"
+                prefWidth="150.0" text="Zaloguj"/>
+        <Button fx:id="registerButton" onAction="#onRegisterButtonClick" layoutX="297.0" layoutY="312.0"
+                prefHeight="45.0" prefWidth="150.0"
+                stylesheets="@../com/project/cwmsgradle/styles.css" text="Zarejestruj"/>
+    </children>
+</AnchorPane>

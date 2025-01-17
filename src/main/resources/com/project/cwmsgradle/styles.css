@@ -35,13 +35,13 @@
     -fx-background-color: white;
     -fx-border-style: none;
     -fx-background-radius: 30px;
-    transition: all 0.3s ease 0s;
+
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0.2, 0, 0);
 }
 
 #loginButton:hover, #registerButton:hover, #submitButton:hover {
     -fx-background-color: #F0F0E7;
-    transform: scale(1.05);
+
 }
 
 #vbLogin {
@@ -54,7 +54,6 @@
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
     -fx-background-radius: 30px;
-    transition: box-shadow 0.3s ease 0s;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0.2, 0, 0);
 }
 
@@ -82,7 +81,6 @@
 
 #manageClientsButton:hover, #manageVehiclesButton:hover, #manageRepairsButton:hover, #exitButton:hover {
     -fx-background-color: #F0F0E7;
-    transform: scale(1.05);
 }
 
 #messageLabel {
@@ -109,13 +107,11 @@
     -fx-background-color: white;
     -fx-border-style: none;
     -fx-background-radius: 30px;
-    transition: all 0.3s ease 0s;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
 }
 
 #saveButton:hover, #cancelButton:hover {
     -fx-background-color: #F0F0E7;
-    transform: scale(1.05);
 }
 
 #registrationNumberField, #brandModelField, #vehicleTypeField, #productionYearField {
@@ -137,7 +133,6 @@ Label {
     -fx-background-color: white;
     -fx-border-style: none;
     -fx-background-radius: 30px;
-    transition: all 0.3s ease 0s;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
 }
 
@@ -147,13 +142,11 @@ Label {
     -fx-background-color: white;
     -fx-border-style: none;
     -fx-background-radius: 30px;
-    transition: all 0.3s ease 0s;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
 }
 
 #addButton:hover, #editButton:hover, #deleteButton:hover, #goBackButton:hover {
     -fx-background-color: #F0F0E7;
-    transform: scale(1.05);
 }
 
 #apMenageVehicles {
@@ -187,6 +180,19 @@ Label {
 
 #hbMenVeh {
     -fx-background-color: white;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+#labelVehEdit{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+#vbVehEdit{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #2A54D2, #6BA0FF);
     -fx-background-radius: 30px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
 }

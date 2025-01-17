@@ -1,16 +1,16 @@
 package com.project.cwmsgradle.controlls;
 
+import com.project.cwmsgradle.modules.Vehicle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-
 import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
-public class VehicleAddController {
+public class VehicleEditController {
 
     @FXML
     private TextField registrationNumberField;
@@ -24,7 +24,16 @@ public class VehicleAddController {
     @FXML
     private TextField productionYearField;
 
+    private Vehicle originalVehicle;
     private VehicleMenageController vehicleMenageController;
+
+    public void setVehicleData(Vehicle vehicle) {
+        this.originalVehicle = vehicle;
+        registrationNumberField.setText(vehicle.getRegistrationNumber());
+        brandModelField.setText(vehicle.getBrandModel());
+        vehicleTypeField.setText(vehicle.getVehicleType());
+        productionYearField.setText(vehicle.getProductionYear());
+    }
 
     public void setVehicleMenageController(VehicleMenageController controller) {
         this.vehicleMenageController = controller;
@@ -32,8 +41,13 @@ public class VehicleAddController {
 
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
-        String vehicleDataString = String.join(",", registrationNumberField.getText(), brandModelField.getText(), vehicleTypeField.getText(), productionYearField.getText());
-        vehicleMenageController.addVehicleToList(vehicleDataString);
+        String updatedRegistrationNumber = registrationNumberField.getText();
+        String updatedBrandModel = brandModelField.getText();
+        String updatedVehicleType = vehicleTypeField.getText();
+        String updatedProductionYear = productionYearField.getText();
+
+        Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrandModel, updatedVehicleType, updatedProductionYear);
+        vehicleMenageController.updateVehicleInList(originalVehicle, updatedVehicle);
         navigateToVehicleMenage(event);
     }
 

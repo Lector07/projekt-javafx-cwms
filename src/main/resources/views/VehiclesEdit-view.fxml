@@ -7,55 +7,64 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button layoutX="277.0" layoutY="386.0" mnemonicParsing="false" text="Zapisz" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="277.0" layoutY="29.0" prefHeight="49.0" prefWidth="166.0" text="Edytuj pojazd" />
-      <VBox alignment="TOP_CENTER" layoutX="253.0" layoutY="84.0" prefHeight="302.0" prefWidth="214.0">
-         <children>
-            <Label text="Numer rejestracyjny:">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Label>
-            <TextField>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Marka i model:">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <TextField>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Typ pojazdu:">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <TextField>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Rok produkcji:">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <TextField>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </TextField>
-         </children>
-      </VBox>
-      <Button layoutX="391.0" layoutY="386.0" mnemonicParsing="false" text="Anuluj" />
-      <Button layoutX="334.0" layoutY="425.0" mnemonicParsing="false" text="Powrót" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0"
+            prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.project.cwmsgradle.controlls.VehicleEditController">
+    <children>
+        <Button fx:id="goBackButton" onAction="#onGoBackButtonClick" layoutX="330.0" layoutY="433.0"
+                mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="61.0" text="Powrót"/>
+        <Button fx:id="cancelButton" onAction="#onCancelButtonClick" layoutX="367.0" layoutY="392.0" mnemonicParsing="false" prefHeight="35.0"
+                prefWidth="100.0" text="Anuluj"/>
+        <Button fx:id="saveButton" onAction="#onSaveButtonClick" layoutX="260.0" layoutY="392.0" mnemonicParsing="false" prefHeight="35.0"
+                prefWidth="100.0" text="Zapisz"/>
+        <Label fx:id="labelVehEdit" alignment="CENTER" contentDisplay="CENTER" layoutX="277.0" layoutY="29.0"
+               prefHeight="49.0" prefWidth="166.0" text="Edytuj pojazd"/>
+        <VBox fx:id="vbVehEdit" alignment="TOP_CENTER" layoutX="254.0" layoutY="78.0" prefHeight="302.0"
+              prefWidth="214.0">
+            <children>
+                <Label fx:id="plateLabel" text="Numer rejestracyjny:">
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="registrationNumberField">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0"/>
+                    </VBox.margin>
+                </TextField>
+                <Label fx:id="brandLabel" text="Marka i model:">
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="brandModelField">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0"/>
+                    </VBox.margin>
+                </TextField>
+                <Label fx:id="typeLabel" text="Typ pojazdu:">
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="vehicleTypeField">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0"/>
+                    </VBox.margin>
+                </TextField>
+                <Label fx:id="yearLabel" text="Rok produkcji:">
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="productionYearField">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0"/>
+                    </VBox.margin>
+                </TextField>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

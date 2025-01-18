@@ -15,8 +15,22 @@ public class MenuViewController {
     private Button exitButton;
 
     @FXML
-    protected void onManageClientsButtonClick() {
-        // Handle manage clients button click
+    private Button manageClientsButton;
+
+    @FXML
+    private Button manageRepairsButton;
+
+    @FXML
+    public void onManageClientsButtonClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClientMenage-view.fxml"));
+            Parent root = loader.load();
+            Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            primaryStage.getScene().setRoot(root);
+            primaryStage.setTitle("Zarządzanie klientami");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -39,6 +53,7 @@ public class MenuViewController {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     protected void onExitButtonClick(ActionEvent event) {

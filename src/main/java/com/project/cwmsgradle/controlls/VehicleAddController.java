@@ -1,5 +1,6 @@
 package com.project.cwmsgradle.controlls;
 
+import com.project.cwmsgradle.modules.Vehicle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,15 +26,26 @@ public class VehicleAddController {
     private TextField productionYearField;
 
     private VehicleMenageController vehicleMenageController;
+    private int clientId;
 
     public void setVehicleMenageController(VehicleMenageController controller) {
         this.vehicleMenageController = controller;
     }
 
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
-        String vehicleDataString = String.join(",", registrationNumberField.getText(), brandModelField.getText(), vehicleTypeField.getText(), productionYearField.getText());
-        vehicleMenageController.addVehicleToList(vehicleDataString);
+        String registrationNumber = registrationNumberField.getText();
+        String brandModel = brandModelField.getText();
+        String vehicleType = vehicleTypeField.getText();
+        String productionYear = productionYearField.getText();
+
+        int vehicleId = vehicleMenageController.generateVehicleId(); // Generate vehicle ID
+        Vehicle newVehicle = new Vehicle(vehicleId, registrationNumber, brandModel, vehicleType, productionYear, clientId);
+        vehicleMenageController.addVehicleToList(newVehicle);
         navigateToVehicleMenage(event);
     }
 

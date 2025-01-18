@@ -11,59 +11,51 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="apMenageVehicles" prefHeight="480.0" prefWidth="720.0"
-            stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.project.cwmsgradle.controlls.VehicleMenageController">
+<AnchorPane fx:id="apMenageVehicles" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.VehicleMenageController">
     <children>
-        <Label fx:id="labelMenVeh" alignment="CENTER" layoutX="35.0" layoutY="15.0" prefHeight="35.0" prefWidth="208.0"
-               text="Zarządzaj pojazdami"/>
+        <Label fx:id="labelMenVeh" alignment="CENTER" layoutX="35.0" layoutY="15.0" prefHeight="35.0" prefWidth="208.0" text="Zarządzaj pojazdami" />
         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="18.0">
             <image>
-                <Image url="@../icons/auto.png"/>
+                <Image url="@../icons/auto.png" />
             </image>
         </ImageView>
-        <VBox fx:id="vbMenVeh" alignment="CENTER" layoutX="14.0" layoutY="54.0" prefHeight="403.0" prefWidth="208.0"
-              AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
+        <VBox fx:id="vbMenVeh" alignment="CENTER" layoutX="14.0" layoutY="54.0" prefHeight="403.0" prefWidth="208.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
             <children>
-                <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddVehicleButtonClick" prefHeight="35.0"
-                        prefWidth="100.0" text="Dodaj">
+                <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddVehicleButtonClick" prefHeight="35.0" prefWidth="100.0" text="Dodaj">
                     <VBox.margin>
-                        <Insets top="20.0"/>
+                        <Insets top="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditVehicleButtonClick"
-                        prefHeight="35.0" prefWidth="100.0" text="Edytuj">
+                <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditVehicleButtonClick" prefHeight="35.0" prefWidth="100.0" text="Edytuj">
                     <VBox.margin>
-                        <Insets top="20.0"/>
+                        <Insets top="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteVehicleButtonClick"
-                        prefHeight="35.0" prefWidth="100.0" text="Usuń">
+                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteVehicleButtonClick" prefHeight="35.0" prefWidth="100.0" text="Usuń">
                     <VBox.margin>
-                        <Insets top="20.0"/>
+                        <Insets top="20.0" />
                     </VBox.margin>
                 </Button>
                 <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#onGoBackButtonClick" text="Powrót">
                     <VBox.margin>
-                        <Insets top="80.0"/>
+                        <Insets top="80.0" />
                     </VBox.margin>
                 </Button>
             </children>
         </VBox>
-        <HBox fx:id="hbMenVeh" alignment="TOP_CENTER" layoutX="247.0" layoutY="60.0" prefHeight="400.0"
-              prefWidth="453.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="247.0"
-              AnchorPane.rightAnchor="20.0">
+        <HBox fx:id="hbMenVeh" alignment="TOP_CENTER" layoutX="247.0" layoutY="60.0" prefHeight="400.0" prefWidth="453.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="20.0">
             <children>
-                <TableView fx:id="vehicleTableView" prefHeight="320.0" prefWidth="410.0">
+                <TableView fx:id="vehicleTableView" prefHeight="320.0" prefWidth="410.0" stylesheets="@../com/project/cwmsgradle/styles.css">
                     <HBox.margin>
-                        <Insets bottom="20.0" top="20.0"/>
+                        <Insets bottom="20.0" top="20.0" />
                     </HBox.margin>
                     <columns>
-                        <TableColumn fx:id="registrationNumberColumn" prefWidth="100.0" text="Registration Number"/>
-                        <TableColumn fx:id="brandModelColumn" prefWidth="100.0" text="Brand Model"/>
-                        <TableColumn fx:id="vehicleTypeColumn" prefWidth="100.0" text="Vehicle Type"/>
-                        <TableColumn fx:id="productionYearColumn" prefWidth="100.0" text="Production Year"/>
+                        <TableColumn fx:id="clientIdColumn" prefWidth="68" text="ID Klienta" />
+                        <TableColumn fx:id="vehicleIdColumn" prefWidth="68" text="ID Pojazdu" />
+                        <TableColumn fx:id="registrationNumberColumn" prefWidth="68" text="Registration Number" />
+                        <TableColumn fx:id="brandModelColumn" prefWidth="68" text="Brand Model" />
+                        <TableColumn fx:id="vehicleTypeColumn" prefWidth="68" text="Vehicle Type" />
+                        <TableColumn fx:id="productionYearColumn" prefWidth="68" text="Production Year" />
                     </columns>
                 </TableView>
             </children>

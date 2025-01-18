@@ -45,8 +45,10 @@ public class VehicleEditController {
         String updatedBrandModel = brandModelField.getText();
         String updatedVehicleType = vehicleTypeField.getText();
         String updatedProductionYear = productionYearField.getText();
+        int clientId = originalVehicle.getClientId(); // Retrieve the clientId from the original vehicle
+        int vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
 
-        Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrandModel, updatedVehicleType, updatedProductionYear);
+        Vehicle updatedVehicle = new Vehicle(vehicleId, updatedRegistrationNumber, updatedBrandModel, updatedVehicleType, updatedProductionYear, clientId);
         vehicleMenageController.updateVehicleInList(originalVehicle, updatedVehicle);
         navigateToVehicleMenage(event);
     }

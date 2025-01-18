@@ -1,16 +1,28 @@
 package com.project.cwmsgradle.modules;
 
 public class Vehicle {
+    private int vehicleId;
     private String registrationNumber;
     private String brandModel;
     private String vehicleType;
     private String productionYear;
+    private int clientId;
 
-    public Vehicle(String registrationNumber, String brandModel, String vehicleType, String productionYear) {
+    public Vehicle(int vehicleId, String registrationNumber, String brandModel, String vehicleType, String productionYear, int clientId) {
+        this.vehicleId = vehicleId;
         this.registrationNumber = registrationNumber;
         this.brandModel = brandModel;
         this.vehicleType = vehicleType;
         this.productionYear = productionYear;
+        this.clientId = clientId;
+    }
+
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
     public String getRegistrationNumber() {
@@ -43,5 +55,13 @@ public class Vehicle {
 
     public void setProductionYear(String productionYear) {
         this.productionYear = productionYear;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 }

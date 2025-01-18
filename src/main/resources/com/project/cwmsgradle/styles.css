@@ -45,7 +45,7 @@
 
 }
 
-#vbLogin {
+#vbLogin, #vbRegister {
     -fx-background-color: white;
     -fx-background-radius: 30px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0.2, 0, 0);
@@ -87,7 +87,7 @@
 #messageLabel {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 18px;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #vbAdd, #vbClientAdd {

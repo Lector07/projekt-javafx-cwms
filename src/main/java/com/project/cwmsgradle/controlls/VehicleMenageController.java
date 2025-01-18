@@ -1,6 +1,6 @@
 package com.project.cwmsgradle.controlls;
 
-import com.project.cwmsgradle.modules.Vehicle;
+import com.project.cwmsgradle.entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

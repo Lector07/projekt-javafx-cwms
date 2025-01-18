@@ -6,48 +6,70 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.MenuViewController">
+<AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.project.cwmsgradle.controlls.MenuViewController">
     <children>
-        <Label fx:id="menuLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="315.0" layoutY="28.0" prefHeight="57.0" prefWidth="100.0" text="Menu" underline="true" AnchorPane.bottomAnchor="395.0" />
-        <SplitPane fx:id="spMenu" layoutX="241.0" layoutY="104.0" prefHeight="339.0" prefWidth="247.0">
+        <Label fx:id="menuLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="315.0" layoutY="28.0"
+               prefHeight="57.0" prefWidth="100.0" text="Menu" underline="true" AnchorPane.bottomAnchor="395.0"/>
+        <SplitPane fx:id="spMenu" layoutX="241.0" layoutY="104.0" prefHeight="342.0" prefWidth="247.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="330.0" prefWidth="245.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="245.0">
                     <children>
-                        <Button fx:id="manageVehiclesButton" layoutX="23.0" layoutY="24.0" onAction="#onManageVehiclesButtonClick" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj pojazdami" />
-                        <Button fx:id="manageClientsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="81.0" onAction="#onManageClientsButtonClick" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj klientami" />
-                        <Button fx:id="manageRepairsButton" layoutX="23.0" layoutY="142.0" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj naprawami" />
-                  <Button fx:id="usersButton" layoutX="23.0" layoutY="201.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" text="Użytkownicy" />
-                        <Button fx:id="exitButton" layoutX="73.0" layoutY="288.0" onAction="#onExitButtonClick" prefHeight="35.0" prefWidth="100.0" text="Wyloguj" />
+                        <Button fx:id="manageVehiclesButton" layoutX="23.0" layoutY="24.0"
+                                onAction="#onManageVehiclesButtonClick" prefHeight="45.0" prefWidth="200.0"
+                                text="Zarządzaj pojazdami"/>
+                        <Button fx:id="manageClientsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0"
+                                layoutY="81.0" onAction="#onManageClientsButtonClick" prefHeight="45.0"
+                                prefWidth="200.0" text="Zarządzaj klientami"/>
+                        <Button fx:id="manageRepairsButton" layoutX="23.0" layoutY="142.0" prefHeight="45.0"
+                                prefWidth="200.0" text="Zarządzaj naprawami"/>
+                        <Button fx:id="usersButton" layoutX="23.0" layoutY="201.0" mnemonicParsing="false"
+                                prefHeight="45.0" prefWidth="200.0" text="Użytkownicy"/>
+                        <Button fx:id="exitButton" layoutX="73.0" layoutY="288.0" onAction="#onExitButtonClick"
+                                prefHeight="35.0" prefWidth="100.0" text="Wyloguj"/>
                         <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="34.0" layoutY="93.0">
                             <image>
-                                <Image url="@../icons/klient.png" />
+                                <Image url="@../icons/klient.png"/>
                             </image>
                         </ImageView>
                         <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="34.0" layoutY="36.0">
                             <image>
-                                <Image url="@../icons/auto.png" />
+                                <Image url="@../icons/auto.png"/>
                             </image>
                         </ImageView>
                         <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="34.0" layoutY="154.0">
                             <image>
-                                <Image url="@../icons/naprawa.png" />
+                                <Image url="@../icons/naprawa.png"/>
                             </image>
                         </ImageView>
-                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="34.0" layoutY="213.0">
-                     <image>
-                        <Image url="@../icons/user.png" />
-                     </image>
-                  </ImageView>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="34.0" layoutY="213.0">
+                            <image>
+                                <Image url="@../icons/user.png"/>
+                            </image>
+                        </ImageView>
 
                     </children>
                 </AnchorPane>
             </items>
         </SplitPane>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="275.0" layoutY="37.0" AnchorPane.bottomAnchor="399.0">
-         <image>
-            <Image url="@../icons/menu.png" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="275.0" layoutY="37.0" AnchorPane.bottomAnchor="399.0">
+            <image>
+                <Image url="@../icons/menu.png"/>
+            </image>
+        </ImageView>
+        <Label fx:id="loggedInUserLabel" layoutX="28.0" layoutY="436.0" text="Zalogowany: "/>
+        <Label fx:id="clientCountLabel" layoutX="28.0" layoutY="46.0" text="Liczba klientów: 0">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Label>
+        <Label fx:id="vehicleCountLabel" layoutX="28.0" layoutY="75.0" text="Liczba pojazdów: 0">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Label>
     </children>
 </AnchorPane>

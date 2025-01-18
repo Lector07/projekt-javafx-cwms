@@ -1,22 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.RegisterDialogController">
+<AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.project.cwmsgradle.controlls.RegisterDialogController">
     <children>
 
-        <Label fx:id="registerLabel" layoutX="289.0" layoutY="46.0" text="Zarejestruj się" />
-        <TextField fx:id="usernameField" layoutX="260.0" layoutY="100.0" prefWidth="200.0" promptText="Login" />
-        <PasswordField fx:id="passwordField" layoutX="260.0" layoutY="140.0" prefWidth="200.0" promptText="Hasło" />
-        <PasswordField fx:id="confirmPasswordField" layoutX="260.0" layoutY="185.0" prefWidth="200.0" promptText="Podaj ponownie hasło" />
-        <Label fx:id="messageLabel" alignment="CENTER" layoutX="185.0" layoutY="229.0" prefHeight="22.0" prefWidth="349.0" />
-        <Button fx:id="submitButton" layoutX="284.0" layoutY="259.0" onAction="#onSubmitButtonClick" prefHeight="45.0" prefWidth="150.0" text="Zarejestruj" />
-        <Button fx:id="returnButton" layoutX="310.0" layoutY="364.0" onAction="#onReturnButtonClick" prefHeight="45.0" prefWidth="100.0" text="Powrót" />
+        <Label fx:id="registerLabel" layoutX="289.0" layoutY="34.0" text="Zarejestruj się" underline="true"/>
+        <Button fx:id="returnButton" layoutX="310.0" layoutY="374.0" onAction="#onReturnButtonClick" prefHeight="25.0"
+                prefWidth="100.0" text="Powrót"/>
+        <VBox fx:id="vbRegister" alignment="TOP_CENTER" layoutX="248.0" layoutY="78.0" prefHeight="274.0"
+              prefWidth="222.0" stylesheets="@../com/project/cwmsgradle/styles.css">
+            <children>
+                <TextField fx:id="usernameField" prefWidth="200.0" promptText="Login">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="35.0"/>
+                    </VBox.margin>
+                </TextField>
+                <PasswordField fx:id="passwordField" prefWidth="200.0" promptText="Hasło">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0"/>
+                    </VBox.margin>
+                </PasswordField>
+                <PasswordField fx:id="confirmPasswordField" prefWidth="200.0" promptText="Podaj ponownie hasło">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0"/>
+                    </VBox.margin>
+                </PasswordField>
+                <Label fx:id="messageLabel" alignment="CENTER" prefHeight="35.0" prefWidth="222.0">
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </Label>
+                <Button fx:id="submitButton" onAction="#onSubmitButtonClick" prefHeight="35.0" prefWidth="150.0"
+                        text="Zarejestruj">
+                    <VBox.margin>
+                        <Insets top="30.0"/>
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>

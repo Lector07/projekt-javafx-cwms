@@ -1,6 +1,6 @@
 package com.project.cwmsgradle.controlls;
 
-import com.project.cwmsgradle.modules.Vehicle;
+import com.project.cwmsgradle.entity.Vehicle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;

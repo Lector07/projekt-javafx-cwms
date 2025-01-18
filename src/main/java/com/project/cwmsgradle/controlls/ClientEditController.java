@@ -1,6 +1,6 @@
 package com.project.cwmsgradle.controlls;
 
-import com.project.cwmsgradle.modules.Client;
+import com.project.cwmsgradle.entity.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

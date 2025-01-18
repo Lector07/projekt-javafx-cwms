@@ -1,4 +1,4 @@
-package com.project.cwmsgradle.modules;
+package com.project.cwmsgradle.entity;
 
 public class Client {
     private int clientId;

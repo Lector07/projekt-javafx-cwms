@@ -1,6 +1,6 @@
 package com.project.cwmsgradle.controlls;
 
-import com.project.cwmsgradle.modules.Client;
+import com.project.cwmsgradle.entity.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

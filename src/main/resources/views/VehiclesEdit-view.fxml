@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0"
             prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css"
-            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.project.cwmsgradle.controlls.VehicleEditController">
     <children>
         <Button fx:id="goBackButton" onAction="#onGoBackButtonClick" layoutX="330.0" layoutY="433.0"

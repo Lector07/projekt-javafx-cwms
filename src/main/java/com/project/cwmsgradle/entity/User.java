@@ -1,19 +1,13 @@
 package com.project.cwmsgradle.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long userId;
 
     @Column(nullable = false, unique = true)
@@ -26,9 +20,22 @@ public class User {
     private String role;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
-    // Getters and setters
+    public User() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
 
     public void setUserId(Long userId) {
         this.userId = userId;
@@ -64,20 +71,5 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
     }
 }

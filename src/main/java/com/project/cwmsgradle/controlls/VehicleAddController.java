@@ -1,6 +1,8 @@
 package com.project.cwmsgradle.controlls;
 
+import com.project.cwmsgradle.entity.Client;
 import com.project.cwmsgradle.entity.Vehicle;
+import com.project.cwmsgradle.utils.AuthenticatedUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +14,9 @@ import javafx.scene.Node;
 import java.io.IOException;
 
 public class VehicleAddController {
+
+    String currentUsername = AuthenticatedUser.getInstance().getUsername();
+    String currentUserRole = AuthenticatedUser.getInstance().getRole();
 
     @FXML
     private TextField registrationNumberField;
@@ -26,14 +31,14 @@ public class VehicleAddController {
     private TextField productionYearField;
 
     private VehicleMenageController vehicleMenageController;
-    private int clientId;
+    private Client client; // Change this line
 
     public void setVehicleMenageController(VehicleMenageController controller) {
         this.vehicleMenageController = controller;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) { // Change this method
+        this.client = client;
     }
 
     @FXML
@@ -41,13 +46,18 @@ public class VehicleAddController {
         String registrationNumber = registrationNumberField.getText();
         String brand = brandField.getText();
         String model = modelField.getText();
-        int productionYear = Integer.parseInt(productionYearField.getText()); // Convert to int
+        int productionYear = Integer.parseInt(productionYearField.getText());
 
-        int vehicleId = vehicleMenageController.generateVehicleId(); // Generate vehicle ID
-        Vehicle newVehicle = new Vehicle(vehicleId, registrationNumber, brand, model, productionYear, clientId);
+        // Retrieve the current user
+        currentUsername = AuthenticatedUser.getInstance().getUsername();
+        currentUserRole = AuthenticatedUser.getInstance().getRole();
+
+        // Tworzymy nowy obiekt Vehicle, bez id.
+        Vehicle newVehicle = new Vehicle(registrationNumber, brand, model, productionYear, client);
         vehicleMenageController.addVehicleToList(newVehicle);
         navigateToVehicleMenage(event);
     }
+
 
     @FXML
     protected void onCancelButtonClick(ActionEvent event) {

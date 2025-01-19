@@ -43,9 +43,12 @@ public class ClientEditController {
         String updatedName = nameField.getText();
         String updatedSurname = surnameField.getText();
         String updatedPhone = phoneField.getText();
-        String updatedMail = mailField.getText();
+        String updatedEmail = mailField.getText();//Zmieniam mail na email
 
-        Client updatedClient = new Client(originalClient.getClientId(), updatedName, updatedSurname, updatedPhone, updatedMail);
+        // Użyj konstruktora z 4 argumentami
+        Client updatedClient = new Client(updatedName, updatedSurname, updatedPhone, updatedEmail);
+
+        updatedClient.setClientId(originalClient.getClientId());// Ustawiamy ID
         clientMenageController.updateClientInList(originalClient, updatedClient);
         navigateToClientMenage(event);
     }

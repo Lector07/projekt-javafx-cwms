@@ -1,5 +1,6 @@
 package com.project.cwmsgradle.controlls;
 
+import com.project.cwmsgradle.entity.Client;
 import com.project.cwmsgradle.entity.Vehicle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
 public class VehicleEditController {
+
 
     @FXML
     private TextField registrationNumberField;
@@ -45,10 +47,12 @@ public class VehicleEditController {
         String updatedBrand = brandField.getText();
         String updatedModel = modelField.getText();
         int updatedProductionYear = Integer.parseInt(productionYearField.getText());
-        int clientId = originalVehicle.getClientId(); // Retrieve the clientId from the original vehicle
-        int vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
+        Client client = originalVehicle.getClients(); // Retrieve the Client object using getClients
+        Long vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
 
-        Vehicle updatedVehicle = new Vehicle(vehicleId, updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, clientId);
+        Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, client);
+        updatedVehicle.setVehicleId(vehicleId); // Ustawiamy ID
+
         vehicleMenageController.updateVehicleInList(originalVehicle, updatedVehicle);
         navigateToVehicleMenage(event);
     }

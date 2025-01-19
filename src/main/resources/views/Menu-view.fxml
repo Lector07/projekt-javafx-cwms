@@ -6,7 +6,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.MenuViewController">
     <children>
@@ -51,16 +50,6 @@
             </image>
         </ImageView>
         <Label fx:id="usernameLabel" layoutX="60.0" layoutY="21.0" text="Username" />
-        <Label fx:id="clientCountLabel" layoutX="548.0" layoutY="21.0" text="Liczba klientów: 0">
-            <font>
-                <Font size="10.0" />
-            </font>
-        </Label>
-        <Label fx:id="vehicleCountLabel" layoutX="548.0" layoutY="46.0" text="Liczba pojazdów: 0">
-            <font>
-                <Font size="10.0" />
-            </font>
-        </Label>
         <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="20.0" layoutY="15.0">
             <image>
                 <Image url="@../icons/user.png" />

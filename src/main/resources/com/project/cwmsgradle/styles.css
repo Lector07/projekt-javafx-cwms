@@ -96,7 +96,7 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#plateLabel, #brandLabel, #modelLabel, #yearLabel {
+#plateLabel, #brandLabel, #modelLabel, #yearLabel, #vinLabel {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
     -fx-text-fill: white;
@@ -115,7 +115,7 @@
     -fx-background-color: #F0F0E7;
 }
 
-#registrationNumberField, #brandField, #modelField, #productionYearField {
+#registrationNumberField, #brandField, #modelField, #productionYearField, #vinField {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
     -fx-background-radius: 30px;

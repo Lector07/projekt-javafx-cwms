@@ -1,33 +1,23 @@
 package com.project.cwmsgradle.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
-import java.math.BigDecimal;
+import jakarta.persistence.*;
 import java.time.LocalDate;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-
 
 @Entity
 @Table(name = "appointments")
 public class Appointment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int appointmentId;
+    private Long appointmentId;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
     private LocalDate date;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal cost;
+    @Column(nullable = false)
+    private double cost;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
@@ -41,13 +31,23 @@ public class Appointment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // Getters and setters
+    public Appointment() {
+    }
 
-    public int getAppointmentId() {
+    public Appointment(String description, LocalDate date, double cost, Client client, Vehicle vehicle, User user) {
+        this.description = description;
+        this.date = date;
+        this.cost = cost;
+        this.client = client;
+        this.vehicle = vehicle;
+        this.user = user;
+    }
+
+    public Long getAppointmentId() {
         return appointmentId;
     }
 
-    public void setAppointmentId(int appointmentId) {
+    public void setAppointmentId(Long appointmentId) {
         this.appointmentId = appointmentId;
     }
 
@@ -67,11 +67,11 @@ public class Appointment {
         this.date = date;
     }
 
-    public BigDecimal getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(BigDecimal cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
@@ -97,18 +97,5 @@ public class Appointment {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Appointment{" +
-                "appointmentId=" + appointmentId +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                ", cost=" + cost +
-                ", client=" + client +
-                ", vehicle=" + vehicle +
-                ", user=" + user +
-                '}';
     }
 }

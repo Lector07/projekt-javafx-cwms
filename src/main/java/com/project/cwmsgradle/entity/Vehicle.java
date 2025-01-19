@@ -1,69 +1,89 @@
+//Vehicle.java
 package com.project.cwmsgradle.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vehicle_id")
-    private int vehicleId;
+    private Long vehicleId;
 
-    @Column(name = "registration_number", nullable = false, length = 50)
+    @Column(nullable = false)
     private String registrationNumber;
 
-    @Column(name = "brand", nullable = false, length = 50)
+    @Column(nullable = false)
     private String brand;
 
-    @Column(name = "model", nullable = false, length = 50)
+    @Column(nullable = false)
     private String model;
 
-    @Column(name = "production_year", nullable = false)
+    @Column(nullable = false)
     private int productionYear;
 
-    @Column(name = "client_id", nullable = false)
-    private int clientId;
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client clients;
 
-    public Vehicle() {
-    }
+    // Default constructor
+    public Vehicle() {}
 
-    public Vehicle(int vehicleId, String registrationNumber, String brand, String model, int productionYear, int clientId) {
-        this.vehicleId = vehicleId;
+    // Constructor with all fields except ID
+    public Vehicle( String registrationNumber, String brand, String model, int productionYear, Client clients) {
         this.registrationNumber = registrationNumber;
         this.brand = brand;
         this.model = model;
         this.productionYear = productionYear;
-        this.clientId = clientId;
+        this.clients = clients;
     }
 
-    public int getVehicleId() {
+    // Getters and setters
+    public Long getVehicleId() {
         return vehicleId;
+    }
+
+    public void setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
     public String getRegistrationNumber() {
         return registrationNumber;
     }
 
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
     public String getBrand() {
         return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getModel() {
         return model;
     }
 
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     public int getProductionYear() {
         return productionYear;
     }
 
-    public int getClientId() {
-        return clientId;
+    public void setProductionYear(int productionYear) {
+        this.productionYear = productionYear;
+    }
+
+    public Client getClients() {
+        return clients;
+    }
+
+    public void setClients(Client clients) {
+        this.clients = clients;
     }
 }

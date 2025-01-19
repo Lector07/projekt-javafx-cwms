@@ -34,11 +34,15 @@ public class ClientAddController {
         String name = nameField.getText();
         String surname = surnameField.getText();
         String phone = phoneField.getText();
-        String mail = mailField.getText();
+        String email = mailField.getText(); //Zmieniamy mail na email
 
         int clientId = clientMenageController.generateClientId();
 
-        Client newClient = new Client(clientId, name, surname, phone, mail);
+        // Używamy konstruktora z 4 argumentami
+        Client newClient = new Client(name, surname, phone, email);
+
+        newClient.setClientId((long) clientId); // Ustawiamy clientId za pomocą settera
+
         clientMenageController.addClientToList(newClient);
         navigateToClientMenage(event);
     }

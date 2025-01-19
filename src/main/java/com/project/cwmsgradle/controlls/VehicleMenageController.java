@@ -1,6 +1,8 @@
 package com.project.cwmsgradle.controlls;
 
+import com.project.cwmsgradle.entity.Client;
 import com.project.cwmsgradle.entity.Vehicle;
+import com.project.cwmsgradle.utils.AuthenticatedUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -45,8 +47,14 @@ public class VehicleMenageController {
     @FXML
     private TableColumn<Vehicle, Integer> clientIdColumn;
 
+    @FXML
+    private TableView<Client> clientTableView; // Define the clientTableView
+
     private ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
     private int nextVehicleId = 1; // Initialize vehicle ID counter
+
+    String currentUsername = AuthenticatedUser.getInstance().getUsername();
+    String currentUserRole = AuthenticatedUser.getInstance().getRole();
 
     @FXML
     protected void initialize() {
@@ -55,7 +63,7 @@ public class VehicleMenageController {
         brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         productionYearColumn.setCellValueFactory(new PropertyValueFactory<>("productionYear"));
-        clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+        clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("client.clientId"));
 
         loadVehicleData();
         vehicleTableView.setItems(vehicleData);
@@ -65,36 +73,25 @@ public class VehicleMenageController {
         return nextVehicleId++;
     }
 
-    private MenuViewController menuViewController;
-
     public void setMenuViewController(MenuViewController menuViewController) {
-        this.menuViewController = menuViewController;
+        // Implement the method to set the Menu View Controller
     }
 
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
-        if (menuViewController == null) {
-            // Handle the case where menuViewController is not set
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Menu View Controller not set");
-            alert.setContentText("Please set the Menu View Controller before going back.");
-            alert.showAndWait();
-            return;
-        }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Menu-view.fxml"));
             Parent root = loader.load();
 
             // Get the controller and set the current user information
             MenuViewController menuController = loader.getController();
-            menuController.setUserRole(menuViewController.getUserRole());
-            menuController.setUsername(menuViewController.getUsername());
+            menuController.setUserRole(currentUserRole);
+            menuController.setUsername(currentUsername);
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
             stage.setTitle("Menu");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,7 +105,7 @@ public class VehicleMenageController {
 
             VehicleAddController addController = loader.getController();
             addController.setVehicleMenageController(this);
-            addController.setClientId(getSelectedClientId()); // Pass the selected client ID
+            addController.setClient(getSelectedClient()); // Pass the selected client
 
             Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             primaryStage.getScene().setRoot(root);
@@ -118,9 +115,20 @@ public class VehicleMenageController {
         }
     }
 
-    private int getSelectedClientId() {
-        // Implement logic to get the selected client ID
-        return 1; // Placeholder value
+    private Client getSelectedClient() {
+        // Assuming you have a TableView<Client> named clientTableView
+        Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        if (selectedClient != null) {
+            return selectedClient;
+        } else {
+            // Handle the case where no client is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Client Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a client from the list.");
+            alert.showAndWait();
+            return null;
+        }
     }
 
     @FXML
@@ -151,7 +159,7 @@ public class VehicleMenageController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Potwierdzenie usunięcia");
             alert.setHeaderText("Czy na pewno chcesz usunąć ten pojazd?");
-            alert.setContentText("ID Pojazdu: " + selectedVehicle.getVehicleId() + "\nID Klienta: " + selectedVehicle.getClientId());
+            alert.setContentText("ID Pojazdu: " + selectedVehicle.getVehicleId() + "\nID Klienta: " + selectedVehicle.getClients().getClientId());
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {

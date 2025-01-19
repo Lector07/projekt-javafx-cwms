@@ -1,49 +1,45 @@
 package com.project.cwmsgradle.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
 public class Client {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id")
-    private int clientId;
+    private Long clientId;
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "surname", nullable = false, length = 100)
+    @Column(nullable = false)
     private String surname;
 
-    @Column(name = "phone", nullable = false, length = 15)
+    @Column(nullable = false)
     private String phone;
 
-    @Column(name = "email", nullable = false, length = 100)
+    @Column
     private String email;
+
+    @OneToMany(mappedBy = "clients", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Vehicle> vehicles;
 
     public Client() {
     }
 
-    public Client(int clientId, String name, String surname, String phone, String email) {
-        this.clientId = clientId;
+    public Client(String name, String surname, String phone, String email) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
     }
 
-    public int getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 
@@ -79,14 +75,11 @@ public class Client {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "clientId=" + clientId +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 }

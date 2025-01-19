@@ -1,6 +1,11 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.Client;
+import com.project.cwmsgradle.utils.AlertUtils;
+import com.project.cwmsgradle.utils.AuthenticatedUser;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,12 +17,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 public class ClientMenageController {
+
+    String currentUsername = AuthenticatedUser.getInstance().getUsername();
+    String currentUserRole = AuthenticatedUser.getInstance().getRole();
+
 
     @FXML
     private TableView<Client> clientTableView;
@@ -60,26 +67,22 @@ public class ClientMenageController {
 
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
-        if (menuViewController == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Menu View Controller not set");
-            alert.setContentText("Please set the Menu View Controller before going back.");
-            alert.showAndWait();
-            return;
-        }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Menu-view.fxml"));
             Parent root = loader.load();
 
+            // Get the controller and set the current user information
             MenuViewController menuController = loader.getController();
-            menuController.setUserRole(menuViewController.getUserRole());
-            menuController.setUsername(menuViewController.getUsername());
+            menuController.setUserRole(AuthenticatedUser.getInstance().getRole());
+            menuController.setUsername(AuthenticatedUser.getInstance().getUsername());
+
+            currentUsername = AuthenticatedUser.getInstance().getUsername();
+            currentUserRole = AuthenticatedUser.getInstance().getRole();
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
             stage.setTitle("Menu");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,14 +107,14 @@ public class ClientMenageController {
 
     public void addClientToList(Client client) {
         clientData.add(client);
-        saveClientData();
+        saveClientToDatabase(client);
     }
 
     public void updateClientInList(Client originalClient, Client updatedClient) {
         int index = clientData.indexOf(originalClient);
         if (index != -1) {
             clientData.set(index, updatedClient);
-            saveClientData();
+            updateClientInDatabase(updatedClient);
         }
     }
 
@@ -119,30 +122,31 @@ public class ClientMenageController {
         return nextClientId++;
     }
 
-    private void saveClientData() {
-        try {
-            List<String> clientDataStrings = clientData.stream()
-                    .map(client -> String.join(",", String.valueOf(client.getClientId()), client.getName(), client.getSurname(), client.getPhone(), client.getEmail()))
-                    .collect(Collectors.toList());
-            Files.write(Paths.get("clientData.txt"), clientDataStrings);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void saveClientToDatabase(Client client) {
+        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            session.save(client);
+            session.getTransaction().commit();
+        }
+    }
+
+    private void updateClientInDatabase(Client client) {
+        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            session.update(client);
+            session.getTransaction().commit();
         }
     }
 
     private void loadClientData() {
-        try {
-            List<String> clientDataStrings = Files.readAllLines(Paths.get("clientData.txt"));
-            for (String clientDataString : clientDataStrings) {
-                String[] data = clientDataString.split(",");
-                if (data.length == 5) {
-                    Client client = new Client(Integer.parseInt(data[0]), data[1], data[2], data[3], data[4]);
-                    clientData.add(client);
-                    nextClientId = Math.max(nextClientId, client.getClientId() + 1);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            List<Client> clients = session.createQuery("from Client", Client.class).getResultList();
+            clientData.addAll(clients);
+            session.getTransaction().commit();
         }
     }
 
@@ -162,12 +166,7 @@ public class ClientMenageController {
                 stage.getScene().setRoot(root);
                 stage.setTitle("Edytuj Klienta");
             } else {
-                // Handle no client selected case
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Brak wyboru");
-                alert.setHeaderText("Nie wybrano klienta");
-                alert.setContentText("Proszę wybrać klienta do edycji.");
-                alert.showAndWait();
+                AlertUtils.showWarningAlert("Brak wyboru", "Nie wybrano klienta", "Proszę wybrać klienta do edycji.");
             }
         } catch (IOException e) {
             e.printStackTrace();

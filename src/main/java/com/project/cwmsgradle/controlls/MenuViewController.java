@@ -1,12 +1,14 @@
+// src/main/java/com/project/cwmsgradle/controlls/MenuViewController.java
 package com.project.cwmsgradle.controlls;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MenuViewController {
@@ -21,10 +23,59 @@ public class MenuViewController {
     private Button manageRepairsButton;
 
     @FXML
+    private Button usersButton;
+
+    @FXML
+    private ImageView userPic;
+
+    @FXML
+    private Label usernameLabel;
+
+    private String userRole;
+    private String username;
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUserRole(String role) {
+        this.userRole = role;
+        updateUIBasedOnRole();
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+        usernameLabel.setText(username);
+    }
+
+    private void updateUIBasedOnRole() {
+        if ("user".equals(userRole)) {
+            usersButton.setVisible(false);
+            userPic.setVisible(false);
+        } else {
+            usersButton.setVisible(true);
+            userPic.setVisible(true);
+        }
+    }
+
+    @FXML
+    protected void initialize() {
+        usernameLabel.setVisible(true);
+    }
+
+    @FXML
     public void onManageClientsButtonClick(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClientMenage-view.fxml"));
             Parent root = loader.load();
+
+            ClientMenageController clientController = loader.getController();
+            clientController.setMenuViewController(this);
+
             Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             primaryStage.getScene().setRoot(root);
             primaryStage.setTitle("Zarządzanie klientami");
@@ -46,6 +97,11 @@ public class MenuViewController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VehiclesMenage-view.fxml"));
             Parent root = loader.load();
+
+            // Get the controller and pass the current user information
+            VehicleMenageController vehiclesController = loader.getController();
+            vehiclesController.setMenuViewController(this);
+
             Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             primaryStage.getScene().setRoot(root);
             primaryStage.setTitle("Zarządzanie pojazdami");
@@ -54,24 +110,17 @@ public class MenuViewController {
         }
     }
 
-
     @FXML
     protected void onExitButtonClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainApp-view.fxml")); // Użyj właściwej ścieżki do swojej strony głównej
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainApp-view.fxml"));
             Parent root = loader.load();
-
-            // Pobierz scenę z obiektu zdarzenia
             Button source = (Button) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
-
-            // Ustawiamy nową scenę dla istniejącego okna
             stage.getScene().setRoot(root);
             stage.setTitle("Strona Główna");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }

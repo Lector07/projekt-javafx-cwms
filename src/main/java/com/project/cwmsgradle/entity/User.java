@@ -1,6 +1,5 @@
 package com.project.cwmsgradle.entity;
 
-
 import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,6 +13,7 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long userId;
 
     @Column(nullable = false, unique = true)
@@ -28,7 +28,7 @@ public class User {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Gettery i settery
+    // Getters and setters
 
     public void setUserId(Long userId) {
         this.userId = userId;

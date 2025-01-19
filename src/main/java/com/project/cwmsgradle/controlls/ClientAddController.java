@@ -37,9 +37,8 @@ public class ClientAddController {
         String mail = mailField.getText();
 
         int clientId = clientMenageController.generateClientId();
-        int id = 0; // or generate a unique id for the vehicle if needed
 
-        Client newClient = new Client(clientId, id, name, surname, phone, mail);
+        Client newClient = new Client(clientId, name, surname, phone, mail);
         clientMenageController.addClientToList(newClient);
         navigateToClientMenage(event);
     }

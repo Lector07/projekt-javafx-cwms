@@ -10,8 +10,11 @@
         <property name="hibernate.connection.password">pgadmin</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
         <mapping class="com.project.cwmsgradle.entity.User"/>
+        <mapping class="com.project.cwmsgradle.entity.Client"/>
+        <mapping class="com.project.cwmsgradle.entity.Vehicle"/>
     </session-factory>
 </hibernate-configuration>

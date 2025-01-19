@@ -42,7 +42,7 @@
                 <Button fx:id="submitButton" onAction="#onSubmitButtonClick" prefHeight="35.0" prefWidth="150.0"
                         text="Zarejestruj">
                     <VBox.margin>
-                        <Insets top="30.0"/>
+                        <Insets top="20.0"/>
                     </VBox.margin>
                 </Button>
             </children>

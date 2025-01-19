@@ -17,10 +17,10 @@ public class VehicleAddController {
     private TextField registrationNumberField;
 
     @FXML
-    private TextField brandModelField;
+    private TextField brandField;
 
     @FXML
-    private TextField vehicleTypeField;
+    private TextField modelField;
 
     @FXML
     private TextField productionYearField;
@@ -39,12 +39,12 @@ public class VehicleAddController {
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String registrationNumber = registrationNumberField.getText();
-        String brandModel = brandModelField.getText();
-        String vehicleType = vehicleTypeField.getText();
-        String productionYear = productionYearField.getText();
+        String brand = brandField.getText();
+        String model = modelField.getText();
+        int productionYear = Integer.parseInt(productionYearField.getText()); // Convert to int
 
         int vehicleId = vehicleMenageController.generateVehicleId(); // Generate vehicle ID
-        Vehicle newVehicle = new Vehicle(vehicleId, registrationNumber, brandModel, vehicleType, productionYear, clientId);
+        Vehicle newVehicle = new Vehicle(vehicleId, registrationNumber, brand, model, productionYear, clientId);
         vehicleMenageController.addVehicleToList(newVehicle);
         navigateToVehicleMenage(event);
     }

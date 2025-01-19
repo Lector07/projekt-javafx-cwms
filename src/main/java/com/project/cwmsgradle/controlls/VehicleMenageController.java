@@ -1,6 +1,9 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.Vehicle;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,11 +19,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class VehicleMenageController {
 
@@ -34,10 +34,10 @@ public class VehicleMenageController {
     private TableColumn<Vehicle, String> registrationNumberColumn;
 
     @FXML
-    private TableColumn<Vehicle, String> brandModelColumn;
+    private TableColumn<Vehicle, String> brandColumn;
 
     @FXML
-    private TableColumn<Vehicle, String> vehicleTypeColumn;
+    private TableColumn<Vehicle, String> modelColumn;
 
     @FXML
     private TableColumn<Vehicle, String> productionYearColumn;
@@ -52,8 +52,8 @@ public class VehicleMenageController {
     protected void initialize() {
         vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
         registrationNumberColumn.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
-        brandModelColumn.setCellValueFactory(new PropertyValueFactory<>("brandModel"));
-        vehicleTypeColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleType"));
+        brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         productionYearColumn.setCellValueFactory(new PropertyValueFactory<>("productionYear"));
         clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
 
@@ -65,14 +65,36 @@ public class VehicleMenageController {
         return nextVehicleId++;
     }
 
+    private MenuViewController menuViewController;
+
+    public void setMenuViewController(MenuViewController menuViewController) {
+        this.menuViewController = menuViewController;
+    }
+
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
+        if (menuViewController == null) {
+            // Handle the case where menuViewController is not set
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Menu View Controller not set");
+            alert.setContentText("Please set the Menu View Controller before going back.");
+            alert.showAndWait();
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Menu-view.fxml"));
             Parent root = loader.load();
-            Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            primaryStage.getScene().setRoot(root);
-            primaryStage.setTitle("Menu");
+
+            // Get the controller and set the current user information
+            MenuViewController menuController = loader.getController();
+            menuController.setUserRole(menuViewController.getUserRole());
+            menuController.setUsername(menuViewController.getUsername());
+
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.getScene().setRoot(root);
+            stage.setTitle("Menu");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -134,7 +156,7 @@ public class VehicleMenageController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 vehicleData.remove(selectedVehicle);
-                saveVehicleData();
+                deleteVehicleFromDatabase(selectedVehicle);
                 refreshTableView();
             }
         }
@@ -142,7 +164,7 @@ public class VehicleMenageController {
 
     public void addVehicleToList(Vehicle vehicle) {
         vehicleData.add(vehicle);
-        saveVehicleData();
+        saveVehicleToDatabase(vehicle);
         refreshTableView();
     }
 
@@ -150,36 +172,45 @@ public class VehicleMenageController {
         int index = vehicleData.indexOf(originalVehicle);
         if (index != -1) {
             vehicleData.set(index, updatedVehicle);
-            saveVehicleData();
+            updateVehicleInDatabase(updatedVehicle);
             refreshTableView();
         }
     }
 
-    private void saveVehicleData() {
-        try {
-            List<String> vehicleDataStrings = vehicleData.stream()
-                    .map(vehicle -> String.join(",", String.valueOf(vehicle.getVehicleId()), vehicle.getRegistrationNumber(), vehicle.getBrandModel(), vehicle.getVehicleType(), vehicle.getProductionYear(), String.valueOf(vehicle.getClientId())))
-                    .collect(Collectors.toList());
-            Files.write(Paths.get("vehicleData.txt"), vehicleDataStrings);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void saveVehicleToDatabase(Vehicle vehicle) {
+        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Vehicle.class).buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            session.save(vehicle);
+            session.getTransaction().commit();
+        }
+    }
+
+    private void updateVehicleInDatabase(Vehicle vehicle) {
+        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Vehicle.class).buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            session.update(vehicle);
+            session.getTransaction().commit();
+        }
+    }
+
+    private void deleteVehicleFromDatabase(Vehicle vehicle) {
+        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Vehicle.class).buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            session.delete(vehicle);
+            session.getTransaction().commit();
         }
     }
 
     private void loadVehicleData() {
-        try {
-            List<String> vehicleDataStrings = Files.readAllLines(Paths.get("vehicleData.txt"));
-            for (String vehicleDataString : vehicleDataStrings) {
-                String[] data = vehicleDataString.split(",");
-                if (data.length == 6) {
-                    int vehicleId = Integer.parseInt(data[0]);
-                    int clientId = Integer.parseInt(data[5]);
-                    Vehicle vehicle = new Vehicle(vehicleId, data[1], data[2], data[3], data[4], clientId);
-                    vehicleData.add(vehicle);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Vehicle.class).buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            List<Vehicle> vehicles = session.createQuery("from Vehicle", Vehicle.class).getResultList();
+            vehicleData.addAll(vehicles);
+            session.getTransaction().commit();
         }
     }
 

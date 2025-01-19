@@ -16,10 +16,10 @@ public class VehicleEditController {
     private TextField registrationNumberField;
 
     @FXML
-    private TextField brandModelField;
+    private TextField brandField;
 
     @FXML
-    private TextField vehicleTypeField;
+    private TextField modelField;
 
     @FXML
     private TextField productionYearField;
@@ -30,9 +30,9 @@ public class VehicleEditController {
     public void setVehicleData(Vehicle vehicle) {
         this.originalVehicle = vehicle;
         registrationNumberField.setText(vehicle.getRegistrationNumber());
-        brandModelField.setText(vehicle.getBrandModel());
-        vehicleTypeField.setText(vehicle.getVehicleType());
-        productionYearField.setText(vehicle.getProductionYear());
+        brandField.setText(vehicle.getBrand());
+        modelField.setText(vehicle.getModel());
+        productionYearField.setText(String.valueOf(vehicle.getProductionYear()));
     }
 
     public void setVehicleMenageController(VehicleMenageController controller) {
@@ -42,13 +42,13 @@ public class VehicleEditController {
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String updatedRegistrationNumber = registrationNumberField.getText();
-        String updatedBrandModel = brandModelField.getText();
-        String updatedVehicleType = vehicleTypeField.getText();
-        String updatedProductionYear = productionYearField.getText();
+        String updatedBrand = brandField.getText();
+        String updatedModel = modelField.getText();
+        int updatedProductionYear = Integer.parseInt(productionYearField.getText());
         int clientId = originalVehicle.getClientId(); // Retrieve the clientId from the original vehicle
         int vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
 
-        Vehicle updatedVehicle = new Vehicle(vehicleId, updatedRegistrationNumber, updatedBrandModel, updatedVehicleType, updatedProductionYear, clientId);
+        Vehicle updatedVehicle = new Vehicle(vehicleId, updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, clientId);
         vehicleMenageController.updateVehicleInList(originalVehicle, updatedVehicle);
         navigateToVehicleMenage(event);
     }

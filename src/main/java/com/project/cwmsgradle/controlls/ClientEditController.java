@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import java.io.IOException;
 
 public class ClientEditController {
-
     @FXML
     private TextField nameField;
 
@@ -32,7 +31,7 @@ public class ClientEditController {
         nameField.setText(client.getName());
         surnameField.setText(client.getSurname());
         phoneField.setText(client.getPhone());
-        mailField.setText(client.getMail());
+        mailField.setText(client.getEmail());
     }
 
     public void setClientMenageController(ClientMenageController controller) {
@@ -46,7 +45,7 @@ public class ClientEditController {
         String updatedPhone = phoneField.getText();
         String updatedMail = mailField.getText();
 
-        Client updatedClient = new Client(originalClient.getClientId(), originalClient.getId(), updatedName, updatedSurname, updatedPhone, updatedMail);
+        Client updatedClient = new Client(originalClient.getClientId(), updatedName, updatedSurname, updatedPhone, updatedMail);
         clientMenageController.updateClientInList(originalClient, updatedClient);
         navigateToClientMenage(event);
     }

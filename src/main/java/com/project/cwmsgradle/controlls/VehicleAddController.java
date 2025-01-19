@@ -11,12 +11,15 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
+
 import java.io.IOException;
 
 public class VehicleAddController {
 
+
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
     String currentUserRole = AuthenticatedUser.getInstance().getRole();
+    Long clientId = AuthenticatedUser.getInstance().getClientId();
 
     @FXML
     private TextField registrationNumberField;
@@ -31,14 +34,17 @@ public class VehicleAddController {
     private TextField productionYearField;
 
     private VehicleMenageController vehicleMenageController;
-    private Client client; // Change this line
+    private Client client;
+
+    public VehicleAddController() {
+        this.client = AuthenticatedUser.getInstance().getClient();
+        if (this.client == null) {
+            throw new IllegalStateException("Client cannot be null");
+        }
+    }
 
     public void setVehicleMenageController(VehicleMenageController controller) {
         this.vehicleMenageController = controller;
-    }
-
-    public void setClient(Client client) { // Change this method
-        this.client = client;
     }
 
     @FXML
@@ -48,16 +54,15 @@ public class VehicleAddController {
         String model = modelField.getText();
         int productionYear = Integer.parseInt(productionYearField.getText());
 
-        // Retrieve the current user
-        currentUsername = AuthenticatedUser.getInstance().getUsername();
-        currentUserRole = AuthenticatedUser.getInstance().getRole();
+        if (client == null) {
+            System.out.println("Client cannot be null");
+            return;
+        }
 
-        // Tworzymy nowy obiekt Vehicle, bez id.
         Vehicle newVehicle = new Vehicle(registrationNumber, brand, model, productionYear, client);
         vehicleMenageController.addVehicleToList(newVehicle);
         navigateToVehicleMenage(event);
     }
-
 
     @FXML
     protected void onCancelButtonClick(ActionEvent event) {

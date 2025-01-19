@@ -1,4 +1,3 @@
-//Vehicle.java
 package com.project.cwmsgradle.entity;
 
 import jakarta.persistence.*;
@@ -6,20 +5,21 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vehicleId;
+    private int vehicleId;
 
-    @Column(nullable = false)
+    @Column(name = "registrationNumber")
     private String registrationNumber;
 
-    @Column(nullable = false)
+    @Column(name = "brand")
     private String brand;
 
-    @Column(nullable = false)
+    @Column(name = "model")
     private String model;
 
-    @Column(nullable = false)
+    @Column(name = "productionYear")
     private int productionYear;
 
     @ManyToOne
@@ -27,10 +27,11 @@ public class Vehicle {
     private Client clients;
 
     // Default constructor
-    public Vehicle() {}
+    public Vehicle() {
+    }
 
-    // Constructor with all fields except ID
-    public Vehicle( String registrationNumber, String brand, String model, int productionYear, Client clients) {
+    // Constructor with parameters
+    public Vehicle(String registrationNumber, String brand, String model, int productionYear, Client clients) {
         this.registrationNumber = registrationNumber;
         this.brand = brand;
         this.model = model;
@@ -39,11 +40,11 @@ public class Vehicle {
     }
 
     // Getters and setters
-    public Long getVehicleId() {
+    public int getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicleId(Long vehicleId) {
+    public void setVehicleId(int vehicleId) {
         this.vehicleId = vehicleId;
     }
 

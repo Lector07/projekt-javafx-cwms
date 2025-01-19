@@ -1,6 +1,5 @@
 package com.project.cwmsgradle.controlls;
 
-import com.project.cwmsgradle.entity.Client;
 import com.project.cwmsgradle.entity.Vehicle;
 import com.project.cwmsgradle.utils.AuthenticatedUser;
 import org.hibernate.Session;
@@ -46,9 +45,6 @@ public class VehicleMenageController {
 
     @FXML
     private TableColumn<Vehicle, Integer> clientIdColumn;
-
-    @FXML
-    private TableView<Client> clientTableView; // Define the clientTableView
 
     private ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
     private int nextVehicleId = 1; // Initialize vehicle ID counter
@@ -105,29 +101,12 @@ public class VehicleMenageController {
 
             VehicleAddController addController = loader.getController();
             addController.setVehicleMenageController(this);
-            addController.setClient(getSelectedClient()); // Pass the selected client
 
             Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             primaryStage.getScene().setRoot(root);
             primaryStage.setTitle("Dodaj pojazd");
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    private Client getSelectedClient() {
-        // Assuming you have a TableView<Client> named clientTableView
-        Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
-        if (selectedClient != null) {
-            return selectedClient;
-        } else {
-            // Handle the case where no client is selected
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Client Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a client from the list.");
-            alert.showAndWait();
-            return null;
         }
     }
 

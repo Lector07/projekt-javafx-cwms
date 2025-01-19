@@ -48,10 +48,17 @@ public class VehicleEditController {
         String updatedModel = modelField.getText();
         int updatedProductionYear = Integer.parseInt(productionYearField.getText());
         Client client = originalVehicle.getClients(); // Retrieve the Client object using getClients
-        Long vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
+        int vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
+
+        // Ensure the client is not null
+        if (client == null) {
+            // Handle the case where the client is null, e.g., show an error message
+            System.out.println("Client cannot be null");
+            return;
+        }
 
         Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, client);
-        updatedVehicle.setVehicleId(vehicleId); // Ustawiamy ID
+        updatedVehicle.setVehicleId(vehicleId); // Set the ID
 
         vehicleMenageController.updateVehicleInList(originalVehicle, updatedVehicle);
         navigateToVehicleMenage(event);

@@ -96,10 +96,17 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#plateLabel, #brandLabel, #modelLabel, #yearLabel, #vinLabel {
+#plateLabel, #brandLabel, #modelLabel, #yearLabel, #clientLabel {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
     -fx-text-fill: white;
+}
+
+#clientComboBox{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 16px;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 0);
 }
 
 #saveButton, #cancelButton {
@@ -173,19 +180,19 @@ Label {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#vbMenVeh, #vbClientMenage {
+#vbMenVeh, #vbClientMenage, #vbAppointment {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #2A54D2, #6BA0FF);
     -fx-background-radius: 30px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#hbMenVeh {
+#hbMenVeh, #hbClientMenage, #hbAppointment {
     -fx-background-color: white;
     -fx-background-radius: 30px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#labelVehEdit {
+#labelVehEdit, #appointmentLabel {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 18px;
     -fx-text-fill: black;
@@ -198,11 +205,6 @@ Label {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#hbCliMen {
-    -fx-background-color: white;
-    -fx-background-radius: 30px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
-}
 
 #labelClientAdd {
     -fx-font-family: 'Ubuntu', sans-serif;
@@ -224,7 +226,7 @@ Label {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 0);
 }
 
-#goBackClientButton, #addClientButton, #cancelClientButton {
+#goBackClientButton, #addClientButton, #cancelClientButton, #addAppointmentButton, #editAppointmentButton, #endAppointmentButton {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-text-fill: black;
     -fx-background-color: white;

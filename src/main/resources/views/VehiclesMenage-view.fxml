@@ -50,12 +50,12 @@
                         <Insets bottom="20.0" top="20.0" />
                     </HBox.margin>
                     <columns>
-                        <TableColumn fx:id="vehicleIdColumn" prefWidth="68" text="ID Pojazdu" />
-                        <TableColumn fx:id="registrationNumberColumn" prefWidth="68" text="Nr.Rejest" />
+                        <TableColumn fx:id="vehicleIdColumn" prefWidth="44.79998779296875" text="ID Pojazdu" />
+                        <TableColumn fx:id="registrationNumberColumn" prefWidth="91.20000839233398" text="Nr.Rejest" />
                         <TableColumn fx:id="brandColumn" prefWidth="68" text="Marka" />
-                        <TableColumn fx:id="modelColumn" prefWidth="68" text="Model" />
-                        <TableColumn fx:id="productionYearColumn" prefWidth="68" text="Rok produkcji" />
-                        <TableColumn fx:id="clientIdColumn" prefWidth="75.0" text="Klient" />
+                        <TableColumn fx:id="modelColumn" prefWidth="80.80000305175781" text="Model" />
+                        <TableColumn fx:id="productionYearColumn" prefWidth="87.20001220703125" text="Rok produkcji" />
+                        <TableColumn fx:id="clientIdColumn" prefWidth="115.199951171875" text="Klient" />
                     </columns>
                 </TableView>
             </children>

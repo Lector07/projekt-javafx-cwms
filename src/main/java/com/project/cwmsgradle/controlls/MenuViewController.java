@@ -34,13 +34,6 @@ public class MenuViewController {
     private String userRole;
     private String username;
 
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public String getUsername() {
-        return username;
-    }
 
     public void setUserRole(String role) {
         this.userRole = role;
@@ -122,5 +115,9 @@ public class MenuViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

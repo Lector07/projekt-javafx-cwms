@@ -94,17 +94,8 @@ public class Client {
         this.appointments = appointments;
     }
 
-
     @Override
     public String toString() {
-        return "Client{" +
-                "clientId=" + clientId +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", clientsVechicle=" + clientsVechicle +
-                ", appointments=" + appointments +
-                '}';
+        return name + " " + surname; // Concatenate the first name and last name
     }
 }

@@ -55,7 +55,7 @@
                         <TableColumn fx:id="brandColumn" prefWidth="68" text="Marka" />
                         <TableColumn fx:id="modelColumn" prefWidth="68" text="Model" />
                         <TableColumn fx:id="productionYearColumn" prefWidth="68" text="Rok produkcji" />
-                        <TableColumn fx:id="clientIdColumn" prefWidth="75.0" text="ID_Klienta" />
+                        <TableColumn fx:id="clientIdColumn" prefWidth="75.0" text="Klient" />
                     </columns>
                 </TableView>
             </children>

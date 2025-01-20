@@ -19,7 +19,7 @@ public class VehicleAddController {
 
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
     String currentUserRole = AuthenticatedUser.getInstance().getRole();
-    Long clientId = AuthenticatedUser.getInstance().getClientId();
+    //Long clientId = AuthenticatedUser.getInstance().getClientId();
 
     @FXML
     private TextField registrationNumberField;
@@ -34,13 +34,12 @@ public class VehicleAddController {
     private TextField productionYearField;
 
     private VehicleMenageController vehicleMenageController;
-    private Client client;
 
     public VehicleAddController() {
-        this.client = AuthenticatedUser.getInstance().getClient();
-        if (this.client == null) {
-            throw new IllegalStateException("Client cannot be null");
-        }
+//        this.client = AuthenticatedUser.getInstance().getClient();
+//        if (this.client == null) {
+//            throw new IllegalStateException("Client cannot be null");
+//        }
     }
 
     public void setVehicleMenageController(VehicleMenageController controller) {
@@ -54,10 +53,17 @@ public class VehicleAddController {
         String model = modelField.getText();
         int productionYear = Integer.parseInt(productionYearField.getText());
 
-        if (client == null) {
-            System.out.println("Client cannot be null");
-            return;
-        }
+        /* TODO
+        * Musisz dodać klienta do pojazdu najlepiej z listy wybieralnej pobrac listę klientów
+        * na razie na sztywno daję id klienta 1 - nie wiąż id klienta z userem zalogowanym
+        *
+        * wtedy jak wybierzesz klienta ładujesz id np. client.setClientId(clients.getClientId();
+        *
+        * */
+        int clid = 1;
+        Client  client = new Client();
+        client.setClientId(clid);
+
 
         Vehicle newVehicle = new Vehicle(registrationNumber, brand, model, productionYear, client);
         vehicleMenageController.addVehicleToList(newVehicle);

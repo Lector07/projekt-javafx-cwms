@@ -8,7 +8,7 @@ import java.util.List;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clientId;
+    private int clientId;
 
     @Column(nullable = false)
     private String name;
@@ -23,7 +23,10 @@ public class Client {
     private String email;
 
     @OneToMany(mappedBy = "clients", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Vehicle> vehicles;
+    private List<Vehicle> clientsVechicle;
+
+    @OneToMany(mappedBy = "appointmentId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Appointment> appointments;
 
     public Client() {
     }
@@ -35,11 +38,11 @@ public class Client {
         this.email = email;
     }
 
-    public Long getClientId() {
+    public int getClientId() {
         return clientId;
     }
 
-    public void setClientId(Long clientId) {
+    public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
@@ -76,10 +79,32 @@ public class Client {
     }
 
     public List<Vehicle> getVehicles() {
-        return vehicles;
+        return clientsVechicle;
     }
 
-    public void setVehicles(List<Vehicle> vehicles) {
-        this.vehicles = vehicles;
+    public void setVehicles(List<Vehicle> clientsVechicle) {
+        this.clientsVechicle = clientsVechicle;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "clientId=" + clientId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", clientsVechicle=" + clientsVechicle +
+                ", appointments=" + appointments +
+                '}';
     }
 }

@@ -2,6 +2,8 @@ package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.Vehicle;
 import com.project.cwmsgradle.utils.AuthenticatedUser;
+import com.project.cwmsgradle.utils.HibernateUtil;
+import javafx.beans.property.SimpleObjectProperty;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -44,7 +46,7 @@ public class VehicleMenageController {
     private TableColumn<Vehicle, String> productionYearColumn;
 
     @FXML
-    private TableColumn<Vehicle, Integer> clientIdColumn;
+    private TableColumn<Vehicle, String> clientIdColumn;
 
     private ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
     private int nextVehicleId = 1; // Initialize vehicle ID counter
@@ -52,15 +54,28 @@ public class VehicleMenageController {
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
     String currentUserRole = AuthenticatedUser.getInstance().getRole();
 
+    private SessionFactory sessionFactory;
+
     @FXML
     protected void initialize() {
+        sessionFactory = HibernateUtil.getSessionFactory(); // Use shared instance
+
+        // Set up table columns
         vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
         registrationNumberColumn.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
         brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         productionYearColumn.setCellValueFactory(new PropertyValueFactory<>("productionYear"));
-        clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("client.clientId"));
-
+        clientIdColumn.setCellValueFactory(cellData -> {
+            Vehicle vehicle = cellData.getValue();
+            if (vehicle != null && vehicle.getClients() != null) {
+                String name = vehicle.getClients().getName();
+                String surname = vehicle.getClients().getSurname();  // Assuming 'surname' exists in 'Client'
+                return new SimpleObjectProperty<>(name + " " + surname); // Concatenate name and surname
+            }
+            return new SimpleObjectProperty<>(""); // Return empty string if no client data
+        });
+        // Load data and bind it to the table
         loadVehicleData();
         vehicleTableView.setItems(vehicleData);
     }
@@ -138,7 +153,7 @@ public class VehicleMenageController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Potwierdzenie usunięcia");
             alert.setHeaderText("Czy na pewno chcesz usunąć ten pojazd?");
-            alert.setContentText("ID Pojazdu: " + selectedVehicle.getVehicleId() + "\nID Klienta: " + selectedVehicle.getClients().getClientId());
+            //alert.setContentText("ID Pojazdu: " + selectedVehicle.getVehicleId() + "\nID Klienta: " + selectedVehicle.getClients().getClientId());
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -165,8 +180,7 @@ public class VehicleMenageController {
     }
 
     private void saveVehicleToDatabase(Vehicle vehicle) {
-        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Vehicle.class).buildSessionFactory();
-             Session session = factory.getCurrentSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(vehicle);
             session.getTransaction().commit();
@@ -174,8 +188,7 @@ public class VehicleMenageController {
     }
 
     private void updateVehicleInDatabase(Vehicle vehicle) {
-        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Vehicle.class).buildSessionFactory();
-             Session session = factory.getCurrentSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.update(vehicle);
             session.getTransaction().commit();
@@ -183,8 +196,7 @@ public class VehicleMenageController {
     }
 
     private void deleteVehicleFromDatabase(Vehicle vehicle) {
-        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Vehicle.class).buildSessionFactory();
-             Session session = factory.getCurrentSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.delete(vehicle);
             session.getTransaction().commit();
@@ -192,8 +204,7 @@ public class VehicleMenageController {
     }
 
     private void loadVehicleData() {
-        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Vehicle.class).buildSessionFactory();
-             Session session = factory.getCurrentSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             List<Vehicle> vehicles = session.createQuery("from Vehicle", Vehicle.class).getResultList();
             vehicleData.addAll(vehicles);

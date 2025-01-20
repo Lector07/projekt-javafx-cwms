@@ -1,6 +1,8 @@
 package com.project.cwmsgradle.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,6 +23,11 @@ public class User {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Appointment> appointments;
+
+
 
     public User() {
         this.createdAt = LocalDateTime.now();
@@ -71,5 +78,25 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", createdAt=" + createdAt +
+                ", appointments=" + appointments +
+                '}';
     }
 }

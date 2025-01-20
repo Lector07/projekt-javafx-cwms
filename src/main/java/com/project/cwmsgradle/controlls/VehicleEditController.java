@@ -51,11 +51,12 @@ public class VehicleEditController {
         int vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
 
         // Ensure the client is not null
-        if (client == null) {
-            // Handle the case where the client is null, e.g., show an error message
-            System.out.println("Client cannot be null");
-            return;
-        }
+//        if (client == null) {
+//            // Handle the case where the client is null, e.g., show an error message
+//            System.out.println("Client cannot be null");
+//            return;
+//        }
+
 
         Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, client);
         updatedVehicle.setVehicleId(vehicleId); // Set the ID

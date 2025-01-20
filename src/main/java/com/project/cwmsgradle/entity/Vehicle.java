@@ -2,6 +2,8 @@ package com.project.cwmsgradle.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
@@ -23,8 +25,12 @@ public class Vehicle {
     private int productionYear;
 
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
+    @JoinColumn(name = "clientid", nullable = false)
     private Client clients;
+
+    @OneToMany(mappedBy = "appointmentId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Appointment> appointments;
+
 
     // Default constructor
     public Vehicle() {
@@ -86,5 +92,26 @@ public class Vehicle {
 
     public void setClients(Client clients) {
         this.clients = clients;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vehicleId=" + vehicleId +
+                ", registrationNumber='" + registrationNumber + '\'' +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", productionYear=" + productionYear +
+                ", clients=" + clients +
+                ", appointments=" + appointments +
+                '}';
     }
 }

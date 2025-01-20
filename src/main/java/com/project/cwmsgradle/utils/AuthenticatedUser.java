@@ -33,7 +33,7 @@ public class AuthenticatedUser {
         return client;
     }
 
-    public Long getClientId() {
+    public Integer getClientId() {
         return client != null ? client.getClientId() : null;
     }
 }

@@ -1,10 +1,14 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.User;
+import com.project.cwmsgradle.utils.AuthenticatedUser;
 import com.project.cwmsgradle.utils.HibernateUtil;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -37,15 +41,22 @@ public class LoginDialogController {
 
         if (authenticateUser(username, password)) {
             messageLabel.setText("Login successful.");
+            // Pobranie roli
+            String role = getUserRole(username);
+            // Ustawienie danych w AuthenticatedUser
+            AuthenticatedUser authUser = AuthenticatedUser.getInstance();
+            authUser.setUsername(username);
+            authUser.setRole(role);
+            // Ustawianie danych w menu view
             if (menuViewController != null) {
-                menuViewController.setUserRole(getUserRole(username));
+                menuViewController.setUserRole(role);
                 menuViewController.setUsername(username);
             }
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Menu-view.fxml"));
                 Parent root = loader.load();
                 MenuViewController menuController = loader.getController();
-                menuController.setUserRole(getUserRole(username));
+                menuController.setUserRole(role);
                 menuController.setUsername(username);
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.getScene().setRoot(root);
@@ -80,6 +91,20 @@ public class LoginDialogController {
             return user != null ? user.getRole() : null;
         } finally {
             session.close();
+        }
+    }
+
+    @FXML
+    private void onReturnButtonClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainApp-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            // Handle exception
         }
     }
 }

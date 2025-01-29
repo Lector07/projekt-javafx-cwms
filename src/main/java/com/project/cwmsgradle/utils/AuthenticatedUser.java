@@ -11,10 +11,8 @@ public class AuthenticatedUser {
 
     private AuthenticatedUser() {
         this.username = new User().getUsername();
-        this.role = new User().getRole();// Replace with actual initialization
-        // Initialize the client object here
-        // For example, you can retrieve it from the database or set it manually
-        this.client = new Client(); // Replace with actual initialization
+        this.role = new User().getRole();
+        this.client = new Client();
     }
 
     public static AuthenticatedUser getInstance() {
@@ -28,8 +26,16 @@ public class AuthenticatedUser {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getRole() {
         return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Client getClient() {

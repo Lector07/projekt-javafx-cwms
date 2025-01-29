@@ -19,6 +19,7 @@
                 <Image url="@../icons/auto.png" />
             </image>
         </ImageView>
+        <Label fx:id="usernameLabelVehicle" layoutX="596.0" layoutY="23.0" prefHeight="21.0" prefWidth="104.0" stylesheets="@../com/project/cwmsgradle/styles.css" text="Username" />
         <VBox fx:id="vbMenVeh" alignment="CENTER" layoutX="14.0" layoutY="54.0" prefHeight="400.0" prefWidth="145.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
             <children>
                 <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddVehicleButtonClick" prefHeight="35.0" prefWidth="100.0" text="Dodaj">
@@ -60,5 +61,10 @@
                 </TableView>
             </children>
         </HBox>
+      <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="565.0" layoutY="22.0">
+         <image>
+            <Image url="@../icons/user.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

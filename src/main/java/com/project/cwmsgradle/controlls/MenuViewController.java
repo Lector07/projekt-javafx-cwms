@@ -1,4 +1,4 @@
-// src/main/java/com/project/cwmsgradle/controlls/MenuViewController.java
+
 package com.project.cwmsgradle.controlls;
 
 import javafx.fxml.FXML;

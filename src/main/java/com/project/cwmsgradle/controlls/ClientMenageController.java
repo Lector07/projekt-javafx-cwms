@@ -54,12 +54,25 @@ public class ClientMenageController {
     }
 
     @FXML
+    private Label usernameLabelClient;
+
+    private String username;
+
+
+    public void setUsername(String username) {
+        this.username = username;
+        usernameLabelClient.setText(username);
+    }
+
+    @FXML
     protected void initialize() {
         clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         mailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        usernameLabelClient.setVisible(true);
+        setUsername(AuthenticatedUser.getInstance().getUsername());
 
         loadClientData();
         clientTableView.setItems(clientData);

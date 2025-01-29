@@ -37,7 +37,7 @@
             </Label>
                 <Button fx:id="submitButton" onAction="#onSubmitButtonClick" prefHeight="45.0" prefWidth="150.0" text="Zaloguj">
                     <VBox.margin>
-                        <Insets top="65.0" />
+                        <Insets bottom="20.0" top="55.0" />
                     </VBox.margin>
                 </Button>
             </children>
@@ -47,5 +47,6 @@
                 <Image url="@../icons/login.png" />
             </image>
         </ImageView>
+      <Button fx:id="returnButton" layoutX="332.0" layoutY="403.0" mnemonicParsing="false" onAction="#onReturnButtonClick" text="Powrót" />
     </children>
 </AnchorPane>

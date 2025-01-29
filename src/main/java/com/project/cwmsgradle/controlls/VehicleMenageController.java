@@ -4,17 +4,13 @@ import com.project.cwmsgradle.entity.Vehicle;
 import com.project.cwmsgradle.utils.AuthenticatedUser;
 import com.project.cwmsgradle.utils.HibernateUtil;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -26,6 +22,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class VehicleMenageController {
+
+    String currentUsername = AuthenticatedUser.getInstance().getUsername();
+    String currentUserRole = AuthenticatedUser.getInstance().getRole();
 
     @FXML
     private TableView<Vehicle> vehicleTableView;
@@ -51,14 +50,27 @@ public class VehicleMenageController {
     private ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
     private int nextVehicleId = 1; // Initialize vehicle ID counter
 
-    String currentUsername = AuthenticatedUser.getInstance().getUsername();
-    String currentUserRole = AuthenticatedUser.getInstance().getRole();
 
     private SessionFactory sessionFactory;
+
+
+    @FXML
+    private Label usernameLabelVehicle;
+
+    private String username;
+
+
+    public void setUsername(String username) {
+        this.username = username;
+        usernameLabelVehicle.setText(username);
+    }
+
 
     @FXML
     protected void initialize() {
         sessionFactory = HibernateUtil.getSessionFactory(); // Use shared instance
+        usernameLabelVehicle.setVisible(true);
+        setUsername(AuthenticatedUser.getInstance().getUsername());
 
         // Set up table columns
         vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
@@ -85,7 +97,7 @@ public class VehicleMenageController {
     }
 
     public void setMenuViewController(MenuViewController menuViewController) {
-        // Implement the method to set the Menu View Controller
+
     }
 
     @FXML
@@ -98,6 +110,9 @@ public class VehicleMenageController {
             MenuViewController menuController = loader.getController();
             menuController.setUserRole(currentUserRole);
             menuController.setUsername(currentUsername);
+
+            currentUsername = AuthenticatedUser.getInstance().getUsername();
+            currentUserRole = AuthenticatedUser.getInstance().getRole();
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);

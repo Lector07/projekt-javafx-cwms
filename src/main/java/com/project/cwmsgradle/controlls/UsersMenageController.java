@@ -10,7 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -130,11 +132,42 @@ public class UsersMenageController {
         }
     }
 
+    @FXML
+    protected void onEditPasswordButtonClick(ActionEvent event) {
+        User selectedUser = usersTableView.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/UsersPasswordEdit-view.fxml"));
+                Parent root = loader.load();
+
+                UsersPasswordEditController passwordEditController = loader.getController();
+                passwordEditController.setUsersMenageController(this);
+                passwordEditController.setUser(selectedUser);
+
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Zmiana hasła");
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            AlertUtils.showWarningAlert("Brak wyboru", "Nie wybrano użytkownika", "Proszę wybrać użytkownika do zmiany hasła.");
+        }
+    }
+
     private void deleteUserFromDatabase(User selectedUser) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.delete(selectedUser);
             session.getTransaction().commit();
         }
+    }
+
+    public void refreshUserTable() {
+        usersData.clear();
+        loadUsersData();
     }
 }

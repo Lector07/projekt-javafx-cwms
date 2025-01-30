@@ -53,27 +53,21 @@ public class VehicleAddController {
 
     @FXML
     public void initialize() {
-        // Load clients from the database using Hibernate and populate ComboBox
         populateClientComboBox();
     }
 
     private void populateClientComboBox() {
         sessionFactory = HibernateUtil.getSessionFactory();
-        // Create an ObservableList to hold the clients
         ObservableList<Client> clientList = FXCollections.observableArrayList();
 
-        // Open a Hibernate session
         try {
-            // Create a query to retrieve all clients
             Session session = sessionFactory.openSession();
             Query<Client> query = session.createQuery("FROM Client", Client.class);
 
-            List<Client> clients = query.list(); // Execute the query
+            List<Client> clients = query.list();
 
-            // Add the clients to the ObservableList
             clientList.addAll(clients);
 
-            // Set the ObservableList to the ComboBox
             clientComboBox.setItems(clientList);
 
         } catch (Exception e) {
@@ -92,18 +86,13 @@ public class VehicleAddController {
         String model = modelField.getText();
         int productionYear = Integer.parseInt(productionYearField.getText());
 
-        // Get the selected client from the ComboBox
         Client selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
 
         if (selectedClient != null) {
-            // Use the selected client to create the new vehicle
             Vehicle newVehicle = new Vehicle(registrationNumber, brand, model, productionYear, selectedClient);
             vehicleMenageController.addVehicleToList(newVehicle);
         } else {
-            // Handle the case where no client is selected (e.g., show an error message)
             System.out.println("No client selected");
-            // TODO
-            // Add error alert!!!!
         }
         navigateToVehicleMenage(event);
     }

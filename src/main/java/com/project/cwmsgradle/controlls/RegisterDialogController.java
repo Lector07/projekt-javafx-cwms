@@ -1,12 +1,12 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.User;
+import com.project.cwmsgradle.utils.AlertUtils;
 import com.project.cwmsgradle.utils.HibernateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -33,22 +33,24 @@ public class RegisterDialogController {
     private Label messageLabel;
 
     @FXML
-    private ImageView logoRegister;
-
-    @FXML
     protected void onSubmitButtonClick() {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            AlertUtils.showWarningAlert("Błąd rejestracji", "Wszystkie pola muszą być wypełnione.", "Proszę wypełnić wszystkie pola.");
+            return;
+        }
+
         if (password.equals(confirmPassword)) {
             if (addUserToDatabase(username, password)) {
-                messageLabel.setText("Konto zostało utworzone.");
+                AlertUtils.showInformationAlert("Rejestracja udana", "Konto zostało utworzone.", "Możesz teraz się zalogować.");
             } else {
-                messageLabel.setText("Użytkownik z taką nazwą już istnieje.");
+                AlertUtils.showErrorAlert("Błąd rejestracji", "Użytkownik z taką nazwą już istnieje.", "Proszę wybrać inną nazwę użytkownika.");
             }
         } else {
-            messageLabel.setText("Hasła nie są identyczne.");
+            AlertUtils.showWarningAlert("Błąd rejestracji", "Hasła nie są identyczne.", "Proszę upewnić się, że hasła są identyczne.");
         }
     }
 
@@ -58,7 +60,6 @@ public class RegisterDialogController {
         try {
             transaction = session.beginTransaction();
 
-            // Check if the user already exists
             User existingUser = (User) session.createQuery("FROM User WHERE username = :username")
                     .setParameter("username", username)
                     .uniqueResult();
@@ -69,7 +70,6 @@ public class RegisterDialogController {
             // Determine the role
             String role = "user";
             if ("admin".equals(username) && "admin".equals(password)) {
-                // Check if an admin already exists
                 User adminUser = (User) session.createQuery("FROM User WHERE role = 'admin'").uniqueResult();
                 if (adminUser == null) {
                     role = "admin";
@@ -106,7 +106,7 @@ public class RegisterDialogController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            // Handle exception
+            e.printStackTrace();
         }
     }
 }

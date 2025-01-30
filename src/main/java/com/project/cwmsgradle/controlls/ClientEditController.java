@@ -1,14 +1,18 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.Client;
+import com.project.cwmsgradle.utils.AlertUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import java.io.IOException;
+import java.util.Optional;
 
 public class ClientEditController {
     @FXML
@@ -48,9 +52,17 @@ public class ClientEditController {
         // Użyj konstruktora z 4 argumentami
         Client updatedClient = new Client(updatedName, updatedSurname, updatedPhone, updatedEmail);
 
-        updatedClient.setClientId(originalClient.getClientId());// Ustawiamy ID
-        clientMenageController.updateClientInList(originalClient, updatedClient);
-        navigateToClientMenage(event);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Potwierdzenie zapisu");
+        alert.setHeaderText("Czy napewno chcesz zapisać zmiany?");
+        alert.setContentText("Kliknij OK, aby zapisać zmiany.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            updatedClient.setClientId(originalClient.getClientId()); // Ustawiamy ID
+            clientMenageController.updateClientInList(originalClient, updatedClient);
+            navigateToClientMenage(event);
+        }
     }
 
     @FXML

@@ -1,6 +1,7 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.User;
+import com.project.cwmsgradle.utils.AlertUtils;
 import com.project.cwmsgradle.utils.AuthenticatedUser;
 import com.project.cwmsgradle.utils.HibernateUtil;
 import javafx.event.ActionEvent;
@@ -40,7 +41,6 @@ public class LoginDialogController {
         String password = passwordField.getText();
 
         if (authenticateUser(username, password)) {
-            messageLabel.setText("Login successful.");
             // Pobranie roli
             String role = getUserRole(username);
             // Ustawienie danych w AuthenticatedUser
@@ -65,7 +65,7 @@ public class LoginDialogController {
                 e.printStackTrace();
             }
         } else {
-            messageLabel.setText("Invalid username or password.");
+            AlertUtils.showErrorAlert("Błąd logowania", "Nieporawne dane logowania.", "Proszę sprawdzić nazwę użytkownika i hasło.");
         }
     }
 
@@ -104,7 +104,7 @@ public class LoginDialogController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            // Handle exception
+            e.printStackTrace();
         }
     }
 }

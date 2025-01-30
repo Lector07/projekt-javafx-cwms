@@ -1,13 +1,13 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.Vehicle;
+import com.project.cwmsgradle.utils.AlertUtils;
 import com.project.cwmsgradle.utils.AuthenticatedUser;
 import com.project.cwmsgradle.utils.HibernateUtil;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -50,21 +50,17 @@ public class VehicleMenageController {
     private ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
     private int nextVehicleId = 1; // Initialize vehicle ID counter
 
-
     private SessionFactory sessionFactory;
-
 
     @FXML
     private Label usernameLabelVehicle;
 
     private String username;
 
-
     public void setUsername(String username) {
         this.username = username;
         usernameLabelVehicle.setText(username);
     }
-
 
     @FXML
     protected void initialize() {
@@ -165,12 +161,7 @@ public class VehicleMenageController {
     protected void onDeleteVehicleButtonClick(ActionEvent event) {
         Vehicle selectedVehicle = vehicleTableView.getSelectionModel().getSelectedItem();
         if (selectedVehicle != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Potwierdzenie usunięcia");
-            alert.setHeaderText("Czy na pewno chcesz usunąć ten pojazd?");
-            //alert.setContentText("ID Pojazdu: " + selectedVehicle.getVehicleId() + "\nID Klienta: " + selectedVehicle.getClients().getClientId());
-
-            Optional<ButtonType> result = alert.showAndWait();
+            Optional<ButtonType> result = AlertUtils.showDeleteConfirmationAlert("pojazd o ID: " + selectedVehicle.getVehicleId());
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 vehicleData.remove(selectedVehicle);
                 deleteVehicleFromDatabase(selectedVehicle);

@@ -21,6 +21,7 @@
 
 #apVehiclesAdd {
     -fx-background-color: white;
+    -fx-background-image: url('https://www.transparenttextures.com/patterns/polonez-pattern.png');
 }
 
 .split-pane {
@@ -35,11 +36,12 @@
 
 #loginLabel, #registerLabel {
     -fx-font-family: 'Ubuntu', sans-serif;
-    -fx-font-size: 22px;
+    -fx-font-size: 24px;
     -fx-font-weight: normal;
     -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 0);
 }
+
 
 #loginButton, #registerButton, #submitButton {
     -fx-font-family: 'Ubuntu', sans-serif;
@@ -171,6 +173,7 @@ Label {
 
 #apMenageVehicles {
     -fx-background-color: white;
+    -fx-background-image: url('https://www.transparenttextures.com/patterns/polonez-pattern.png');
 }
 
 #spAnchorPaneButtons {
@@ -185,20 +188,20 @@ Label {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#labelMenVeh, #labelClientMenage {
+#labelMenVeh, #labelClientMenage, #usersLabel {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 18px;
     -fx-text-fill: black;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#vbMenVeh, #vbClientMenage, #vbAppointment {
+#vbMenVeh, #vbClientMenage, #vbAppointment, #vbUsers {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #2A54D2, #6BA0FF);
     -fx-background-radius: 30px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#hbMenVeh, #hbCliMen, #hbAppointment {
+#hbMenVeh, #hbCliMen, #hbAppointment, #hbUsers {
     -fx-background-color: white;
     -fx-background-radius: 30px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
@@ -274,4 +277,33 @@ Label {
     -fx-font-size: 18px;
     -fx-text-fill: black;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#usernameLabelAppointments, #usernameLabelUsers {
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#returnButton:hover {
+    -fx-background-color: #F0F0E7;
+}
+
+#apUsers {
+    -fx-background-color: white;
+    -fx-background-image: url('https://www.transparenttextures.com/patterns/polonez-pattern.png');
+}
+
+#changePasswordButton, #deleteUserButton {
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-text-fill: black;
+    -fx-background-color: white;
+    -fx-border-style: none;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#changePasswordButton:hover, #deleteUserButton:hover {
+    -fx-background-color: #F0F0E7;
 }

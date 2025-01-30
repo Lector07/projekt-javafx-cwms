@@ -185,4 +185,32 @@ public class ClientMenageController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    protected void onDeleteClientButtonClick(ActionEvent event) {
+        Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        if (selectedClient != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Potwierdzenie usunięcia");
+            alert.setHeaderText("Czy na pewno chcesz usunąć tego klienta?");
+            alert.setContentText("ID Klienta: " + selectedClient.getClientId());
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                clientData.remove(selectedClient);
+                deleteClientFromDatabase(selectedClient);
+            }
+        } else {
+            AlertUtils.showWarningAlert("Brak wyboru", "Nie wybrano klienta", "Proszę wybrać klienta do usunięcia.");
+        }
+    }
+
+    private void deleteClientFromDatabase(Client selectedClient) {
+        try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            session.delete(selectedClient);
+            session.getTransaction().commit();
+        }
+    }
 }

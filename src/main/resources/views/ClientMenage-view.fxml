@@ -32,7 +32,7 @@
                         <Insets top="30.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Usuń klienta">
+                <Button fx:id="deleteButton" onAction="#onDeleteClientButtonClick" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Usuń klienta">
                     <VBox.margin>
                         <Insets top="30.0" />
                     </VBox.margin>

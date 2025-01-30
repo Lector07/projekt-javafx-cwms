@@ -71,7 +71,7 @@ public class MenuViewController {
 
             Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             primaryStage.getScene().setRoot(root);
-            primaryStage.setTitle("Zarządzanie klientami");
+            primaryStage.setTitle("CWMS-FX");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,6 +80,23 @@ public class MenuViewController {
     @FXML
     protected void onManageRepairsButtonClick() {
         // Handle manage repairs button click
+    }
+
+    @FXML
+    protected void onUsersButtonClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/UsersMenage-view.fxml"));
+            Parent root = loader.load();
+
+            UsersMenageController usersController = loader.getController();
+            usersController.setMenuViewController(this);
+
+            Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            primaryStage.getScene().setRoot(root);
+            primaryStage.setTitle("CWMS-FX");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -97,7 +114,7 @@ public class MenuViewController {
 
             Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             primaryStage.getScene().setRoot(root);
-            primaryStage.setTitle("Zarządzanie pojazdami");
+            primaryStage.setTitle("CWMS-FX");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,7 +128,7 @@ public class MenuViewController {
             Button source = (Button) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.getScene().setRoot(root);
-            stage.setTitle("Strona Główna");
+            stage.setTitle("CWMS-FX");
         } catch (IOException e) {
             e.printStackTrace();
         }

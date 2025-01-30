@@ -3,11 +3,15 @@ package com.project.cwmsgradle.controlls;
 import com.project.cwmsgradle.entity.Client;
 import com.project.cwmsgradle.entity.Vehicle;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import java.io.IOException;
+import java.util.Optional;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -50,19 +54,26 @@ public class VehicleEditController {
         Client client = originalVehicle.getClients(); // Retrieve the Client object using getClients
         int vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
 
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Potwierdzenie zapisu");
+        alert.setHeaderText("Czy napewno chcesz zapisać zmiany?");
+        alert.setContentText("Kliknij OK, aby zapisać zmiany.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, client);
+            updatedVehicle.setVehicleId(vehicleId); // Set the ID
+
+            vehicleMenageController.updateVehicleInList(originalVehicle, updatedVehicle);
+            navigateToVehicleMenage(event);
+        }
         // Ensure the client is not null
 //        if (client == null) {
 //            // Handle the case where the client is null, e.g., show an error message
 //            System.out.println("Client cannot be null");
 //            return;
 //        }
-
-
-        Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, client);
-        updatedVehicle.setVehicleId(vehicleId); // Set the ID
-
-        vehicleMenageController.updateVehicleInList(originalVehicle, updatedVehicle);
-        navigateToVehicleMenage(event);
     }
 
     @FXML

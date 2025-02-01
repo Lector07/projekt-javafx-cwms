@@ -32,6 +32,11 @@ public class UsersPasswordEditController {
     }
 
     @FXML
+    protected void initialize() {
+        usersEditTextField.setPromptText("Wprowadź nowe hasło");
+    }
+
+    @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String newPassword = usersEditTextField.getText();
         if (newPassword.isEmpty()) {

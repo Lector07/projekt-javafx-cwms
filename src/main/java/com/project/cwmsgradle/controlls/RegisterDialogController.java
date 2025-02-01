@@ -33,6 +33,13 @@ public class RegisterDialogController {
     private Label messageLabel;
 
     @FXML
+    protected void initialize() {
+        usernameField.setPromptText("Wpisz nazwę użytkownika");
+        passwordField.setPromptText("Wpisz hasło");
+        confirmPasswordField.setPromptText("Potwierdź hasło");
+    }
+
+    @FXML
     protected void onSubmitButtonClick() {
         String username = usernameField.getText();
         String password = passwordField.getText();

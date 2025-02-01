@@ -45,6 +45,7 @@ public class VehicleEditController {
         this.vehicleMenageController = controller;
     }
 
+
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String updatedRegistrationNumber = registrationNumberField.getText();

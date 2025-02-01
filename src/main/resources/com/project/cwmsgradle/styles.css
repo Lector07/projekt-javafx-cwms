@@ -345,3 +345,8 @@ Label {
 #passwordEditButton:hover {
     -fx-background-color: #F0F0E7;
 }
+
+#apClientAdd, #apClientEdit {
+    -fx-background-color: white;
+    -fx-background-image: url('https://www.transparenttextures.com/patterns/polonez-pattern.png');
+}

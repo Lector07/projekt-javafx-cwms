@@ -20,12 +20,12 @@
         </Label>
         <VBox fx:id="vbLogin" alignment="TOP_CENTER" layoutX="239.0" layoutY="105.0" prefHeight="301.0" prefWidth="243.0">
             <children>
-                <TextField fx:id="usernameField" prefHeight="30.0" prefWidth="189.0" promptText="Podaj login">
+                <TextField fx:id="usernameField" prefHeight="30.0" prefWidth="189.0" promptText="Nazwa użytkownika">
                     <VBox.margin>
                         <Insets left="15.0" right="15.0" top="30.0" />
                     </VBox.margin>
                 </TextField>
-                <PasswordField fx:id="passwordField" prefWidth="100.0" promptText="Podaj hasło">
+                <PasswordField fx:id="passwordField" prefWidth="100.0" promptText="Hasło">
                     <VBox.margin>
                         <Insets left="15.0" right="15.0" top="20.0" />
                     </VBox.margin>

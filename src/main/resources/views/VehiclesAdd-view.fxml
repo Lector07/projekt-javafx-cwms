@@ -19,7 +19,7 @@
                         <Insets top="20.0" />
                     </VBox.margin>
                 </Label>
-                <TextField fx:id="registrationNumberField" prefWidth="200.0">
+                <TextField fx:id="registrationNumberField" promptText="Numer rejestracyjny" prefWidth="200.0">
                     <VBox.margin>
                         <Insets left="10.0" right="10.0" top="7.0" />
                     </VBox.margin>
@@ -30,7 +30,7 @@
                         <Insets top="7.0" />
                     </VBox.margin>
                 </Label>
-                <TextField fx:id="brandField" prefWidth="200.0">
+                <TextField fx:id="brandField" promptText="Marka" prefWidth="200.0">
                     <VBox.margin>
                         <Insets left="10.0" right="10.0" top="7.0" />
                     </VBox.margin>
@@ -41,7 +41,7 @@
                         <Insets top="7.0" />
                     </VBox.margin>
                 </Label>
-                <TextField fx:id="modelField" prefWidth="200.0">
+                <TextField fx:id="modelField" promptText="Model" prefWidth="200.0">
                     <VBox.margin>
                         <Insets left="10.0" right="10.0" top="7.0" />
                     </VBox.margin>
@@ -52,7 +52,7 @@
                         <Insets top="7.0" />
                     </VBox.margin>
                 </Label>
-                <TextField fx:id="productionYearField" prefWidth="200.0">
+                <TextField fx:id="productionYearField" promptText="Rok produkcji" prefWidth="200.0">
                     <VBox.margin>
                         <Insets left="10.0" right="10.0" top="7.0" />
                     </VBox.margin>

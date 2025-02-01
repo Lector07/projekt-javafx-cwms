@@ -25,7 +25,6 @@ public class ClientMenageController {
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
     String currentUserRole = AuthenticatedUser.getInstance().getRole();
 
-
     @FXML
     private TableView<Client> clientTableView;
 
@@ -58,7 +57,6 @@ public class ClientMenageController {
 
     private String username;
 
-
     public void setUsername(String username) {
         this.username = username;
         usernameLabelClient.setText(username);
@@ -84,7 +82,6 @@ public class ClientMenageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Menu-view.fxml"));
             Parent root = loader.load();
 
-            // Get the controller and set the current user information
             MenuViewController menuController = loader.getController();
             menuController.setUserRole(AuthenticatedUser.getInstance().getRole());
             menuController.setUsername(AuthenticatedUser.getInstance().getUsername());
@@ -119,15 +116,19 @@ public class ClientMenageController {
     }
 
     public void addClientToList(Client client) {
-        clientData.add(client);
-        saveClientToDatabase(client);
+        if (validateClientData(client)) {
+            clientData.add(client);
+            saveClientToDatabase(client);
+        }
     }
 
     public void updateClientInList(Client originalClient, Client updatedClient) {
-        int index = clientData.indexOf(originalClient);
-        if (index != -1) {
-            clientData.set(index, updatedClient);
-            updateClientInDatabase(updatedClient);
+        if (validateClientData(updatedClient)) {
+            int index = clientData.indexOf(originalClient);
+            if (index != -1) {
+                clientData.set(index, updatedClient);
+                updateClientInDatabase(updatedClient);
+            }
         }
     }
 
@@ -212,5 +213,33 @@ public class ClientMenageController {
             session.delete(selectedClient);
             session.getTransaction().commit();
         }
+    }
+
+    private boolean validateClientData(Client client) {
+        if (!isValidPhoneNumber(client.getPhone())) {
+            AlertUtils.showWarningAlert("Błąd", "Nieprawidłowy numer telefonu", "Numer telefonu musi mieć 9 cyfr.");
+            return false;
+        }
+        if (!isValidEmail(client.getEmail())) {
+            AlertUtils.showWarningAlert("Błąd", "Nieprawidłowy email", "Email musi zawierać '@'.");
+            return false;
+        }
+        if (!isValidName(client.getName()) || !isValidName(client.getSurname())) {
+            AlertUtils.showWarningAlert("Błąd", "Nieprawidłowe imię lub nazwisko", "Imiona i nazwisko muszą zaczynać się z dużej litery i nie mogą zawierać liczb.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        return phoneNumber != null && phoneNumber.matches("\\d{9}");
+    }
+
+    private boolean isValidEmail(String email) {
+        return email != null && email.contains("@");
+    }
+
+    private boolean isValidName(String name) {
+        return name != null && name.matches("[A-Z][a-zA-Z]*");
     }
 }

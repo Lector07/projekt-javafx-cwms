@@ -35,6 +35,7 @@ public class LoginDialogController {
         this.menuViewController = menuViewController;
     }
 
+
     @FXML
     protected void onSubmitButtonClick() {
         String username = usernameField.getText();

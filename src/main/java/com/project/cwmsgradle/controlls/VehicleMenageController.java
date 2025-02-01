@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class VehicleMenageController {
 
@@ -83,6 +84,19 @@ public class VehicleMenageController {
             }
             return new SimpleObjectProperty<>(""); // Return empty string if no client data
         });
+
+        registrationNumberColumn.setCellFactory(column -> new TableCell<Vehicle, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(item.toUpperCase());
+                }
+            }
+        });
+
         // Load data and bind it to the table
         loadVehicleData();
         vehicleTableView.setItems(vehicleData);
@@ -171,18 +185,51 @@ public class VehicleMenageController {
     }
 
     public void addVehicleToList(Vehicle vehicle) {
-        vehicleData.add(vehicle);
-        saveVehicleToDatabase(vehicle);
-        refreshTableView();
+        if (validateVehicleData(vehicle)) {
+            vehicleData.add(vehicle);
+            saveVehicleToDatabase(vehicle);
+            refreshTableView();
+        }
     }
 
     public void updateVehicleInList(Vehicle originalVehicle, Vehicle updatedVehicle) {
-        int index = vehicleData.indexOf(originalVehicle);
-        if (index != -1) {
-            vehicleData.set(index, updatedVehicle);
-            updateVehicleInDatabase(updatedVehicle);
-            refreshTableView();
+        if (validateVehicleData(updatedVehicle)) {
+            int index = vehicleData.indexOf(originalVehicle);
+            if (index != -1) {
+                vehicleData.set(index, updatedVehicle);
+                updateVehicleInDatabase(updatedVehicle);
+                refreshTableView();
+            }
         }
+    }
+
+    private boolean validateVehicleData(Vehicle vehicle) {
+        if (!isValidBrand(vehicle.getBrand())) {
+            AlertUtils.showWarningAlert("Błąd", "Nieprawidłowy format", "Wpisana wartość musi być z dużej litery i nie może zawierać cyfr.");
+            return false;
+        }
+        if (!isValidModel(vehicle.getModel())) {
+            AlertUtils.showWarningAlert("Błąd", "Nieprawidłowy format", "Wpisana wartość musi być z dużej litery i nie może zawierać cyfr.");
+            return false;
+        }
+        if (!isValidProductionYear(vehicle.getProductionYear())) {
+            AlertUtils.showWarningAlert("Błąd", "Nieprawidłowy rok produkcji", "Rok produkcji musi być liczbą od 1900 roku.");
+            return false;
+        }
+        return true;
+    }
+
+
+    private boolean isValidBrand(String brand) {
+        return brand != null && brand.matches("[A-Z][a-zA-Z]*");
+    }
+
+    private boolean isValidModel(String model) {
+        return model != null && model.matches("[A-Z][a-zA-Z]*");
+    }
+
+    private boolean isValidProductionYear(int year) {
+        return year >= 1900;
     }
 
     private void saveVehicleToDatabase(Vehicle vehicle) {

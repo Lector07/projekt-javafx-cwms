@@ -29,6 +29,7 @@ public class ClientAddController {
         this.clientMenageController = controller;
     }
 
+
     @FXML
     public void onSaveButtonClick(ActionEvent event) {
         String name = nameField.getText();

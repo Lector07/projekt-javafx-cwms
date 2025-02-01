@@ -38,6 +38,8 @@ public class ClientEditController {
         mailField.setText(client.getEmail());
     }
 
+
+
     public void setClientMenageController(ClientMenageController controller) {
         this.clientMenageController = controller;
     }

@@ -359,3 +359,58 @@ Label {
 #addAppointmentButton:hover, #editAppointmentButton:hover, #endAppointmentButton:hover {
     -fx-background-color: #F0F0E7;
 }
+
+#apAppointmentAdd {
+    -fx-background-color: white;
+    -fx-background-image: url('https://www.transparenttextures.com/patterns/polonez-pattern.png');
+}
+
+#vbAppointmentAdd {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #2A54D2, #6BA0FF);
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#apAppointmentAddVehicleLabel, #appointmentAddDescriptionLabel {
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#appointmentAddLabel{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#tesxtAreaAppointment{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 16px;
+    -fx-border-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#comboboxAppointmentAdd{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 16px;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#addAppointmentButton{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-text-fill: black;
+    -fx-background-color: white;
+    -fx-border-style: none;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#comboboxAppointmentEdit{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 16px;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}

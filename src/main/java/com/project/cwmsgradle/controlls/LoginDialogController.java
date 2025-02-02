@@ -35,35 +35,38 @@ public class LoginDialogController {
         this.menuViewController = menuViewController;
     }
 
-
     @FXML
     protected void onSubmitButtonClick() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         if (authenticateUser(username, password)) {
-            // Pobranie roli
-            String role = getUserRole(username);
-            // Ustawienie danych w AuthenticatedUser
-            AuthenticatedUser authUser = AuthenticatedUser.getInstance();
-            authUser.setUsername(username);
-            authUser.setRole(role);
-            // Ustawianie danych w menu view
-            if (menuViewController != null) {
-                menuViewController.setUserRole(role);
-                menuViewController.setUsername(username);
-            }
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Menu-view.fxml"));
-                Parent root = loader.load();
-                MenuViewController menuController = loader.getController();
-                menuController.setUserRole(role);
-                menuController.setUsername(username);
-                Stage stage = (Stage) usernameField.getScene().getWindow();
-                stage.getScene().setRoot(root);
-                stage.setTitle("CWMS-FX");
-            } catch (IOException e) {
-                e.printStackTrace();
+            User user = getUserByUsername(username);
+            if (user != null) {
+                // Initialize AuthenticatedUser instance
+                AuthenticatedUser authUser = AuthenticatedUser.getInstance();
+                authUser.setUserId(user.getUserId());
+                authUser.setUsername(user.getUsername());
+                authUser.setRole(user.getRole());
+
+                // Set data in menu view
+                if (menuViewController != null) {
+                    menuViewController.setUserRole(user.getRole());
+                    menuViewController.setUsername(user.getUsername());
+                }
+
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Menu-view.fxml"));
+                    Parent root = loader.load();
+                    MenuViewController menuController = loader.getController();
+                    menuController.setUserRole(user.getRole());
+                    menuController.setUsername(user.getUsername());
+                    Stage stage = (Stage) usernameField.getScene().getWindow();
+                    stage.getScene().setRoot(root);
+                    stage.setTitle("CWMS-FX");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             AlertUtils.showErrorAlert("Błąd logowania", "Nieporawne dane logowania.", "Proszę sprawdzić nazwę użytkownika i hasło.");
@@ -83,13 +86,12 @@ public class LoginDialogController {
         }
     }
 
-    private String getUserRole(String username) {
+    private User getUserByUsername(String username) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            User user = (User) session.createQuery("FROM User WHERE username = :username")
+            return (User) session.createQuery("FROM User WHERE username = :username")
                     .setParameter("username", username)
                     .uniqueResult();
-            return user != null ? user.getRole() : null;
         } finally {
             session.close();
         }
@@ -103,9 +105,11 @@ public class LoginDialogController {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
+            stage.setTitle("CWMS-FX");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

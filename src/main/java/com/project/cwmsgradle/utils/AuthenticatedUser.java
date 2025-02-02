@@ -7,11 +7,14 @@ public class AuthenticatedUser {
     private static AuthenticatedUser instance;
     private String username;
     private String role;
+    private Long userId;
     private Client client;
+
 
     private AuthenticatedUser() {
         this.username = new User().getUsername();
         this.role = new User().getRole();
+        this.userId = new User().getUserId();
         this.client = new Client();
     }
 
@@ -45,4 +48,14 @@ public class AuthenticatedUser {
     public Integer getClientId() {
         return client != null ? client.getClientId() : null;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+
 }

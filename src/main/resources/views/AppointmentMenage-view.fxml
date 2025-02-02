@@ -20,12 +20,12 @@
                 <Insets />
             </opaqueInsets>
             <children>
-                <Button fx:id="addAppointmentButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Dodaj zlecenie">
+                <Button fx:id="addAppointmentButton" mnemonicParsing="false" onAction="#onAddAppointmentButtonClick" prefHeight="30.0" prefWidth="100.0" text="Dodaj zlecenie">
                     <VBox.margin>
                         <Insets top="60.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="editAppointmentButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Edytuj">
+                <Button fx:id="editAppointmentButton" onAction="#onEditAppointmentButtonClick" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Edytuj">
                     <VBox.margin>
                         <Insets top="15.0" />
                     </VBox.margin>
@@ -35,7 +35,7 @@
                         <Insets top="15.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="goBackButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="60.0" text="Powrót">
+                <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="20.0" prefWidth="60.0" text="Powrót">
                     <VBox.margin>
                         <Insets top="40.0" />
                     </VBox.margin>
@@ -49,15 +49,16 @@
         </ImageView>
         <HBox fx:id="hbAppointment" alignment="CENTER" layoutX="198.0" layoutY="66.0" prefHeight="384.0" prefWidth="500.0" stylesheets="@../com/project/cwmsgradle/styles.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
             <children>
-                <TableView prefHeight="384.0" prefWidth="503.0">
+                <TableView fx:id="appointmentsTableView" prefHeight="384.0" prefWidth="503.0">
                     <columns>
-                        <TableColumn prefWidth="45.0" text="ID Klienta" />
-                        <TableColumn prefWidth="45.0" text="ID Pojazdu" />
-                        <TableColumn prefWidth="45.0" text="ID Zlecenia" />
-                        <TableColumn prefWidth="92.0" text="Opis" />
-                        <TableColumn prefWidth="79.0" text="Data" />
-                        <TableColumn prefWidth="78.0" text="Koszt" />
-                        <TableColumn prefWidth="75.0" text="Obsługuje" />
+                        <TableColumn fx:id="appointmentIdColumn" prefWidth="45.0" text="ID Zlecenia" />
+                        <TableColumn fx:id="clientColumnAppointment" prefWidth="45.0" text="Klient" />
+                        <TableColumn fx:id="vehicleColumnAppointment" prefWidth="45.0" text="Pojazd" />
+                        <TableColumn fx:id="descriptionColumnAppointment" prefWidth="92.0" text="Opis" />
+                  <TableColumn fx:id="statusColumnAppointment" prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="dateColumnAppointment" prefWidth="79.0" text="Data" />
+                        <TableColumn fx:id="costColumnAppointment" prefWidth="78.0" text="Koszt" />
+                        <TableColumn fx:id="mechanicColumnAppointment" prefWidth="75.0" text="Obsługuje" />
                     </columns>
                     <HBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

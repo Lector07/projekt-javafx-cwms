@@ -104,14 +104,10 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "vehicleId=" + vehicleId +
-                ", registrationNumber='" + registrationNumber + '\'' +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", productionYear=" + productionYear +
-                ", clients=" + clients +
-                ", appointments=" + appointments +
-                '}';
+        return brand + " " + model + " - " + clients.getName() + " " + clients.getSurname();
+    }
+
+    public Client getClient() {
+        return clients;
     }
 }

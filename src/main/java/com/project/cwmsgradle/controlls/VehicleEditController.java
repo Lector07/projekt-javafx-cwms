@@ -17,7 +17,6 @@ import javafx.scene.Parent;
 
 public class VehicleEditController {
 
-
     @FXML
     private TextField registrationNumberField;
 
@@ -33,6 +32,10 @@ public class VehicleEditController {
     private Vehicle originalVehicle;
     private VehicleMenageController vehicleMenageController;
 
+    /**
+     * Ustawia dane pojazdu w polach tekstowych.
+     * @param vehicle pojazd do edycji
+     */
     public void setVehicleData(Vehicle vehicle) {
         this.originalVehicle = vehicle;
         registrationNumberField.setText(vehicle.getRegistrationNumber());
@@ -41,20 +44,26 @@ public class VehicleEditController {
         productionYearField.setText(String.valueOf(vehicle.getProductionYear()));
     }
 
+    /**
+     * Ustawia kontroler zarządzania pojazdami.
+     * @param controller kontroler zarządzania pojazdami
+     */
     public void setVehicleMenageController(VehicleMenageController controller) {
         this.vehicleMenageController = controller;
     }
 
-
+    /**
+     * Obsługuje kliknięcie przycisku zapisu, aktualizuje dane pojazdu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String updatedRegistrationNumber = registrationNumberField.getText();
         String updatedBrand = brandField.getText();
         String updatedModel = modelField.getText();
         int updatedProductionYear = Integer.parseInt(productionYearField.getText());
-        Client client = originalVehicle.getClients(); // Retrieve the Client object using getClients
-        int vehicleId = originalVehicle.getVehicleId(); // Retrieve the vehicleId from the original vehicle
-
+        Client client = originalVehicle.getClients(); // Pobiera obiekt Client za pomocą getClients
+        int vehicleId = originalVehicle.getVehicleId(); // Pobiera vehicleId z oryginalnego pojazdu
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Potwierdzenie zapisu");
@@ -64,29 +73,35 @@ public class VehicleEditController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, client);
-            updatedVehicle.setVehicleId(vehicleId); // Set the ID
+            updatedVehicle.setVehicleId(vehicleId); // Ustawia ID
 
             vehicleMenageController.updateVehicleInList(originalVehicle, updatedVehicle);
             navigateToVehicleMenage(event);
         }
-        // Ensure the client is not null
-//        if (client == null) {
-//            // Handle the case where the client is null, e.g., show an error message
-//            System.out.println("Client cannot be null");
-//            return;
-//        }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku anulowania, wraca do widoku zarządzania pojazdami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onCancelButtonClick(ActionEvent event) {
         navigateToVehicleMenage(event);
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu, wraca do widoku zarządzania pojazdami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
         navigateToVehicleMenage(event);
     }
 
+    /**
+     * Nawiguje do widoku zarządzania pojazdami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     private void navigateToVehicleMenage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VehiclesMenage-view.fxml"));

@@ -1,4 +1,3 @@
-
 package com.project.cwmsgradle.controlls;
 
 import javafx.fxml.FXML;
@@ -34,17 +33,27 @@ public class MenuViewController {
     private String userRole;
     private String username;
 
-
+    /**
+     * Ustawia rolę użytkownika i aktualizuje interfejs użytkownika na podstawie roli.
+     * @param role rola użytkownika
+     */
     public void setUserRole(String role) {
         this.userRole = role;
         updateUIBasedOnRole();
     }
 
+    /**
+     * Ustawia nazwę użytkownika i aktualizuje etykietę.
+     * @param username nazwa użytkownika
+     */
     public void setUsername(String username) {
         this.username = username;
         usernameLabel.setText(username);
     }
 
+    /**
+     * Aktualizuje interfejs użytkownika na podstawie roli użytkownika.
+     */
     private void updateUIBasedOnRole() {
         if ("user".equals(userRole)) {
             usersButton.setVisible(false);
@@ -55,11 +64,18 @@ public class MenuViewController {
         }
     }
 
+    /**
+     * Inicjalizuje kontroler, ustawia widoczność etykiety nazwy użytkownika.
+     */
     @FXML
     protected void initialize() {
         usernameLabel.setVisible(true);
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku zarządzania klientami, ładuje widok zarządzania klientami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     public void onManageClientsButtonClick(ActionEvent event) {
         try {
@@ -77,6 +93,9 @@ public class MenuViewController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku zarządzania naprawami, ładuje widok zarządzania naprawami.
+     */
     @FXML
     protected void onManageRepairsButtonClick() {
         try {
@@ -94,6 +113,10 @@ public class MenuViewController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku zarządzania użytkownikami, ładuje widok zarządzania użytkownikami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onUsersButtonClick(ActionEvent event) {
         try {
@@ -114,13 +137,17 @@ public class MenuViewController {
     @FXML
     private Button manageVehiclesButton;
 
+    /**
+     * Obsługuje kliknięcie przycisku zarządzania pojazdami, ładuje widok zarządzania pojazdami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onManageVehiclesButtonClick(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VehiclesMenage-view.fxml"));
             Parent root = loader.load();
 
-            // Get the controller and pass the current user information
+            // Pobiera kontroler i przekazuje aktualne informacje o użytkowniku
             VehicleMenageController vehiclesController = loader.getController();
             vehiclesController.setMenuViewController(this);
 
@@ -132,6 +159,10 @@ public class MenuViewController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku wyjścia, ładuje widok główny aplikacji.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onExitButtonClick(ActionEvent event) {
         try {
@@ -146,6 +177,10 @@ public class MenuViewController {
         }
     }
 
+    /**
+     * Zwraca nazwę użytkownika.
+     * @return nazwa użytkownika
+     */
     public String getUsername() {
         return username;
     }

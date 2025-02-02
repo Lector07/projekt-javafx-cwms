@@ -23,10 +23,8 @@ import java.util.List;
 
 public class VehicleAddController {
 
-
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
     String currentUserRole = AuthenticatedUser.getInstance().getRole();
-    //Long clientId = AuthenticatedUser.getInstance().getClientId();
 
     @FXML
     private TextField registrationNumberField;
@@ -48,14 +46,19 @@ public class VehicleAddController {
     private SessionFactory sessionFactory;
 
     public VehicleAddController() {
-
     }
 
+    /**
+     * Inicjalizuje kontroler, wypełnia combobox klientów.
+     */
     @FXML
     public void initialize() {
         populateClientComboBox();
     }
 
+    /**
+     * Wypełnia combobox listą klientów z bazy danych.
+     */
     private void populateClientComboBox() {
         sessionFactory = HibernateUtil.getSessionFactory();
         ObservableList<Client> clientList = FXCollections.observableArrayList();
@@ -75,10 +78,18 @@ public class VehicleAddController {
         }
     }
 
+    /**
+     * Ustawia kontroler zarządzania pojazdami.
+     * @param controller kontroler zarządzania pojazdami
+     */
     public void setVehicleMenageController(VehicleMenageController controller) {
         this.vehicleMenageController = controller;
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku zapisu, dodaje nowy pojazd do listy.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String registrationNumber = registrationNumberField.getText();
@@ -97,16 +108,28 @@ public class VehicleAddController {
         navigateToVehicleMenage(event);
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku anulowania, wraca do widoku zarządzania pojazdami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onCancelButtonClick(ActionEvent event) {
         navigateToVehicleMenage(event);
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu, wraca do widoku zarządzania pojazdami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
         navigateToVehicleMenage(event);
     }
 
+    /**
+     * Nawiguje do widoku zarządzania pojazdami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     private void navigateToVehicleMenage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VehiclesMenage-view.fxml"));

@@ -109,7 +109,7 @@ public class ClientMenageController {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
-            stage.setTitle("Dodaj Klienta");
+            stage.setTitle("CWMS-FX");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -178,7 +178,7 @@ public class ClientMenageController {
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.getScene().setRoot(root);
-                stage.setTitle("Edytuj Klienta");
+                stage.setTitle("CWMS-FX");
             } else {
                 AlertUtils.showWarningAlert("Brak wyboru", "Nie wybrano klienta", "Proszę wybrać klienta do edycji.");
             }
@@ -191,12 +191,7 @@ public class ClientMenageController {
     protected void onDeleteClientButtonClick(ActionEvent event) {
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
         if (selectedClient != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Potwierdzenie usunięcia");
-            alert.setHeaderText("Czy na pewno chcesz usunąć tego klienta?");
-            alert.setContentText("ID Klienta: " + selectedClient.getClientId());
-
-            Optional<ButtonType> result = alert.showAndWait();
+            Optional<ButtonType> result = AlertUtils.showDeleteConfirmationAlert("tego klienta");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 clientData.remove(selectedClient);
                 deleteClientFromDatabase(selectedClient);

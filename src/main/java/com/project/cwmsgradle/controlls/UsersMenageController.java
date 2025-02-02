@@ -106,7 +106,7 @@ public class UsersMenageController {
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
-            stage.setTitle("Menu");
+            stage.setTitle("CWMS-FX");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -146,7 +146,7 @@ public class UsersMenageController {
 
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Zmiana hasła");
+                stage.setTitle("CWMS-FX");
                 stage.setScene(new Scene(root));
                 stage.showAndWait();
 

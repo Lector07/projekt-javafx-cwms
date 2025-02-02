@@ -113,7 +113,7 @@ public class VehicleAddController {
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
-            stage.setTitle("Zarządzanie pojazdami");
+            stage.setTitle("CWMS-FX");
         } catch (IOException e) {
             e.printStackTrace();
         }

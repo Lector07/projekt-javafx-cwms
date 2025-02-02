@@ -126,7 +126,7 @@ public class VehicleMenageController {
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
-            stage.setTitle("Menu");
+            stage.setTitle("CWMS-FX");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,7 +144,7 @@ public class VehicleMenageController {
 
             Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             primaryStage.getScene().setRoot(root);
-            primaryStage.setTitle("Dodaj pojazd");
+            primaryStage.setTitle("CWMS-FX");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -164,7 +164,7 @@ public class VehicleMenageController {
 
                 Stage primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 primaryStage.getScene().setRoot(root);
-                primaryStage.setTitle("Edytuj pojazd");
+                primaryStage.setTitle("CWMS-FX");
             } catch (IOException e) {
                 e.printStackTrace();
             }

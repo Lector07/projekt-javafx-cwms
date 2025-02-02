@@ -83,7 +83,7 @@ public class ClientEditController {
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
-            stage.setTitle("Zarządzanie klientami");
+            stage.setTitle("CWMS-FX");
         } catch (IOException e) {
             e.printStackTrace();
         }

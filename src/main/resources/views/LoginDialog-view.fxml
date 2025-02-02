@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.LoginDialogController">
     <children>
-        <Label fx:id="loginLabel" alignment="CENTER" layoutX="277.0" layoutY="46.0" prefHeight="46.0" prefWidth="166.0" text="Zaloguj się">
+        <Label fx:id="loginLabel" alignment="CENTER" layoutX="278.0" layoutY="47.0" prefHeight="46.0" prefWidth="166.0" text="Zaloguj się">
             <font>
                 <Font size="24.0" />
             </font>
@@ -22,27 +22,22 @@
             <children>
                 <TextField fx:id="usernameField" prefHeight="30.0" prefWidth="189.0" promptText="Nazwa użytkownika">
                     <VBox.margin>
-                        <Insets left="15.0" right="15.0" top="30.0" />
+                        <Insets left="15.0" right="15.0" top="40.0" />
                     </VBox.margin>
                 </TextField>
                 <PasswordField fx:id="passwordField" prefWidth="100.0" promptText="Hasło">
                     <VBox.margin>
-                        <Insets left="15.0" right="15.0" top="20.0" />
+                        <Insets left="15.0" right="15.0" top="40.0" />
                     </VBox.margin>
                 </PasswordField>
-            <Label fx:id="messageLabel" alignment="CENTER" prefHeight="98.0" prefWidth="191.0" textAlignment="CENTER" wrapText="true">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Label>
                 <Button fx:id="submitButton" onAction="#onSubmitButtonClick" prefHeight="39.0" prefWidth="150.0" text="Zaloguj">
                     <VBox.margin>
-                        <Insets bottom="20.0" top="25.0" />
+                        <Insets bottom="20.0" top="80.0" />
                     </VBox.margin>
                 </Button>
             </children>
         </VBox>
-        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="255.0" layoutY="47.0">
+        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="255.0" layoutY="47.0" AnchorPane.rightAnchor="418.0">
             <image>
                 <Image url="@../icons/login.png" />
             </image>

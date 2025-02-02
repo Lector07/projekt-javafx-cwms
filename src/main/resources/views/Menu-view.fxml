@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.MenuViewController">
+<AnchorPane fx:id="apMain" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.MenuViewController">
     <children>
         <Label fx:id="menuLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="315.0" layoutY="28.0" prefHeight="57.0" prefWidth="100.0" text="Menu" underline="true" AnchorPane.bottomAnchor="395.0" />
         <SplitPane fx:id="spMenu" layoutX="241.0" layoutY="104.0" prefHeight="342.0" prefWidth="247.0">
@@ -16,7 +16,7 @@
                     <children>
                         <Button fx:id="manageVehiclesButton" layoutX="23.0" layoutY="24.0" onAction="#onManageVehiclesButtonClick" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj pojazdami" />
                         <Button fx:id="manageClientsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="81.0" onAction="#onManageClientsButtonClick" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj klientami" />
-                        <Button fx:id="manageRepairsButton" layoutX="23.0" layoutY="142.0" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj naprawami" />
+                        <Button fx:id="manageRepairsButton" onAction="#onManageRepairsButtonClick" layoutX="23.0" layoutY="142.0" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj naprawami" />
                         <Button fx:id="usersButton" onAction="#onUsersButtonClick" layoutX="23.0" layoutY="201.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" text="Użytkownicy" />
                         <Button fx:id="exitButton" layoutX="73.0" layoutY="288.0" onAction="#onExitButtonClick" prefHeight="35.0" prefWidth="100.0" text="Wyloguj" />
                         <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="34.0" layoutY="93.0">

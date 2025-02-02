@@ -79,7 +79,19 @@ public class MenuViewController {
 
     @FXML
     protected void onManageRepairsButtonClick() {
-        // Handle manage repairs button click
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AppointmentMenage-view.fxml"));
+            Parent root = loader.load();
+
+            AppointmentMenageController appointmentController = loader.getController();
+            appointmentController.setMenuViewController(this);
+
+            Stage primaryStage = (Stage) manageRepairsButton.getScene().getWindow();
+            primaryStage.getScene().setRoot(root);
+            primaryStage.setTitle("CWMS-FX");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

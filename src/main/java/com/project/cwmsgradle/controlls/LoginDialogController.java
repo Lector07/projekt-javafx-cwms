@@ -61,7 +61,7 @@ public class LoginDialogController {
                 menuController.setUsername(username);
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.getScene().setRoot(root);
-                stage.setTitle("Menu");
+                stage.setTitle("CWMS-FX");
             } catch (IOException e) {
                 e.printStackTrace();
             }

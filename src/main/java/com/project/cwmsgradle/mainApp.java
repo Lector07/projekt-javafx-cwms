@@ -5,8 +5,10 @@ import com.project.cwmsgradle.utils.HibernateUtil;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
 
@@ -32,6 +34,12 @@ public class mainApp extends Application {
         }
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
 
+        InputStream iconStream = getClass().getResourceAsStream("/icons/icon.png");
+        if (iconStream == null) {
+            throw new IOException("Nie znaleziono pliku ikony: /icons/icon.png");
+        }
+        Image icon = new Image(iconStream);
+        primaryStage.getIcons().add(icon);
 
         Parent root = loader.load();
         primaryStage.setTitle("CWMS-FX");

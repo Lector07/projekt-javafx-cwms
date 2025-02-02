@@ -39,7 +39,7 @@
     -fx-font-size: 24px;
     -fx-font-weight: normal;
     -fx-text-fill: white;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
 }
 
 
@@ -50,7 +50,7 @@
     -fx-border-style: none;
     -fx-background-radius: 30px;
 
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0.2, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 #loginButton:hover, #registerButton:hover, #submitButton:hover {
@@ -61,18 +61,18 @@
 #vbLogin, #vbRegister {
     -fx-background-color: white;
     -fx-background-radius: 30px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0.2, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 #usernameField, #passwordField, #confirmPasswordField {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
     -fx-background-radius: 30px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0.2, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 #spMenu {
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0.2, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 #menuLabel {
@@ -80,7 +80,7 @@
     -fx-font-size: 32px;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0.2, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 #manageClientsButton, #manageVehiclesButton, #manageRepairsButton, #exitButton, #returnButton, #usersButton {
@@ -120,7 +120,7 @@
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
     -fx-background-radius: 30px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 #saveButton, #cancelButton {
@@ -140,7 +140,7 @@
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
     -fx-background-radius: 30px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 Label {
@@ -238,7 +238,7 @@ Label {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
     -fx-background-radius: 30px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 #goBackClientButton, #addClientButton, #cancelClientButton, #addAppointmentButton,
@@ -349,4 +349,13 @@ Label {
 #apClientAdd, #apClientEdit {
     -fx-background-color: white;
     -fx-background-image: url('https://www.transparenttextures.com/patterns/polonez-pattern.png');
+}
+
+#apAppointments {
+    -fx-background-color: white;
+    -fx-background-image: url('https://www.transparenttextures.com/patterns/polonez-pattern.png');
+}
+
+#addAppointmentButton:hover, #editAppointmentButton:hover, #endAppointmentButton:hover {
+    -fx-background-color: #F0F0E7;
 }

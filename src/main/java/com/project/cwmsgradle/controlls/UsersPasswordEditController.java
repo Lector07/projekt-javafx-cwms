@@ -20,6 +20,9 @@ public class UsersPasswordEditController {
     @FXML
     private TextField usersEditTextField;
 
+    @FXML
+    private TextField confirmPasswordField;
+
     private UsersMenageController usersMenageController;
     private User user;
 
@@ -34,13 +37,26 @@ public class UsersPasswordEditController {
     @FXML
     protected void initialize() {
         usersEditTextField.setPromptText("Wprowadź nowe hasło");
+        confirmPasswordField.setPromptText("Potwierdź nowe hasło");
     }
 
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String newPassword = usersEditTextField.getText();
-        if (newPassword.isEmpty()) {
-            AlertUtils.showWarningAlert("Błąd", "Pole hasła jest puste", "Proszę wprowadzić nowe hasło.");
+        String confirmPassword = confirmPasswordField.getText();
+
+        if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            AlertUtils.showWarningAlert("Błąd", "Pole hasła jest puste", "Proszę wprowadzić i potwierdzić nowe hasło.");
+            return;
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            AlertUtils.showWarningAlert("Błąd", "Hasła nie są zgodne", "Nowe hasło i potwierdzenie hasła muszą być takie same.");
+            return;
+        }
+
+        if (newPassword.equals(user.getPassword())) {
+            AlertUtils.showWarningAlert("Błąd", "To samo hasło", "Nowe hasło nie może być takie samo jak poprzednie.");
             return;
         }
 
@@ -77,7 +93,6 @@ public class UsersPasswordEditController {
     protected void onCancelButtonClick(ActionEvent event) {
         closeWindow();
     }
-
 
     private void closeWindow() {
         Stage stage = (Stage) usersEditTextField.getScene().getWindow();

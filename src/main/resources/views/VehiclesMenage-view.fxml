@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="apMenageVehicles" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.VehicleMenageController">
+<AnchorPane fx:id="apMenageVehicles" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.VehicleMenageController">
     <children>
         <Label fx:id="labelMenVeh" alignment="CENTER" layoutX="35.0" layoutY="15.0" prefHeight="35.0" prefWidth="208.0" text="Zarządzaj pojazdami" />
         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="18.0">

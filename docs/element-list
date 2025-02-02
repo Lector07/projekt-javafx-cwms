@@ -1,0 +1,5 @@
+module:com.project.cwmsgradle
+com.project.cwmsgradle
+com.project.cwmsgradle.controlls
+com.project.cwmsgradle.entity
+com.project.cwmsgradle.utils

@@ -16,7 +16,7 @@
                     <children>
                         <Button fx:id="manageVehiclesButton" layoutX="23.0" layoutY="24.0" onAction="#onManageVehiclesButtonClick" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj pojazdami" />
                         <Button fx:id="manageClientsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="81.0" onAction="#onManageClientsButtonClick" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj klientami" />
-                        <Button fx:id="manageRepairsButton" onAction="#onManageRepairsButtonClick" layoutX="23.0" layoutY="142.0" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj naprawami" />
+                        <Button fx:id="manageRepairsButton" onAction="#onManageRepairsButtonClick" layoutX="23.0" layoutY="142.0" prefHeight="45.0" prefWidth="200.0" text="Zarządzaj zleceniami" />
                         <Button fx:id="usersButton" onAction="#onUsersButtonClick" layoutX="23.0" layoutY="201.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" text="Użytkownicy" />
                         <Button fx:id="exitButton" layoutX="73.0" layoutY="288.0" onAction="#onExitButtonClick" prefHeight="35.0" prefWidth="100.0" text="Wyloguj" />
                         <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="34.0" layoutY="93.0">

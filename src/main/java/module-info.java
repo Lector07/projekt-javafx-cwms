@@ -7,7 +7,7 @@ module com.project.cwmsgradle {
     requires jakarta.persistence;
 
 
-    opens com.project.cwmsgradle.entity to javafx.base;
+    opens com.project.cwmsgradle.entity to javafx.base, org.hibernate.orm.core;
     opens com.project.cwmsgradle.controlls to javafx.fxml;
 
     exports com.project.cwmsgradle;

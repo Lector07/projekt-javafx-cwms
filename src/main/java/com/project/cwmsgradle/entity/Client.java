@@ -3,6 +3,9 @@ package com.project.cwmsgradle.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+/**
+ * Klasa reprezentująca klienta.
+ */
 @Entity
 @Table(name = "clients")
 public class Client {
@@ -28,9 +31,19 @@ public class Client {
     @OneToMany(mappedBy = "appointmentId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 
+    /**
+     * Konstruktor domyślny.
+     */
     public Client() {
     }
 
+    /**
+     * Konstruktor z parametrami.
+     * @param name imię klienta
+     * @param surname nazwisko klienta
+     * @param phone numer telefonu klienta
+     * @param email adres e-mail klienta
+     */
     public Client(String name, String surname, String phone, String email) {
         this.name = name;
         this.surname = surname;
@@ -96,6 +109,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return name + " " + surname; // Concatenate the first name and last name
+        return name + " " + surname; // Konkatenacja imienia i nazwiska
     }
 }

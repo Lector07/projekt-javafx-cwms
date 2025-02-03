@@ -10,6 +10,9 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * Kontroler widoku menu, obsługujący różne akcje użytkownika.
+ */
 public class MenuViewController {
 
     @FXML

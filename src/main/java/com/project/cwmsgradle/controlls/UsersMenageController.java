@@ -23,6 +23,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Kontroler odpowiedzialny za zarządzanie użytkownikami.
+ */
 public class UsersMenageController {
 
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
@@ -57,15 +60,26 @@ public class UsersMenageController {
 
     private String username;
 
+    /**
+     * Ustawia nazwę użytkownika.
+     * @param username nazwa użytkownika
+     */
     public void setUsername(String username) {
         this.username = username;
         usernameLabelUsers.setText(username);
     }
 
+    /**
+     * Ustawia kontroler menu.
+     * @param menuViewController kontroler menu
+     */
     public void setMenuViewController(MenuViewController menuViewController) {
         this.menuViewController = menuViewController;
     }
 
+    /**
+     * Inicjalizuje kontroler, ustawia kolumny tabeli i ładuje dane użytkowników.
+     */
     @FXML
     protected void initialize() {
         sessionFactory = HibernateUtil.getSessionFactory();
@@ -82,6 +96,9 @@ public class UsersMenageController {
         usersTableView.setItems(usersData);
     }
 
+    /**
+     * Ładuje dane użytkowników z bazy danych.
+     */
     private void loadUsersData() {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -91,7 +108,10 @@ public class UsersMenageController {
         }
     }
 
-
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
         try {
@@ -114,6 +134,10 @@ public class UsersMenageController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku usunięcia użytkownika.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onDeleteUserButtonClick(ActionEvent event) {
         User selectedUser = usersTableView.getSelectionModel().getSelectedItem();
@@ -133,6 +157,10 @@ public class UsersMenageController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku edycji hasła użytkownika.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onEditPasswordButtonClick(ActionEvent event) {
         User selectedUser = usersTableView.getSelectionModel().getSelectedItem();
@@ -159,6 +187,10 @@ public class UsersMenageController {
         }
     }
 
+    /**
+     * Usuwa użytkownika z bazy danych.
+     * @param selectedUser użytkownik do usunięcia
+     */
     private void deleteUserFromDatabase(User selectedUser) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -167,6 +199,9 @@ public class UsersMenageController {
         }
     }
 
+    /**
+     * Odświeża tabelę użytkowników.
+     */
     public void refreshUserTable() {
         usersData.clear();
         loadUsersData();

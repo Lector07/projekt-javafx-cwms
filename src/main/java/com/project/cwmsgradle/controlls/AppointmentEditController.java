@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
+/**
+ * Kontroler odpowiedzialny za edycję wizyt.
+ */
 public class AppointmentEditController {
 
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
@@ -30,6 +33,9 @@ public class AppointmentEditController {
 
     private Appointment appointment;
 
+    /**
+     * Inicjalizuje kontroler, wypełnia combobox statusami wizyt.
+     */
     @FXML
     public void initialize() {
         comboboxAppointmentEdit.getItems().addAll(
@@ -39,12 +45,20 @@ public class AppointmentEditController {
         );
     }
 
+    /**
+     * Ustawia wizytę do edycji.
+     * @param appointment wizyta do edycji
+     */
     public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
         comboboxAppointmentEdit.setValue(appointment.getStatus());
         textAreaAppointment.setText(appointment.getDescription());
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku edycji wizyty.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onEditButtonClick(ActionEvent event) {
         String updatedDescription = textAreaAppointment.getText();
@@ -63,11 +77,19 @@ public class AppointmentEditController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     public void onGoBackButtonClick(ActionEvent event) {
         navigateToClientMenage(event);
     }
 
+    /**
+     * Nawiguje do widoku zarządzania klientami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     private void navigateToClientMenage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AppointmentMenage-view.fxml"));
@@ -80,6 +102,10 @@ public class AppointmentEditController {
         }
     }
 
+    /**
+     * Ustawia nazwę użytkownika.
+     * @param currentUsername nazwa użytkownika
+     */
     public void setUsername(String currentUsername) {
         this.currentUsername = currentUsername;
     }

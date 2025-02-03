@@ -28,7 +28,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-
+/**
+ * Kontroler odpowiedzialny za zarządzanie wizytami.
+ */
 public class AppointmentMenageController {
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
     String currentUserRole = AuthenticatedUser.getInstance().getRole();
@@ -71,14 +73,26 @@ public class AppointmentMenageController {
 
     private String username;
 
+    /**
+     * Ustawia nazwę użytkownika.
+     * @param username nazwa użytkownika
+     */
     public void setUsername(String username) {
         this.username = username;
         usernameLabelAppointments.setText(username);
     }
+
+    /**
+     * Ustawia ID bieżącego użytkownika.
+     * @param currentUserId ID bieżącego użytkownika
+     */
     public void setCurrentUserId(Long currentUserId) {
         this.currentUserId = currentUserId;
     }
 
+    /**
+     * Inicjalizuje kontroler, ustawia fabrykę sesji i wypełnia tabelę wizytami.
+     */
     @FXML
     protected void initialize() {
         sessionFactory = HibernateUtil.getSessionFactory();
@@ -120,6 +134,10 @@ public class AppointmentMenageController {
         appointmentsTableView.setItems(appointmentData);
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku dodawania wizyty.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onAddAppointmentButtonClick(ActionEvent event) {
         try {
@@ -139,6 +157,10 @@ public class AppointmentMenageController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku edycji wizyty.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onEditAppointmentButtonClick(ActionEvent event) {
         try {
@@ -161,6 +183,10 @@ public class AppointmentMenageController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku zakończenia wizyty.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onEndAppointmentButtonClick(ActionEvent event) {
         try {
@@ -185,6 +211,10 @@ public class AppointmentMenageController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
         try {
@@ -208,6 +238,9 @@ public class AppointmentMenageController {
         }
     }
 
+    /**
+     * Ładuje dane wizyt z bazy danych.
+     */
     private void loadAppointmentsData() {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -217,13 +250,18 @@ public class AppointmentMenageController {
         }
     }
 
-
+    /**
+     * Dodaje wizytę do listy.
+     * @param appointment wizyta do dodania
+     */
     public void addAppointmentToList(Appointment appointment) {
         appointmentData.add(appointment);
         refreshTableView();
     }
 
-
+    /**
+     * Odświeża TableView z wizytami.
+     */
     private void refreshTableView() {
         appointmentsTableView.setItems(null);
         appointmentsTableView.setItems(appointmentData);

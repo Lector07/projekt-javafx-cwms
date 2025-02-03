@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.Optional;
 import javafx.scene.control.ButtonType;
 
+/**
+ * Kontroler odpowiedzialny za edycję klientów.
+ */
 public class ClientEditController {
     @FXML
     private TextField nameField;
@@ -29,6 +32,10 @@ public class ClientEditController {
     private Client originalClient;
     private ClientMenageController clientMenageController;
 
+    /**
+     * Ustawia dane klienta do edycji.
+     * @param client klient do edycji
+     */
     public void setClientData(Client client) {
         this.originalClient = client;
         nameField.setText(client.getName());
@@ -37,10 +44,18 @@ public class ClientEditController {
         mailField.setText(client.getEmail());
     }
 
+    /**
+     * Ustawia kontroler zarządzania klientami.
+     * @param controller kontroler zarządzania klientami
+     */
     public void setClientMenageController(ClientMenageController controller) {
         this.clientMenageController = controller;
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku zapisu klienta.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     public void onSaveButtonClick(ActionEvent event) {
         String updatedName = nameField.getText();
@@ -59,16 +74,28 @@ public class ClientEditController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku anulowania.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     public void onCancelButtonClick(ActionEvent event) {
         navigateToClientMenage(event);
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     public void onGoBackButtonClick(ActionEvent event) {
         navigateToClientMenage(event);
     }
 
+    /**
+     * Nawiguje do widoku zarządzania klientami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     private void navigateToClientMenage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClientMenage-view.fxml"));

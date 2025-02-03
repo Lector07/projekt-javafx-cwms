@@ -2,9 +2,11 @@ package com.project.cwmsgradle.entity;
 
 import jakarta.persistence.*;
 import java.util.List;
-
 import java.time.LocalDateTime;
 
+/**
+ * Klasa reprezentująca użytkownika.
+ */
 @Entity
 @Table(name = "users")
 public class User {
@@ -27,12 +29,19 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 
-
-
+    /**
+     * Konstruktor domyślny.
+     */
     public User() {
         this.createdAt = LocalDateTime.now();
     }
 
+    /**
+     * Konstruktor z parametrami.
+     * @param username nazwa użytkownika
+     * @param password hasło użytkownika
+     * @param role rola użytkownika
+     */
     public User(String username, String password, String role) {
         this.username = username;
         this.password = password;

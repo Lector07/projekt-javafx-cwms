@@ -18,6 +18,9 @@ import org.hibernate.Session;
 
 import java.io.IOException;
 
+/**
+ * Kontroler odpowiedzialny za logowanie użytkowników.
+ */
 public class LoginDialogController {
 
     @FXML
@@ -31,10 +34,17 @@ public class LoginDialogController {
 
     private MenuViewController menuViewController;
 
+    /**
+     * Ustawia kontroler menu.
+     * @param menuViewController kontroler menu
+     */
     public void setMenuViewController(MenuViewController menuViewController) {
         this.menuViewController = menuViewController;
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku logowania.
+     */
     @FXML
     protected void onSubmitButtonClick() {
         String username = usernameField.getText();
@@ -43,13 +53,13 @@ public class LoginDialogController {
         if (authenticateUser(username, password)) {
             User user = getUserByUsername(username);
             if (user != null) {
-                // Initialize AuthenticatedUser instance
+                // Inicjalizuje instancję AuthenticatedUser
                 AuthenticatedUser authUser = AuthenticatedUser.getInstance();
                 authUser.setUserId(user.getUserId());
                 authUser.setUsername(user.getUsername());
                 authUser.setRole(user.getRole());
 
-                // Set data in menu view
+                // Ustawia dane w widoku menu
                 if (menuViewController != null) {
                     menuViewController.setUserRole(user.getRole());
                     menuViewController.setUsername(user.getUsername());
@@ -73,6 +83,12 @@ public class LoginDialogController {
         }
     }
 
+    /**
+     * Autoryzuje użytkownika na podstawie nazwy użytkownika i hasła.
+     * @param username nazwa użytkownika
+     * @param password hasło
+     * @return true, jeśli użytkownik został pomyślnie uwierzytelniony, w przeciwnym razie false
+     */
     private boolean authenticateUser(String username, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -86,6 +102,11 @@ public class LoginDialogController {
         }
     }
 
+    /**
+     * Pobiera użytkownika na podstawie nazwy użytkownika.
+     * @param username nazwa użytkownika
+     * @return użytkownik
+     */
     private User getUserByUsername(String username) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -97,6 +118,10 @@ public class LoginDialogController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     private void onReturnButtonClick(ActionEvent event) {
         try {

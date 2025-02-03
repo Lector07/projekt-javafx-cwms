@@ -9,10 +9,15 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 
+/**
+ * Kontroler głównej aplikacji, obsługujący logowanie i rejestrację.
+ */
 public class mainAppController {
 
-
-
+    /**
+     * Obsługuje kliknięcie przycisku logowania.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onLoginButtonClick(ActionEvent event) {
         try {
@@ -32,6 +37,10 @@ public class mainAppController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku rejestracji.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onRegisterButtonClick(ActionEvent event) {
         try {
@@ -50,7 +59,4 @@ public class mainAppController {
             e.printStackTrace();
         }
     }
-
-
-
 }

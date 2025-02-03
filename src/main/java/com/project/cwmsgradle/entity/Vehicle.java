@@ -1,9 +1,11 @@
 package com.project.cwmsgradle.entity;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
+/**
+ * Klasa reprezentująca pojazd.
+ */
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
@@ -31,12 +33,20 @@ public class Vehicle {
     @OneToMany(mappedBy = "appointmentId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 
-
-    // Default constructor
+    /**
+     * Konstruktor domyślny.
+     */
     public Vehicle() {
     }
 
-    // Constructor with parameters
+    /**
+     * Konstruktor z parametrami.
+     * @param registrationNumber numer rejestracyjny pojazdu
+     * @param brand marka pojazdu
+     * @param model model pojazdu
+     * @param productionYear rok produkcji pojazdu
+     * @param clients klient powiązany z pojazdem
+     */
     public Vehicle(String registrationNumber, String brand, String model, int productionYear, Client clients) {
         this.registrationNumber = registrationNumber;
         this.brand = brand;
@@ -45,7 +55,6 @@ public class Vehicle {
         this.clients = clients;
     }
 
-    // Getters and setters
     public int getVehicleId() {
         return vehicleId;
     }

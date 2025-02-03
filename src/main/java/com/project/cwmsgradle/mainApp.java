@@ -11,9 +11,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-
+/**
+ * Główna klasa aplikacji JavaFX.
+ */
 public class mainApp extends Application {
 
+    /**
+     * Metoda start inicjalizująca główną scenę aplikacji.
+     * @param primaryStage główna scena
+     * @throws IOException w przypadku błędów wejścia/wyjścia
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
 
@@ -26,7 +33,6 @@ public class mainApp extends Application {
         } catch (ClassNotFoundException e) {
             System.err.println("JAXB is NOT available on the classpath: " + e.getMessage());
         }
-
 
         URL fxmlUrl = mainApp.class.getResource("/views/MainApp-view.fxml");
         if (fxmlUrl == null) {
@@ -47,6 +53,10 @@ public class mainApp extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Główna metoda uruchamiająca aplikację.
+     * @param args argumenty wiersza poleceń
+     */
     public static void main(String[] args) {
         HibernateUtil.getSessionFactory();
         launch(args);

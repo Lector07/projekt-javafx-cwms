@@ -3,6 +3,9 @@ package com.project.cwmsgradle.entity;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * Klasa reprezentująca spotkanie.
+ */
 @Entity
 @Table(name = "appointments")
 public class Appointment {
@@ -22,7 +25,6 @@ public class Appointment {
     @Column(nullable = false)
     private String status;
 
-
     @ManyToOne
     @JoinColumn(name = "clientId", nullable = false)
     private Client client;
@@ -35,9 +37,22 @@ public class Appointment {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
+    /**
+     * Konstruktor domyślny.
+     */
     public Appointment() {
     }
 
+    /**
+     * Konstruktor z parametrami.
+     * @param description opis spotkania
+     * @param date data spotkania
+     * @param cost koszt spotkania
+     * @param status status spotkania
+     * @param client klient powiązany ze spotkaniem
+     * @param vehicle pojazd powiązany ze spotkaniem
+     * @param user użytkownik powiązany ze spotkaniem
+     */
     public Appointment(String description, LocalDate date, double cost, String status, Client client, Vehicle vehicle, User user) {
         this.description = description;
         this.date = date;
@@ -48,6 +63,11 @@ public class Appointment {
         this.user = user;
     }
 
+    /**
+     * Konstruktor z parametrami.
+     * @param description opis spotkania
+     * @param selectedVehicle wybrany pojazd
+     */
     public Appointment(String description, Vehicle selectedVehicle) {
         this.description = description;
         this.vehicle = selectedVehicle;

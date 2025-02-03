@@ -18,6 +18,9 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 
+/**
+ * Kontroler odpowiedzialny za rejestrację użytkowników.
+ */
 public class RegisterDialogController {
 
     @FXML
@@ -29,8 +32,9 @@ public class RegisterDialogController {
     @FXML
     private PasswordField confirmPasswordField;
 
-
-
+    /**
+     * Obsługuje kliknięcie przycisku rejestracji.
+     */
     @FXML
     protected void onSubmitButtonClick() {
         String username = usernameField.getText();
@@ -53,6 +57,12 @@ public class RegisterDialogController {
         }
     }
 
+    /**
+     * Dodaje użytkownika do bazy danych.
+     * @param username nazwa użytkownika
+     * @param password hasło
+     * @return true, jeśli użytkownik został pomyślnie dodany, w przeciwnym razie false
+     */
     private boolean addUserToDatabase(String username, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -66,7 +76,7 @@ public class RegisterDialogController {
                 return false;
             }
 
-            // Determine the role
+            // Określa rolę
             String role = "user";
             if ("admin".equals(username) && "admin".equals(password)) {
                 User adminUser = (User) session.createQuery("FROM User WHERE role = 'admin'").uniqueResult();
@@ -75,7 +85,7 @@ public class RegisterDialogController {
                 }
             }
 
-            // Create and save the new user
+            // Tworzy i zapisuje nowego użytkownika
             User newUser = new User();
             newUser.setUsername(username);
             newUser.setPassword(password);
@@ -95,6 +105,10 @@ public class RegisterDialogController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     private void onReturnButtonClick(ActionEvent event) {
         try {

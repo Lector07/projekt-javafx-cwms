@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Kontroler odpowiedzialny za dodawanie wizyt.
+ */
 public class AppointmentAddController {
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
     String currentUserRole = AuthenticatedUser.getInstance().getRole();
@@ -39,16 +42,21 @@ public class AppointmentAddController {
 
     private UsersMenageController usersMenageController;
 
+    /**
+     * Inicjalizuje kontroler, ustawia fabrykę sesji i wypełnia combobox pojazdami.
+     */
     @FXML
     protected void initialize() {
         sessionFactory = HibernateUtil.getSessionFactory();
         populateAppointmentComboBox();
         currentUserId = AuthenticatedUser.getInstance().getUserId();
         setCurrentUserId(currentUserId);
-        System.out.println("Initialized currentUserId: " + currentUserId); // Debugging line
+        System.out.println("Initialized currentUserId: " + currentUserId); // Linia debugowania
     }
 
-
+    /**
+     * Wypełnia combobox pojazdami z bazy danych.
+     */
     private void populateAppointmentComboBox() {
         sessionFactory = HibernateUtil.getSessionFactory();
         ObservableList<Vehicle> vehicleList = FXCollections.observableArrayList();
@@ -91,6 +99,10 @@ public class AppointmentAddController {
         });
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku dodawania wizyty.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onAddAppointmentButtonClick(ActionEvent event) {
         String description = textAreaAppointment.getText();
@@ -120,7 +132,7 @@ public class AppointmentAddController {
                 session.save(appointment);
                 session.getTransaction().commit();
 
-                // Refresh the TableView in AppointmentsMenageController
+                // Odśwież TableView w AppointmentsMenageController
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AppointmentMenage-view.fxml"));
                 Parent root = loader.load();
                 AppointmentMenageController controller = loader.getController();
@@ -136,13 +148,19 @@ public class AppointmentAddController {
         navigateToAppointmentMenage(event);
     }
 
-
-
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
         navigateToAppointmentMenage(event);
     }
 
+    /**
+     * Nawiguje do widoku zarządzania wizytami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     private void navigateToAppointmentMenage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AppointmentMenage-view.fxml"));
@@ -155,23 +173,43 @@ public class AppointmentAddController {
         }
     }
 
+    /**
+     * Ustawia nazwę użytkownika.
+     * @param currentUsername nazwa użytkownika
+     */
     public void setUsername(String currentUsername) {
         this.currentUsername = currentUsername;
     }
 
+    /**
+     * Ustawia ID bieżącego użytkownika.
+     * @param currentUserId ID bieżącego użytkownika
+     */
     public void setCurrentUserId(Long currentUserId) {
         this.currentUserId = currentUserId;
     }
 
-
+    /**
+     * Zwraca combobox z pojazdami.
+     * @return combobox z pojazdami
+     */
     public ComboBox<Vehicle> getComboboxAppointmentAdd() {
         return comboboxAppointmentAdd;
     }
 
+    /**
+     * Ustawia combobox z pojazdami.
+     * @param comboboxAppointmentAdd combobox z pojazdami
+     */
     public void setComboboxAppointmentAdd(ComboBox<Vehicle> comboboxAppointmentAdd) {
         this.comboboxAppointmentAdd = comboboxAppointmentAdd;
     }
 
+    /**
+     * Zwraca użytkownika na podstawie ID.
+     * @param userId ID użytkownika
+     * @return użytkownik lub null
+     */
     public User getUserById(Long userId) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -180,10 +218,16 @@ public class AppointmentAddController {
                     .uniqueResult();
 
             session.getTransaction().commit();
-            return user; // Return User object or null
+            return user; // Zwraca obiekt User lub null
         }
     }
 
+    /**
+     * Wyświetla alert.
+     * @param alertType typ alertu
+     * @param title tytuł alertu
+     * @param content treść alertu
+     */
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -191,5 +235,4 @@ public class AppointmentAddController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
 }

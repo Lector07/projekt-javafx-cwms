@@ -15,6 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.ButtonType;
 
+/**
+ * Kontroler odpowiedzialny za edycję pojazdów.
+ */
 public class VehicleEditController {
 
     @FXML

@@ -13,6 +13,9 @@ import org.hibernate.Transaction;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Kontroler odpowiedzialny za zakończenie wizyt.
+ */
 public class AppointmentEndController {
 
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
@@ -28,14 +31,25 @@ public class AppointmentEndController {
     private Appointment appointment;
     private TableView<Appointment> appointmentsTableView;
 
+    /**
+     * Ustawia wizytę do zakończenia.
+     * @param appointment wizyta do zakończenia
+     */
     public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
     }
 
+    /**
+     * Ustawia TableView z wizytami.
+     * @param appointmentsTableView TableView z wizytami
+     */
     public void setAppointmentsTableView(TableView<Appointment> appointmentsTableView) {
         this.appointmentsTableView = appointmentsTableView;
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku zakończenia wizyty.
+     */
     @FXML
     protected void onEndAppointmentButtonClick() {
         if (checkboxEndAppointment.isSelected()) {
@@ -46,6 +60,9 @@ public class AppointmentEndController {
         }
     }
 
+    /**
+     * Aktualizuje status i koszt wizyty.
+     */
     private void updateAppointmentStatusAndCost() {
         String costText = costTextField.getText();
         if (costText != null && !costText.isEmpty()) {
@@ -73,17 +90,27 @@ public class AppointmentEndController {
         }
     }
 
+    /**
+     * Odświeża TableView z wizytami.
+     */
     private void refreshTable() {
         if (appointmentsTableView != null) {
             appointmentsTableView.refresh();
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     */
     @FXML
     protected void onGoBackButtonClick() {
         costTextField.getScene().getWindow().hide();
     }
 
+    /**
+     * Ustawia nazwę użytkownika.
+     * @param currentUsername nazwa użytkownika
+     */
     public void setUsername(String currentUsername) {
         this.currentUsername = currentUsername;
     }

@@ -15,6 +15,9 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 
+/**
+ * Kontroler odpowiedzialny za edycję hasła użytkownika.
+ */
 public class UsersPasswordEditController {
 
     @FXML
@@ -26,20 +29,35 @@ public class UsersPasswordEditController {
     private UsersMenageController usersMenageController;
     private User user;
 
+    /**
+     * Ustawia kontroler zarządzania użytkownikami.
+     * @param controller kontroler zarządzania użytkownikami
+     */
     public void setUsersMenageController(UsersMenageController controller) {
         this.usersMenageController = controller;
     }
 
+    /**
+     * Ustawia użytkownika, którego hasło ma być edytowane.
+     * @param user użytkownik
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Inicjalizuje kontroler, ustawia podpowiedzi dla pól tekstowych.
+     */
     @FXML
     protected void initialize() {
         usersEditTextField.setPromptText("Wprowadź nowe hasło");
         confirmPasswordField.setPromptText("Potwierdź nowe hasło");
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku zapisu, aktualizuje hasło użytkownika.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String newPassword = usersEditTextField.getText();
@@ -69,6 +87,12 @@ public class UsersPasswordEditController {
         }
     }
 
+    /**
+     * Aktualizuje hasło użytkownika w bazie danych.
+     * @param user użytkownik
+     * @param newPassword nowe hasło
+     * @return true, jeśli hasło zostało pomyślnie zaktualizowane, w przeciwnym razie false
+     */
     private boolean updateUserPassword(User user, String newPassword) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -89,16 +113,27 @@ public class UsersPasswordEditController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku anulowania, zamyka okno.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onCancelButtonClick(ActionEvent event) {
         closeWindow();
     }
 
+    /**
+     * Zamyka okno.
+     */
     private void closeWindow() {
         Stage stage = (Stage) usersEditTextField.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu, ładuje widok zarządzania użytkownikami.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
         try {

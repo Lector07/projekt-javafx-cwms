@@ -16,12 +16,16 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+/**
+ * Kontroler odpowiedzialny za zarządzanie pojazdami.
+ */
 public class VehicleMenageController {
 
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
@@ -206,9 +210,13 @@ public class VehicleMenageController {
         if (selectedVehicle != null) {
             Optional<ButtonType> result = AlertUtils.showDeleteConfirmationAlert("pojazd o ID: " + selectedVehicle.getVehicleId());
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                vehicleData.remove(selectedVehicle);
-                deleteVehicleFromDatabase(selectedVehicle);
-                refreshTableView();
+                try {
+                    deleteVehicleFromDatabase(selectedVehicle);
+                    vehicleData.remove(selectedVehicle);
+                    refreshTableView();
+                } catch (ConstraintViolationException e) {
+                    AlertUtils.showErrorAlert("Błąd", "Nie można usunąć pojazdu", "Pojazd jest w naprawie i nie można go usunąć.");
+                }
             }
         }
     }
@@ -326,7 +334,7 @@ public class VehicleMenageController {
     }
 
     /**
-     * Laduje dane pojazdów z bazy danych.
+     * Ładuje dane pojazdów z bazy danych.
      */
     private void loadVehicleData() {
         try (Session session = sessionFactory.openSession()) {

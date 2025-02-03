@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Kontroler odpowiedzialny za zarządzanie klientami.
+ */
 public class ClientMenageController {
 
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
@@ -48,6 +51,10 @@ public class ClientMenageController {
 
     private MenuViewController menuViewController;
 
+    /**
+     * Ustawia kontroler menu.
+     * @param menuViewController kontroler menu
+     */
     public void setMenuViewController(MenuViewController menuViewController) {
         this.menuViewController = menuViewController;
     }
@@ -57,11 +64,18 @@ public class ClientMenageController {
 
     private String username;
 
+    /**
+     * Ustawia nazwę użytkownika.
+     * @param username nazwa użytkownika
+     */
     public void setUsername(String username) {
         this.username = username;
         usernameLabelClient.setText(username);
     }
 
+    /**
+     * Inicjalizuje kontroler, ustawia kolumny tabeli i ładuje dane klientów.
+     */
     @FXML
     protected void initialize() {
         clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
@@ -76,6 +90,10 @@ public class ClientMenageController {
         clientTableView.setItems(clientData);
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku powrotu.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
         try {
@@ -98,6 +116,10 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku dodawania klienta.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     public void onAddClientButtonClick(ActionEvent event) {
         try {
@@ -115,6 +137,10 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Dodaje klienta do listy.
+     * @param client klient do dodania
+     */
     public void addClientToList(Client client) {
         if (validateClientData(client)) {
             clientData.add(client);
@@ -122,6 +148,11 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Aktualizuje klienta na liście.
+     * @param originalClient oryginalny klient
+     * @param updatedClient zaktualizowany klient
+     */
     public void updateClientInList(Client originalClient, Client updatedClient) {
         if (validateClientData(updatedClient)) {
             int index = clientData.indexOf(originalClient);
@@ -132,10 +163,18 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Generuje ID klienta.
+     * @return ID klienta
+     */
     public int generateClientId() {
         return nextClientId++;
     }
 
+    /**
+     * Zapisuje klienta do bazy danych.
+     * @param client klient do zapisania
+     */
     private void saveClientToDatabase(Client client) {
         try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();
              Session session = factory.getCurrentSession()) {
@@ -145,6 +184,10 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Aktualizuje klienta w bazie danych.
+     * @param client klient do aktualizacji
+     */
     private void updateClientInDatabase(Client client) {
         try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();
              Session session = factory.getCurrentSession()) {
@@ -154,6 +197,9 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Ładuje dane klientów z bazy danych.
+     */
     private void loadClientData() {
         try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();
              Session session = factory.getCurrentSession()) {
@@ -164,6 +210,10 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku edycji klienta.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     public void onEditClientButtonClick(ActionEvent event) {
         try {
@@ -187,6 +237,10 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku usunięcia klienta.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     protected void onDeleteClientButtonClick(ActionEvent event) {
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
@@ -201,6 +255,10 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Usuwa klienta z bazy danych.
+     * @param selectedClient klient do usunięcia
+     */
     private void deleteClientFromDatabase(Client selectedClient) {
         try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();
              Session session = factory.getCurrentSession()) {
@@ -210,6 +268,11 @@ public class ClientMenageController {
         }
     }
 
+    /**
+     * Waliduje dane klienta.
+     * @param client klient do walidacji
+     * @return true, jeśli dane są poprawne, w przeciwnym razie false
+     */
     private boolean validateClientData(Client client) {
         if (!isValidPhoneNumber(client.getPhone())) {
             AlertUtils.showWarningAlert("Błąd", "Nieprawidłowy numer telefonu", "Numer telefonu musi mieć 9 cyfr.");
@@ -226,14 +289,29 @@ public class ClientMenageController {
         return true;
     }
 
+    /**
+     * Sprawdza, czy numer telefonu jest poprawny.
+     * @param phoneNumber numer telefonu do sprawdzenia
+     * @return true, jeśli numer telefonu jest poprawny, w przeciwnym razie false
+     */
     private boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber != null && phoneNumber.matches("\\d{9}");
     }
 
+    /**
+     * Sprawdza, czy email jest poprawny.
+     * @param email email do sprawdzenia
+     * @return true, jeśli email jest poprawny, w przeciwnym razie false
+     */
     private boolean isValidEmail(String email) {
         return email != null && email.contains("@");
     }
 
+    /**
+     * Sprawdza, czy imię lub nazwisko jest poprawne.
+     * @param name imię lub nazwisko do sprawdzenia
+     * @return true, jeśli imię lub nazwisko jest poprawne, w przeciwnym razie false
+     */
     private boolean isValidName(String name) {
         return name != null && name.matches("[A-Z][a-zA-Z]*");
     }

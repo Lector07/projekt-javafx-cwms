@@ -21,6 +21,9 @@ import org.hibernate.Session;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Kontroler odpowiedzialny za dodawanie pojazdów.
+ */
 public class VehicleAddController {
 
     String currentUsername = AuthenticatedUser.getInstance().getUsername();

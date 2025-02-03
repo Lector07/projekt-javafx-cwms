@@ -3,6 +3,9 @@ package com.project.cwmsgradle.utils;
 import com.project.cwmsgradle.entity.Client;
 import com.project.cwmsgradle.entity.User;
 
+/**
+ * Klasa reprezentująca uwierzytelnionego użytkownika.
+ */
 public class AuthenticatedUser {
     private static AuthenticatedUser instance;
     private String username;
@@ -10,7 +13,9 @@ public class AuthenticatedUser {
     private Long userId;
     private Client client;
 
-
+    /**
+     * Prywatny konstruktor domyślny.
+     */
     private AuthenticatedUser() {
         this.username = new User().getUsername();
         this.role = new User().getRole();
@@ -18,6 +23,10 @@ public class AuthenticatedUser {
         this.client = new Client();
     }
 
+    /**
+     * Zwraca instancję singletona AuthenticatedUser.
+     * @return instancja AuthenticatedUser
+     */
     public static AuthenticatedUser getInstance() {
         if (instance == null) {
             instance = new AuthenticatedUser();
@@ -56,6 +65,4 @@ public class AuthenticatedUser {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-
-
 }

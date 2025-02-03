@@ -17,12 +17,12 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void showConfirmationAlert(String title, String header, String content) {
+    public static Optional<ButtonType> showConfirmationAlert(String title, String header, String content) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(new String(title.getBytes(), StandardCharsets.UTF_8));
         alert.setHeaderText(new String(header.getBytes(), StandardCharsets.UTF_8));
         alert.setContentText(new String(content.getBytes(), StandardCharsets.UTF_8));
-        alert.showAndWait();
+        return alert.showAndWait(); // Return the optional button type
     }
 
     public static void showInformationAlert(String title, String header, String content) {

@@ -252,7 +252,7 @@ public class VehicleMenageController {
             return false;
         }
         if (!isValidModel(vehicle.getModel())) {
-            AlertUtils.showWarningAlert("Błąd", "Nieprawidłowy format", "Wpisana wartość musi być z dużej litery i nie może zawierać cyfr.");
+            AlertUtils.showWarningAlert("Błąd", "Nieprawidłowy format", "Wpisana wartość musi być z dużej litery.");
             return false;
         }
         if (!isValidProductionYear(vehicle.getProductionYear())) {
@@ -277,7 +277,7 @@ public class VehicleMenageController {
      * @return true, jeśli model jest poprawny, w przeciwnym razie false
      */
     private boolean isValidModel(String model) {
-        return model != null && model.matches("[A-Z][a-zA-Z]*");
+        return model != null && model.matches("[A-Za-z0-9]*");
     }
 
     /**

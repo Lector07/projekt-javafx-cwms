@@ -2,9 +2,8 @@ package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.Client;
 import com.project.cwmsgradle.entity.Vehicle;
+import com.project.cwmsgradle.utils.AlertUtils;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -14,6 +13,7 @@ import java.util.Optional;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.ButtonType;
 
 public class VehicleEditController {
 
@@ -65,12 +65,7 @@ public class VehicleEditController {
         Client client = originalVehicle.getClients(); // Pobiera obiekt Client za pomocą getClients
         int vehicleId = originalVehicle.getVehicleId(); // Pobiera vehicleId z oryginalnego pojazdu
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Potwierdzenie zapisu");
-        alert.setHeaderText("Czy napewno chcesz zapisać zmiany?");
-        alert.setContentText("Kliknij OK, aby zapisać zmiany.");
-
-        Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType> result = AlertUtils.showConfirmationAlert("Potwierdzenie zapisu", "Czy napewno chcesz zapisać zmiany?", "Kliknij OK, aby zapisać zmiany.");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Vehicle updatedVehicle = new Vehicle(updatedRegistrationNumber, updatedBrand, updatedModel, updatedProductionYear, client);
             updatedVehicle.setVehicleId(vehicleId); // Ustawia ID

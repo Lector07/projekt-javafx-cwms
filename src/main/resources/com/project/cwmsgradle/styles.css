@@ -414,3 +414,43 @@ Label {
     -fx-background-radius: 30px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
+
+#apAppointmentEnd {
+    -fx-background-color: white;
+    -fx-background-image: url('https://www.transparenttextures.com/patterns/polonez-pattern.png');
+}
+
+#vbAppointmentEnd{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #2A54D2, #6BA0FF);
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#appointmentEndLabel{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#checkboxEndAppointment{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+}
+
+#costTextField{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 16px;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#editInfoAppointmentButton{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-text-fill: black;
+    -fx-background-color: white;
+    -fx-border-style: none;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}

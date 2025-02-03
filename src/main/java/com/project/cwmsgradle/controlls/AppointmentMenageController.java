@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -22,7 +23,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -66,24 +66,11 @@ public class AppointmentMenageController {
 
     public SessionFactory sessionFactory;
 
-
-
-    /**
-     * Ustawia kontroler widoku menu.
-     * @param menuViewController kontroler widoku menu
-     */
-    public void setMenuViewController(MenuViewController menuViewController) {
-    }
-
     @FXML
     private Label usernameLabelAppointments;
 
     private String username;
 
-    /**
-     * Ustawia nazwę użytkownika i aktualizuje etykietę.
-     * @param username nazwa użytkownika
-     */
     public void setUsername(String username) {
         this.username = username;
         usernameLabelAppointments.setText(username);
@@ -92,11 +79,6 @@ public class AppointmentMenageController {
         this.currentUserId = currentUserId;
     }
 
-
-    /**
-     * Inicjalizuje kontroler, ustawia widoczność etykiety nazwy użytkownika
-     * i ustawia nazwę użytkownika.
-     */
     @FXML
     protected void initialize() {
         sessionFactory = HibernateUtil.getSessionFactory();
@@ -148,7 +130,6 @@ public class AppointmentMenageController {
             AppointmentAddController appointmentAddController = loader.getController();
             appointmentAddController.setUsername(currentUsername);
 
-
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
             stage.setTitle("CWMS-FX");
@@ -180,11 +161,30 @@ public class AppointmentMenageController {
         }
     }
 
-    /**
-     * Obsługuje kliknięcie przycisku powrotu, ładuje widok menu i ustawia
-     * aktualne informacje o użytkowniku.
-     * @param event zdarzenie kliknięcia przycisku
-     */
+    @FXML
+    protected void onEndAppointmentButtonClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AppointmentEnd-view.fxml"));
+            Parent root = loader.load();
+
+            // Pobiera kontroler i ustawia aktualne informacje o użytkowniku
+            AppointmentEndController appointmentEndController = loader.getController();
+            appointmentEndController.setUsername(currentUsername);
+
+            Appointment selectedAppointment = appointmentsTableView.getSelectionModel().getSelectedItem();
+            appointmentEndController.setAppointment(selectedAppointment);
+            appointmentEndController.setAppointmentsTableView(appointmentsTableView);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("CWMS-FX - End Appointment");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) {
         try {
@@ -217,22 +217,19 @@ public class AppointmentMenageController {
         }
     }
 
+
     public void addAppointmentToList(Appointment appointment) {
         appointmentData.add(appointment);
-        saveAppointmentToDatabase(appointment);
         refreshTableView();
     }
 
-    private void saveAppointmentToDatabase(Appointment appointment) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            session.save(appointment);
-            session.getTransaction().commit();
-        }
-    }
 
     private void refreshTableView() {
         appointmentsTableView.setItems(null);
         appointmentsTableView.setItems(appointmentData);
+    }
+
+    public void setMenuViewController(MenuViewController menuViewController) {
+
     }
 }

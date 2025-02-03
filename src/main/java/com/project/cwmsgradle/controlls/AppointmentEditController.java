@@ -53,7 +53,7 @@ public class AppointmentEditController {
         appointment.setDescription(updatedDescription);
         appointment.setStatus(updatedStatus);
 
-        Optional<ButtonType> result = AlertUtils.showDeleteConfirmationAlert("appointment");
+        Optional<ButtonType> result = AlertUtils.showConfirmationAlert("Potwierdzenie edycji", "Czy na pewno chcesz edytować?", "Tej operacji nie można cofnąć.");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 Transaction transaction = session.beginTransaction();

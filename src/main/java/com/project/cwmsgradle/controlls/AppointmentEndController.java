@@ -1,6 +1,7 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.Appointment;
+import com.project.cwmsgradle.entity.User;
 import com.project.cwmsgradle.utils.AlertUtils;
 import com.project.cwmsgradle.utils.AuthenticatedUser;
 import com.project.cwmsgradle.utils.HibernateUtil;
@@ -75,6 +76,10 @@ public class AppointmentEndController {
                 appointment.setCost(cost);
                 appointment.setStatus(new String("Zakończono".getBytes(), StandardCharsets.UTF_8));
 
+                // Set the user who is ending the appointment
+                User currentUser = getUserById(currentUserId);
+                appointment.setUser(currentUser);
+
                 try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                     Transaction transaction = session.beginTransaction();
                     session.update(appointment);
@@ -113,5 +118,21 @@ public class AppointmentEndController {
      */
     public void setUsername(String currentUsername) {
         this.currentUsername = currentUsername;
+    }
+
+    /**
+     * Zwraca użytkownika na podstawie ID.
+     * @param userId ID użytkownika
+     * @return użytkownik lub null
+     */
+    private User getUserById(Long userId) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            User user = session.createQuery("from User where userId = :userId", User.class)
+                    .setParameter("userId", userId)
+                    .uniqueResult();
+            session.getTransaction().commit();
+            return user;
+        }
     }
 }

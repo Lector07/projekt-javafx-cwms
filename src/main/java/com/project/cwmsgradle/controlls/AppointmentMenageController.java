@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,17 +33,16 @@ import java.util.List;
 public class AppointmentMenageController {
     String currentUsername = AuthenticatedUser.getInstance().getUsername();
     String currentUserRole = AuthenticatedUser.getInstance().getRole();
-
     Long currentUserId = AuthenticatedUser.getInstance().getUserId();
 
     @FXML
     private TableView<Appointment> appointmentsTableView;
 
     @FXML
-    private TableColumn<Appointment,Long> appointmentIdColumn;
+    private TableColumn<Appointment, Long> appointmentIdColumn;
 
     @FXML
-    private TableColumn<Appointment,String> descriptionColumnAppointment;
+    private TableColumn<Appointment, String> descriptionColumnAppointment;
 
     @FXML
     private TableColumn<Appointment, LocalDate> dateColumnAppointment;
@@ -132,6 +130,10 @@ public class AppointmentMenageController {
 
         loadAppointmentsData();
         appointmentsTableView.setItems(appointmentData);
+
+        // Add a comparator to sort the table by appointment ID in descending order
+        appointmentIdColumn.setSortType(TableColumn.SortType.DESCENDING);
+        appointmentsTableView.getSortOrder().add(appointmentIdColumn);
     }
 
     /**
@@ -265,6 +267,7 @@ public class AppointmentMenageController {
     private void refreshTableView() {
         appointmentsTableView.setItems(null);
         appointmentsTableView.setItems(appointmentData);
+        appointmentsTableView.sort();
     }
 
     public void setMenuViewController(MenuViewController menuViewController) {

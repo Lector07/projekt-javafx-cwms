@@ -48,7 +48,7 @@
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
 
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
@@ -67,7 +67,7 @@
 #usernameField, #passwordField, #confirmPasswordField {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -88,7 +88,7 @@
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     transition: all 0.3s ease 0s;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
@@ -119,7 +119,7 @@
 #clientComboBox {
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -128,7 +128,7 @@
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -154,7 +154,7 @@ Label {
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -163,7 +163,7 @@ Label {
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -195,9 +195,15 @@ Label {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
-#vbMenVeh, #vbClientMenage, #vbAppointment, #vbUsers {
+#vbMenVeh, #vbClientMenage, #vbUsers {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #2A54D2, #6BA0FF);
     -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#vbAppointment{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #2A54D2, #6BA0FF);
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -247,7 +253,7 @@ Label {
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -300,7 +306,7 @@ Label {
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -338,7 +344,7 @@ Label {
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -395,7 +401,7 @@ Label {
 #comboboxAppointmentAdd{
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -404,14 +410,14 @@ Label {
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 #comboboxAppointmentEdit{
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 16px;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
@@ -451,6 +457,6 @@ Label {
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-border-style: none;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }

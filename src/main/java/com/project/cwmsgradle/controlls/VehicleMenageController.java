@@ -337,7 +337,7 @@ public class VehicleMenageController {
     }
 
     /**
-     * Ładuje dane pojazdów z bazy danych.
+     * Laduje dane pojazdów z bazy danych.
      */
     private void loadVehicleData() {
         try (Session session = sessionFactory.openSession()) {

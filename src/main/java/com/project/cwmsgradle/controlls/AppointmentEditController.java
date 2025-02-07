@@ -41,7 +41,8 @@ public class AppointmentEditController {
         comboboxAppointmentEdit.getItems().addAll(
                 new String("W naprawie".getBytes(), StandardCharsets.UTF_8),
                 new String("Oczekuje na części".getBytes(), StandardCharsets.UTF_8),
-                new String("Naprawiony".getBytes(), StandardCharsets.UTF_8)
+                new String("Naprawiony".getBytes(), StandardCharsets.UTF_8),
+                new String("Złomowanie".getBytes(), StandardCharsets.UTF_8)
         );
     }
 

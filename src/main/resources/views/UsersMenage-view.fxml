@@ -25,7 +25,7 @@
                   </Button>
                   <Button fx:id="deleteUserButton" mnemonicParsing="false" onAction="#onDeleteUserButtonClick" prefHeight="20.0" prefWidth="125.0" text="Usuń użytkownika">
                      <HBox.margin>
-                        <Insets right="80.0" />
+                        <Insets right="150.0" />
                      </HBox.margin>
                   </Button>
                   <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="20.0" prefWidth="100.0" text="Powrót">
@@ -37,8 +37,8 @@
             </HBox>
          </children>
       </VBox>
-      <Label fx:id="usersLabel" layoutX="50.0" layoutY="32.0" prefHeight="32.0" prefWidth="126.0" text="Użytkownicy" />
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="32.0">
+      <Label fx:id="usersLabel" layoutX="65.0" layoutY="32.0" prefHeight="32.0" prefWidth="126.0" text="Użytkownicy" />
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="30.0" layoutY="32.0">
          <image>
             <Image url="@../icons/user.png" />
          </image>

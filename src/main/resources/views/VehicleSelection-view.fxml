@@ -5,27 +5,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
 <AnchorPane fx:id="apSelectedVeh" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.VehicleSelectionController">
     <children>
-        <Button fx:id="selectVehicleButton" layoutX="310.0" layoutY="427.0" mnemonicParsing="false" onAction="#onSelectVehicleButtonClick" text="Wybierz pojazd" />
-      <HBox fx:id="hbSelectVeh" alignment="CENTER" layoutX="31.2" layoutY="50.0" prefHeight="362.0" prefWidth="658.0" stylesheets="@../com/project/cwmsgradle/styles.css" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0">
-         <children>
-              <TableView fx:id="vehicleTableView" prefHeight="303.0" prefWidth="607.0">
-                  <columns>
-                      <TableColumn fx:id="vehicleIdColumn" prefWidth="51.199987053871155" text="ID" />
-                      <TableColumn fx:id="brandColumn" prefWidth="192.79996490478516" text="Marka" />
-                      <TableColumn fx:id="modelColumn" prefWidth="184.7999267578125" text="Model" />
-                      <TableColumn fx:id="clientColumn" prefWidth="180.00003051757812" text="Klient" />
-                  </columns>
+        <HBox alignment="CENTER" layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="332.0" spacing="10.0">
+            <children>
+                <Label fx:id="selectVehLabel" text="Wyszukaj pojazd:">
                <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-              </TableView>
-         </children>
-      </HBox>
-      <Label fx:id="selectVehLabel" layoutX="298.0" layoutY="14.0" text="Wybierz pojazd" />
+                  <Insets right="20.0" />
+               </HBox.margin></Label>
+                <TextField fx:id="searchField" onKeyReleased="#onSearchKeyReleased" promptText="Szukaj pojazdu..." />
+            </children>
+        </HBox>
+        <HBox fx:id="hbSelectVeh" alignment="CENTER" layoutX="31.2" layoutY="50.0" prefHeight="362.0" prefWidth="658.0" stylesheets="@../com/project/cwmsgradle/styles.css" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0">
+            <children>
+                <TableView fx:id="vehicleTableView" prefHeight="303.0" prefWidth="607.0">
+                    <columns>
+                        <TableColumn fx:id="vehicleIdColumn" prefWidth="51.199987053871155" text="ID" />
+                        <TableColumn fx:id="brandColumn" prefWidth="192.79996490478516" text="Marka" />
+                        <TableColumn fx:id="modelColumn" prefWidth="184.7999267578125" text="Model" />
+                        <TableColumn fx:id="clientColumn" prefWidth="180.00003051757812" text="Klient" />
+                    </columns>
+                    <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </HBox.margin>
+                </TableView>
+            </children>
+        </HBox>
+        <Button fx:id="selectVehicleButton" layoutX="310.0" layoutY="427.0" mnemonicParsing="false" onAction="#onSelectVehicleButtonClick" text="Wybierz pojazd" />
     </children>
 </AnchorPane>

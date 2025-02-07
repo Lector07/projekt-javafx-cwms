@@ -6,9 +6,11 @@ import com.project.cwmsgradle.utils.HibernateUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.hibernate.Session;
@@ -38,7 +40,11 @@ public class VehicleSelectionController {
     @FXML
     private TableColumn<Vehicle, String> clientColumn;
 
+    @FXML
+    private TextField searchField;
+
     private ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
+    private FilteredList<Vehicle> filteredData;
 
     /**
      * Inicjalizuje kontroler, ustawia fabrykę sesji i wypełnia tabelę pojazdami.
@@ -57,9 +63,9 @@ public class VehicleSelectionController {
             return new SimpleStringProperty("");
         });
 
-
         loadVehicleData();
-        vehicleTableView.setItems(vehicleData);
+        filteredData = new FilteredList<>(vehicleData, p -> true);
+        vehicleTableView.setItems(filteredData);
 
         vehicleIdColumn.setSortType(TableColumn.SortType.DESCENDING);
         vehicleTableView.getSortOrder().add(vehicleIdColumn);
@@ -89,6 +95,22 @@ public class VehicleSelectionController {
             stage.close();
         } else {
             AlertUtils.showWarningAlert("Brak wyboru", "Nie wybrano pojazdu", "Proszę wybrać pojazd.");
+        }
+    }
+
+    /**
+     * Obsługuje wpisywanie tekstu w polu wyszukiwania.
+     */
+    @FXML
+    protected void onSearchKeyReleased() {
+        String filter = searchField.getText();
+        if (filter == null || filter.isEmpty()) {
+            filteredData.setPredicate(p -> true);
+        } else {
+            filteredData.setPredicate(vehicle -> vehicle.getBrand().toLowerCase().contains(filter.toLowerCase()) ||
+                    vehicle.getModel().toLowerCase().contains(filter.toLowerCase()) ||
+                    (vehicle.getClient() != null && (vehicle.getClient().getName().toLowerCase().contains(filter.toLowerCase()) ||
+                            vehicle.getClient().getSurname().toLowerCase().contains(filter.toLowerCase()))));
         }
     }
 

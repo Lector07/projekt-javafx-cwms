@@ -57,16 +57,16 @@ public class VehicleSelectionController {
             return new SimpleStringProperty("");
         });
 
-        vehicleIdColumn.setSortType(TableColumn.SortType.DESCENDING);
-        vehicleTableView.getSortOrder().add(vehicleIdColumn);
-
 
         loadVehicleData();
         vehicleTableView.setItems(vehicleData);
+
+        vehicleIdColumn.setSortType(TableColumn.SortType.DESCENDING);
+        vehicleTableView.getSortOrder().add(vehicleIdColumn);
     }
 
     /**
-     * Ładuje dane pojazdów z bazy danych.
+     * Laduje dane pojazdów z bazy danych.
      */
     private void loadVehicleData() {
         try (Session session = sessionFactory.openSession()) {

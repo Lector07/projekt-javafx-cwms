@@ -11,26 +11,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="apUsers" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.UsersMenageController">
+<AnchorPane fx:id="apUsers" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.UsersMenageController">
    <children>
       <Label fx:id="usernameLabelUsers" layoutX="607.0" layoutY="32.0" prefHeight="32.0" prefWidth="113.0" />
-      <VBox fx:id="vbUsers" alignment="TOP_CENTER" layoutX="62.0" layoutY="140.0" prefHeight="369.0" prefWidth="150.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0">
+      <VBox fx:id="vbUsers" alignment="CENTER" layoutX="30.0" layoutY="78.0" prefHeight="45.0" prefWidth="674.0" AnchorPane.bottomAnchor="356.4" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.799999999999955">
          <children>
-            <Button fx:id="changePasswordButton" onAction="#onEditPasswordButtonClick" mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Zmiana hasła">
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="deleteUserButton" onAction="#onDeleteUserButtonClick" mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Usuń użytkownika">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="25.0" prefWidth="100.0" text="Powrót">
-               <VBox.margin>
-                  <Insets top="130.0" />
-               </VBox.margin>
-            </Button>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="150.0">
+               <children>
+                  <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#onEditPasswordButtonClick" prefHeight="20.0" prefWidth="125.0" text="Zmiana hasła">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="deleteUserButton" mnemonicParsing="false" onAction="#onDeleteUserButtonClick" prefHeight="20.0" prefWidth="125.0" text="Usuń użytkownika">
+                     <HBox.margin>
+                        <Insets right="80.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="20.0" prefWidth="100.0" text="Powrót">
+                     <HBox.margin>
+                        <Insets left="80.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
       <Label fx:id="usersLabel" layoutX="50.0" layoutY="32.0" prefHeight="32.0" prefWidth="126.0" text="Użytkownicy" />
@@ -44,15 +48,15 @@
             <Image url="@../icons/user.png" />
          </image>
       </ImageView>
-      <HBox fx:id="hbUsers" alignment="CENTER" layoutX="192.0" layoutY="81.0" prefHeight="369.0" prefWidth="510.0" AnchorPane.rightAnchor="20.0">
+      <HBox fx:id="hbUsers" alignment="CENTER" layoutX="105.0" layoutY="143.0" prefHeight="309.0" prefWidth="660.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <children>
-            <TableView fx:id="usersTableView" prefHeight="291.0" prefWidth="492.0">
+            <TableView fx:id="usersTableView" prefHeight="270.0" prefWidth="618.0">
               <columns>
-                <TableColumn fx:id="userIdColumn" prefWidth="47.0" text="ID" />
-                <TableColumn fx:id="usernameColumn" prefWidth="103.0" text="Nazwa" />
-                  <TableColumn fx:id="passwordColumn" prefWidth="102.0" text="Hasło" />
-                  <TableColumn fx:id="roleColumn" prefWidth="90.0" text="Rola" />
-                  <TableColumn fx:id="createdAtColumn" prefWidth="126.0" text="Utworzono" />
+                <TableColumn fx:id="userIdColumn" prefWidth="36.000029385089874" text="ID" />
+                <TableColumn fx:id="usernameColumn" prefWidth="114.39997482299805" text="Nazwa" />
+                  <TableColumn fx:id="passwordColumn" prefWidth="132.80006408691406" text="Hasło" />
+                  <TableColumn fx:id="roleColumn" prefWidth="132.0" text="Rola" />
+                  <TableColumn fx:id="createdAtColumn" prefWidth="202.39990234375" text="Utworzono" />
               </columns>
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

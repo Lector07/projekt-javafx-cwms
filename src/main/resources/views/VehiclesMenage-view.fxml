@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="apMenageVehicles" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.VehicleMenageController">
+<AnchorPane fx:id="apMenageVehicles" prefHeight="480.0" prefWidth="720.0" stylesheets="@../com/project/cwmsgradle/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.cwmsgradle.controlls.VehicleMenageController">
     <children>
         <Label fx:id="labelMenVeh" alignment="CENTER" layoutX="35.0" layoutY="15.0" prefHeight="35.0" prefWidth="208.0" text="Zarządzaj pojazdami" />
         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="18.0">
@@ -20,43 +20,47 @@
             </image>
         </ImageView>
         <Label fx:id="usernameLabelVehicle" layoutX="596.0" layoutY="23.0" prefHeight="21.0" prefWidth="104.0" stylesheets="@../com/project/cwmsgradle/styles.css" text="Username" />
-        <VBox fx:id="vbMenVeh" alignment="CENTER" layoutX="14.0" layoutY="54.0" prefHeight="400.0" prefWidth="145.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
+        <VBox fx:id="vbMenVeh" alignment="CENTER" layoutX="30.0" layoutY="65.0" prefHeight="45.0" prefWidth="583.0" AnchorPane.bottomAnchor="373.4" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.799999999999955" AnchorPane.topAnchor="65.0">
             <children>
-                <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddVehicleButtonClick" prefHeight="35.0" prefWidth="100.0" text="Dodaj">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditVehicleButtonClick" prefHeight="35.0" prefWidth="100.0" text="Edytuj">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteVehicleButtonClick" prefHeight="35.0" prefWidth="100.0" text="Usuń">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#onGoBackButtonClick" text="Powrót">
-                    <VBox.margin>
-                        <Insets top="80.0" />
-                    </VBox.margin>
-                </Button>
+            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="583.0">
+               <children>
+                      <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddVehicleButtonClick" prefHeight="20.0" prefWidth="100.0" text="Dodaj">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                      </Button>
+                      <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditVehicleButtonClick" prefHeight="20.0" prefWidth="100.0" text="Edytuj">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                      </Button>
+                      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteVehicleButtonClick" prefHeight="20.0" prefWidth="100.0" text="Usuń">
+                     <HBox.margin>
+                        <Insets right="90.0" />
+                     </HBox.margin>
+                      </Button>
+                      <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="20.0" text="Powrót">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                      </Button>
+               </children>
+            </HBox>
             </children>
         </VBox>
-        <HBox fx:id="hbMenVeh" alignment="TOP_CENTER" layoutX="181.0" layoutY="60.0" prefHeight="400.0" prefWidth="519.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="181.0" AnchorPane.rightAnchor="20.0">
+        <HBox fx:id="hbMenVeh" alignment="TOP_CENTER" layoutX="31.2" layoutY="128.0" prefHeight="331.0" prefWidth="659.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="30.0">
             <children>
-                <TableView fx:id="vehicleTableView" prefHeight="360.0" prefWidth="487.0" stylesheets="@../com/project/cwmsgradle/styles.css">
+                <TableView fx:id="vehicleTableView" prefHeight="291.0" prefWidth="617.0" stylesheets="@../com/project/cwmsgradle/styles.css">
                     <HBox.margin>
                         <Insets bottom="20.0" top="20.0" />
                     </HBox.margin>
                     <columns>
-                        <TableColumn fx:id="vehicleIdColumn" prefWidth="44.79998779296875" text="ID Pojazdu" />
-                        <TableColumn fx:id="registrationNumberColumn" prefWidth="91.20000839233398" text="Nr.Rejest" />
-                        <TableColumn fx:id="brandColumn" prefWidth="68" text="Marka" />
-                        <TableColumn fx:id="modelColumn" prefWidth="80.80000305175781" text="Model" />
-                        <TableColumn fx:id="productionYearColumn" prefWidth="87.20001220703125" text="Rok produkcji" />
-                        <TableColumn fx:id="clientIdColumn" prefWidth="115.199951171875" text="Klient" />
+                        <TableColumn fx:id="vehicleIdColumn" prefWidth="30.399993896484375" text="ID" />
+                        <TableColumn fx:id="registrationNumberColumn" prefWidth="106.39999771118164" text="Nr.Rejest" />
+                        <TableColumn fx:id="brandColumn" prefWidth="111.19993591308594" text="Marka" />
+                        <TableColumn fx:id="modelColumn" prefWidth="120.800048828125" text="Model" />
+                        <TableColumn fx:id="productionYearColumn" prefWidth="100.7999267578125" text="Rok produkcji" />
+                        <TableColumn fx:id="clientIdColumn" prefWidth="147.20001220703125" text="Klient" />
                     </columns>
                 </TableView>
             </children>

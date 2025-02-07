@@ -21,7 +21,6 @@ import org.hibernate.exception.ConstraintViolationException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 /**
  * Kontroler odpowiedzialny za zarządzanie pojazdami.
@@ -112,6 +111,10 @@ public class VehicleMenageController {
         // Załadowanie danych i powiązanie ich z tabelą
         loadVehicleData();
         vehicleTableView.setItems(vehicleData);
+
+        // Add a comparator to sort the table by vehicle ID in descending order
+        vehicleIdColumn.setSortType(TableColumn.SortType.DESCENDING);
+        vehicleTableView.getSortOrder().add(vehicleIdColumn);
     }
 
     /**
@@ -351,5 +354,6 @@ public class VehicleMenageController {
     private void refreshTableView() {
         vehicleTableView.setItems(null);
         vehicleTableView.setItems(vehicleData);
+        vehicleTableView.sort();
     }
 }

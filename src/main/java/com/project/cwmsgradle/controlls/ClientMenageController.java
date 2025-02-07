@@ -88,6 +88,10 @@ public class ClientMenageController {
 
         loadClientData();
         clientTableView.setItems(clientData);
+
+        // Add a comparator to sort the table by client ID in descending order
+        clientIdColumn.setSortType(TableColumn.SortType.DESCENDING);
+        clientTableView.getSortOrder().add(clientIdColumn);
     }
 
     /**
@@ -145,6 +149,7 @@ public class ClientMenageController {
         if (validateClientData(client)) {
             clientData.add(client);
             saveClientToDatabase(client);
+            refreshTableView();
         }
     }
 
@@ -159,6 +164,7 @@ public class ClientMenageController {
             if (index != -1) {
                 clientData.set(index, updatedClient);
                 updateClientInDatabase(updatedClient);
+                refreshTableView();
             }
         }
     }
@@ -249,6 +255,7 @@ public class ClientMenageController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 clientData.remove(selectedClient);
                 deleteClientFromDatabase(selectedClient);
+                refreshTableView();
             }
         } else {
             AlertUtils.showWarningAlert("Brak wyboru", "Nie wybrano klienta", "Proszę wybrać klienta do usunięcia.");
@@ -314,5 +321,14 @@ public class ClientMenageController {
      */
     private boolean isValidName(String name) {
         return name != null && name.matches("[A-Z][a-zA-Z]*");
+    }
+
+    /**
+     * Odświeża widok tabeli klientów.
+     */
+    private void refreshTableView() {
+        clientTableView.setItems(null);
+        clientTableView.setItems(clientData);
+        clientTableView.sort();
     }
 }

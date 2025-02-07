@@ -1,29 +1,24 @@
 package com.project.cwmsgradle.controlls;
 
 import com.project.cwmsgradle.entity.Appointment;
-import com.project.cwmsgradle.entity.Client;
 import com.project.cwmsgradle.entity.User;
 import com.project.cwmsgradle.entity.Vehicle;
+import com.project.cwmsgradle.utils.AlertUtils;
 import com.project.cwmsgradle.utils.AuthenticatedUser;
 import com.project.cwmsgradle.utils.HibernateUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Kontroler odpowiedzialny za dodawanie wizyt.
@@ -35,12 +30,11 @@ public class AppointmentAddController {
     private SessionFactory sessionFactory;
 
     @FXML
-    private ComboBox<Vehicle> comboboxAppointmentAdd;
-
-    @FXML
     private TextArea textAreaAppointment;
+    @FXML
+    private Label selectedVehicleLabel;
 
-    private UsersMenageController usersMenageController;
+    private Vehicle selectedVehicle;
 
     /**
      * Inicjalizuje kontroler, ustawia fabrykę sesji i wypełnia combobox pojazdami.
@@ -48,55 +42,9 @@ public class AppointmentAddController {
     @FXML
     protected void initialize() {
         sessionFactory = HibernateUtil.getSessionFactory();
-        populateAppointmentComboBox();
         currentUserId = AuthenticatedUser.getInstance().getUserId();
         setCurrentUserId(currentUserId);
         System.out.println("Initialized currentUserId: " + currentUserId); // Linia debugowania
-    }
-
-    /**
-     * Wypełnia combobox pojazdami z bazy danych.
-     */
-    private void populateAppointmentComboBox() {
-        sessionFactory = HibernateUtil.getSessionFactory();
-        ObservableList<Vehicle> vehicleList = FXCollections.observableArrayList();
-
-        try (org.hibernate.Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            org.hibernate.query.Query<Vehicle> query = session.createQuery("from Vehicle v left join fetch v.appointments");
-            List<Vehicle> vehicles = query.list();
-            vehicleList.addAll(vehicles);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Błąd wczytywania pojazdów", "Nie udało się wczytać listy pojazdów");
-            return;
-        }
-
-        comboboxAppointmentAdd.setItems(vehicleList);
-        comboboxAppointmentAdd.setCellFactory(param -> new ListCell<Vehicle>() {
-            @Override
-            protected void updateItem(Vehicle vehicle, boolean empty) {
-                super.updateItem(vehicle, empty);
-                if (empty || vehicle == null) {
-                    setText(null);
-                } else {
-                    setText(vehicle.getBrand() + " " + vehicle.getModel() + " - " + vehicle.getClient().getName() + " " + vehicle.getClient().getSurname());
-                }
-            }
-        });
-
-        comboboxAppointmentAdd.setButtonCell(new ListCell<Vehicle>() {
-            @Override
-            protected void updateItem(Vehicle vehicle, boolean empty) {
-                super.updateItem(vehicle, empty);
-                if (empty || vehicle == null) {
-                    setText(null);
-                } else {
-                    setText(vehicle.getBrand() + " " + vehicle.getModel() + " - " + vehicle.getClient().getName() + " " + vehicle.getClient().getSurname());
-                }
-            }
-        });
     }
 
     /**
@@ -104,9 +52,8 @@ public class AppointmentAddController {
      * @param event zdarzenie kliknięcia przycisku
      */
     @FXML
-    protected void onAddAppointmentButtonClick(ActionEvent event) {
+    protected void AddAppointmentButtonClick(ActionEvent event) {
         String description = textAreaAppointment.getText();
-        Vehicle selectedVehicle = comboboxAppointmentAdd.getSelectionModel().getSelectedItem();
         String status = "Oczekuje";
         double cost = 0.0;
         LocalDate date = LocalDate.now();
@@ -140,10 +87,10 @@ public class AppointmentAddController {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Błąd dodawania wizyty", "Wystąpił błąd podczas dodawania nowej wizyty");
+                AlertUtils.showErrorAlert("Błąd dodawania wizyty", "Wystąpił błąd podczas dodawania nowej wizyty", e.getMessage());
             }
         } else {
-            showAlert(Alert.AlertType.WARNING, "Błąd dodawania wizyty", "Nie wybrano pojazdu.");
+            AlertUtils.showWarningAlert("Błąd dodawania wizyty", "Nie wybrano pojazdu.", "Proszę wybrać pojazd.");
         }
         navigateToAppointmentMenage(event);
     }
@@ -173,6 +120,30 @@ public class AppointmentAddController {
         }
     }
 
+    @FXML
+    protected void onSelectVehicleButtonClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VehicleSelection-view.fxml"));
+            Parent root = loader.load();
+
+            VehicleSelectionController vehicleSelectionController = loader.getController();
+            vehicleSelectionController.setAppointmentAddController(this);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Wybierz pojazd");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setSelectedVehicle(Vehicle vehicle) {
+        this.selectedVehicle = vehicle;
+        selectedVehicleLabel.setText(vehicle.getBrand() + " " + vehicle.getModel() + " - " + vehicle.getClient().getName() + " " + vehicle.getClient().getSurname());
+    }
+
     /**
      * Ustawia nazwę użytkownika.
      * @param currentUsername nazwa użytkownika
@@ -190,28 +161,12 @@ public class AppointmentAddController {
     }
 
     /**
-     * Zwraca combobox z pojazdami.
-     * @return combobox z pojazdami
-     */
-    public ComboBox<Vehicle> getComboboxAppointmentAdd() {
-        return comboboxAppointmentAdd;
-    }
-
-    /**
-     * Ustawia combobox z pojazdami.
-     * @param comboboxAppointmentAdd combobox z pojazdami
-     */
-    public void setComboboxAppointmentAdd(ComboBox<Vehicle> comboboxAppointmentAdd) {
-        this.comboboxAppointmentAdd = comboboxAppointmentAdd;
-    }
-
-    /**
      * Zwraca użytkownika na podstawie ID.
      * @param userId ID użytkownika
      * @return użytkownik lub null
      */
     public User getUserById(Long userId) {
-        try (Session session = sessionFactory.openSession()) {
+        try (org.hibernate.Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             User user = session.createQuery("from User where userId = :userId", User.class)
                     .setParameter("userId", userId)
@@ -220,19 +175,5 @@ public class AppointmentAddController {
             session.getTransaction().commit();
             return user; // Zwraca obiekt User lub null
         }
-    }
-
-    /**
-     * Wyświetla alert.
-     * @param alertType typ alertu
-     * @param title tytuł alertu
-     * @param content treść alertu
-     */
-    private void showAlert(Alert.AlertType alertType, String title, String content) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
     }
 }

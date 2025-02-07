@@ -204,7 +204,7 @@ public class ClientMenageController {
     }
 
     /**
-     * Ładuje dane klientów z bazy danych.
+     * Laduje dane klientów z bazy danych.
      */
     private void loadClientData() {
         try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class).buildSessionFactory();

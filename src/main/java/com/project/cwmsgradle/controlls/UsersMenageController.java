@@ -97,7 +97,7 @@ public class UsersMenageController {
     }
 
     /**
-     * Ładuje dane użytkowników z bazy danych.
+     * Laduje dane użytkowników z bazy danych.
      */
     private void loadUsersData() {
         try (Session session = sessionFactory.openSession()) {

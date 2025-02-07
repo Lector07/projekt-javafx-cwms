@@ -241,7 +241,7 @@ public class AppointmentMenageController {
     }
 
     /**
-     * Ładuje dane wizyt z bazy danych.
+     * Laduje dane wizyt z bazy danych.
      */
     private void loadAppointmentsData() {
         try (Session session = sessionFactory.openSession()) {

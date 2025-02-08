@@ -36,5 +36,6 @@
             </children>
         </HBox>
         <Button fx:id="selectVehicleButton" layoutX="310.0" layoutY="427.0" mnemonicParsing="false" onAction="#onSelectVehicleButtonClick" text="Wybierz pojazd" />
+      <Button fx:id="goBackButton"  onAction="#onGoBackButtonClick" layoutX="637.0" layoutY="426.0" mnemonicParsing="false" text="Powrót" />
     </children>
 </AnchorPane>

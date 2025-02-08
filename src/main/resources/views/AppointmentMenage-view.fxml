@@ -60,13 +60,13 @@
                 <TableView fx:id="appointmentsTableView" prefHeight="205.0" prefWidth="607.0">
                     <columns>
                         <TableColumn fx:id="appointmentIdColumn" prefWidth="33.0" text="ID" />
-                        <TableColumn fx:id="clientColumnAppointment" prefWidth="86.0" text="Klient" />
-                        <TableColumn fx:id="vehicleColumnAppointment" prefWidth="86.0" text="Pojazd" />
-                        <TableColumn fx:id="descriptionColumnAppointment" prefWidth="85.0" text="Opis" />
-                  <TableColumn fx:id="statusColumnAppointment" prefWidth="78.0" text="Status" />
-                        <TableColumn fx:id="dateColumnAppointment" prefWidth="84.0" text="Data" />
-                        <TableColumn fx:id="costColumnAppointment" prefWidth="57.0" text="Koszt" />
-                        <TableColumn fx:id="mechanicColumnAppointment" prefWidth="94.0" text="Obsługuje" />
+                        <TableColumn fx:id="clientColumnAppointment" prefWidth="99.19996643066406" text="Klient" />
+                        <TableColumn fx:id="vehicleColumnAppointment" prefWidth="96.0" text="Pojazd" />
+                        <TableColumn fx:id="descriptionColumnAppointment" prefWidth="77.5999755859375" text="Opis" />
+                  <TableColumn fx:id="statusColumnAppointment" prefWidth="76.7999267578125" text="Status" />
+                        <TableColumn fx:id="dateColumnAppointment" prefWidth="72.800048828125" text="Data" />
+                        <TableColumn fx:id="costColumnAppointment" prefWidth="64.7999267578125" text="Koszt" />
+                        <TableColumn fx:id="mechanicColumnAppointment" prefWidth="87.20001220703125" text="Obsługuje" />
                     </columns>
                     <HBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

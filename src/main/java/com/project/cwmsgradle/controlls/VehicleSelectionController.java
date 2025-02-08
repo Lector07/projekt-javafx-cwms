@@ -117,4 +117,10 @@ public class VehicleSelectionController {
     public void setAppointmentAddController(AppointmentAddController appointmentAddController) {
         this.appointmentAddController = appointmentAddController;
     }
+
+    @FXML
+    protected void onGoBackButtonClick() {
+        Stage stage = (Stage) vehicleTableView.getScene().getWindow();
+        stage.close();
+    }
 }
